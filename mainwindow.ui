@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1079</width>
-    <height>764</height>
+    <width>1172</width>
+    <height>751</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,14 +20,24 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>70</y>
-      <width>791</width>
-      <height>601</height>
+      <x>150</x>
+      <y>30</y>
+      <width>861</width>
+      <height>651</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(35, 38, 49);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NameOfFile">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>0</y>
+      <width>871</width>
+      <height>21</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -36,7 +46,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1079</width>
+     <width>1172</width>
      <height>30</height>
     </rect>
    </property>
@@ -52,7 +62,7 @@
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
-     <string>Edit</string>
+     <string>Ed&amp;it</string>
     </property>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
@@ -60,8 +70,15 @@
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
    </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionHow_to_work"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -79,7 +96,10 @@
   </action>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open</string>
+    <string>&amp;Open (Ctrl+O)</string>
+   </property>
+   <property name="iconText">
+    <string>Open (Ctrl+O)</string>
    </property>
   </action>
   <action name="actionSave">
@@ -119,7 +139,12 @@
   </action>
   <action name="actionClose_file">
    <property name="text">
-    <string>Close file</string>
+    <string>&amp;Close file</string>
+   </property>
+  </action>
+  <action name="actionHow_to_work">
+   <property name="text">
+    <string>&amp;How to work</string>
    </property>
   </action>
  </widget>
