@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    scene = new QGraphicsScene;
+    ColorDialog = new QColorDialog(this);
 
     //STYLE
     QFont allFont("Misc Fixed", 16, QFont::Bold);
@@ -18,10 +20,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->NameOfFile->setAlignment(Qt::AlignCenter);
     ui->NameOfFile->setStyleSheet(style);
     ui->menuBar->setStyleSheet(style);
+
+    ColorDialog->setFont(fFont);
+    ColorDialog->setStyleSheet(style);
     //STYLE
 
 
-    scene = new QGraphicsScene;
+    connect(ui->Color, SIGNAL(released()), ColorDialog, SLOT(show()));
+    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(SetColorView(QColor)));
+
+    //ColorDialog->show();
 
     //ZOOM
     zoomUp = new QAction(this);
@@ -46,6 +54,23 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
     //OPEN FILE
 
+    //CLOSE FILE
+    connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
+
+    //SAVE AS FILE
+    saveFileAs = new QAction(this);
+    saveFileAs->setShortcut(tr("Ctrl+Shift+S"));
+    connect(saveFileAs, SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
+    ui->graphicsView->addAction(saveFileAs);
+
+    connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
+    //SAVE AS FILE
+
+}
+
+void MainWindow::SetColorView(QColor)
+{
+
 }
 
 void MainWindow::zoomUpEvent(bool)
@@ -53,8 +78,6 @@ void MainWindow::zoomUpEvent(bool)
     ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     double scaleFactor = 1.15;
     ui->graphicsView-> scale(scaleFactor, scaleFactor);
-    QTextStream out(stdout);
-
 }
 
 void MainWindow::zoomDownEvent(bool)
@@ -73,6 +96,38 @@ void MainWindow::FileOpen(bool)
     scene->addPixmap(QPixmap(fileNameToOpen));    
     ui->graphicsView->setScene(scene);
     ui->NameOfFile->setText(fileNameToOpen);
+}
+
+void MainWindow::FileClose(bool)
+{
+
+}
+
+void MainWindow::FileSaveAs(bool)
+{
+
+        QString newPath = QFileDialog::getSaveFileName(this, trUtf8("Save SVG"),
+            "/home/kor", tr("SVG files (*.svg)"));
+
+        if (newPath.isEmpty())
+            return;
+
+
+
+        QSvgGenerator generator;
+        generator.setFileName(newPath);
+        generator.setSize(QSize(scene->width(), scene->height()));
+        generator.setViewBox(QRect(0, 0, scene->width(), scene->height()));
+        generator.setTitle(trUtf8("Name"));
+        generator.setDescription(trUtf8("File SVG"));
+
+
+        QPainter painter;
+        painter.begin(&generator);
+        scene->render(&painter);
+        painter.end();
+
+
 }
 
 ///ZOOM IN MOUSE. BUT IT WORKS BAD WITH SCROLL

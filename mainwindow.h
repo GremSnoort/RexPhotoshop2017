@@ -12,6 +12,15 @@
 #include <QWheelEvent>
 #include <QKeyEvent>
 #include <QScrollBar>
+#include <QtSvg/QGraphicsSvgItem>
+#include <QtSvg/QSvgGenerator>
+#include <QtSvg/QSvgRenderer>
+#include <QtSvg/QSvgWidget>
+#include <QtSvg/QtSvg>
+
+#include <QColorDialog>
+#include <QMouseEvent>
+
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +42,14 @@ public:
     QAction* zoomUp;
     QAction* zoomDown;
     QAction* openFile;
+    QAction* saveFileAs;
+    QAction* setColor;
+
+    QColorDialog* ColorDialog;
+
+
+
+
 
 private:
     Ui::MainWindow *ui;
@@ -42,8 +59,12 @@ private:
 
 public slots:
     void FileOpen(bool);
+    void FileClose(bool);
+    void FileSaveAs(bool);
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
+
+    void SetColorView(QColor);
 
 };
 

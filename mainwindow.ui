@@ -22,7 +22,7 @@
      <rect>
       <x>150</x>
       <y>30</y>
-      <width>861</width>
+      <width>931</width>
       <height>651</height>
      </rect>
     </property>
@@ -35,9 +35,22 @@
      <rect>
       <x>140</x>
       <y>0</y>
-      <width>871</width>
+      <width>941</width>
       <height>21</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Color">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>30</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -72,7 +85,7 @@
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>A&amp;bout</string>
     </property>
     <addaction name="actionHow_to_work"/>
    </widget>
@@ -109,7 +122,10 @@
   </action>
   <action name="actionSave_as">
    <property name="text">
-    <string>Sa&amp;ve as</string>
+    <string>Sa&amp;ve as (Ctrl+Shift+S)</string>
+   </property>
+   <property name="iconText">
+    <string>Save as (Ctrl+Shift+S)</string>
    </property>
   </action>
   <action name="actionUndo">
