@@ -6,30 +6,48 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    OptionsForm = new OptionsForNewFile();
+    OptionsForm->hide();
     scene = new QGraphicsScene;
     ColorDialog = new QColorDialog(this);
+    currentColorOfBrush = QColor(255, 255, 255);
 
     //STYLE
     QFont allFont("Misc Fixed", 16, QFont::Bold);
     QFont fFont("Misc Fixed", 12, QFont::Bold);
-    QString style = "color: rgb(160, 170, 180);\n";
+    QString style = "color: rgb(160, 200, 180);\n";
+    QString style1 = "background-color: rgb(35, 38, 49);color: rgb(160, 200, 180);\n";
+
     ui->menuBar->setFont(allFont);
+    ui->menuBar->setStyleSheet(style1);
     ui->menuFile->setFont(fFont);
     ui->menuEdit->setFont(fFont);
     ui->NameOfFile->setFont(fFont);
     ui->NameOfFile->setAlignment(Qt::AlignCenter);
     ui->NameOfFile->setStyleSheet(style);
-    ui->menuBar->setStyleSheet(style);
 
-    ColorDialog->setFont(fFont);
-    ColorDialog->setStyleSheet(style);
+    ui->label->setFont(fFont);
+    ui->label->setStyleSheet(style);
+    ui->label->setAlignment(Qt::AlignCenter);
+
+
+    ui->SetColorButton->setFont(fFont);
+    ui->SetColorButton->setStyleSheet(style1);
+
+
     //STYLE
 
 
-    connect(ui->Color, SIGNAL(released()), ColorDialog, SLOT(show()));
-    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(SetColorView(QColor)));
 
-    //ColorDialog->show();
+    //COLOR
+    connect(ui->SetColorButton, SIGNAL(released()), this, SLOT(SetColorView()));
+
+    setColor = new QAction(this);
+    setColor->setShortcut(tr("Ctrl+P"));
+    connect(setColor, SIGNAL(triggered(bool)), this, SLOT(SetColorView()));
+    ui->SetColorButton->addAction(setColor);
+    //COLOR
+
 
     //ZOOM
     zoomUp = new QAction(this);
@@ -49,10 +67,19 @@ MainWindow::MainWindow(QWidget *parent) :
     openFile = new QAction(this);
     openFile->setShortcut(tr("Ctrl+O"));
     connect(openFile, SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
-    ui->graphicsView->addAction(openFile);
+    ui->menuBar->addAction(openFile);
 
     connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
     //OPEN FILE
+
+    //NEW FILE
+    newFile = new QAction(this);
+    newFile->setShortcut(tr("Ctrl+N"));
+    connect(newFile, SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
+    ui->menuBar->addAction(newFile);
+
+    connect(ui->menuFile->actions().at(0), SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
+    //NEW FILE
 
     //CLOSE FILE
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
@@ -61,30 +88,43 @@ MainWindow::MainWindow(QWidget *parent) :
     saveFileAs = new QAction(this);
     saveFileAs->setShortcut(tr("Ctrl+Shift+S"));
     connect(saveFileAs, SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
-    ui->graphicsView->addAction(saveFileAs);
+    ui->menuBar->addAction(saveFileAs);
 
     connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
     //SAVE AS FILE
 
+
+    //------
+
+
+
 }
 
-void MainWindow::SetColorView(QColor)
-{
 
+void MainWindow::SetColorView()
+{    
+    currentColorOfBrush = ColorDialog->getColor();
+    ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
 }
 
 void MainWindow::zoomUpEvent(bool)
 {
+    if(CountOfZoom<30){
     ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     double scaleFactor = 1.15;
     ui->graphicsView-> scale(scaleFactor, scaleFactor);
+    CountOfZoom++;
+    }
 }
 
 void MainWindow::zoomDownEvent(bool)
 {
+    if(CountOfZoom>(-30)){
     ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     double scaleFactor = 1.15;
     ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+    CountOfZoom--;
+    }
 }
 
 void MainWindow::FileOpen(bool)
@@ -98,8 +138,36 @@ void MainWindow::FileOpen(bool)
     ui->NameOfFile->setText(fileNameToOpen);
 }
 
+void MainWindow::FileNew(bool)
+{
+    OptionsForm->show();
+
+    connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
+
+
+
+
+}
+
+void MainWindow::MakeNewFile()
+{
+    X = OptionsForm->W;
+    Y = OptionsForm->H;
+    if(X>0 && Y>0){
+
+    QPixmap tmppixmap = QPixmap(X, Y);
+    tmppixmap.fill(QColor(255,255,255));
+    scene->addPixmap(tmppixmap);
+
+    ui->graphicsView->setScene(scene);
+    ui->NameOfFile->setText("New_file");
+    }
+
+}
+
 void MainWindow::FileClose(bool)
 {
+
 
 }
 

@@ -22,7 +22,7 @@
      <rect>
       <x>150</x>
       <y>30</y>
-      <width>931</width>
+      <width>871</width>
       <height>651</height>
      </rect>
     </property>
@@ -35,22 +35,52 @@
      <rect>
       <x>140</x>
       <y>0</y>
-      <width>941</width>
+      <width>881</width>
       <height>21</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="Color">
+   <widget class="QPushButton" name="SetColorButton">
     <property name="geometry">
      <rect>
-      <x>1090</x>
+      <x>1040</x>
+      <y>150</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Change color</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="Color" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1039</x>
       <y>30</y>
-      <width>71</width>
-      <height>71</height>
+      <width>121</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>180</y>
+      <width>81</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>(Ctrl+P)</string>
     </property>
    </widget>
   </widget>
@@ -104,7 +134,10 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew">
    <property name="text">
-    <string>&amp;New*</string>
+    <string>&amp;New* (Ctrl+N)</string>
+   </property>
+   <property name="iconText">
+    <string>New* (Ctrl+N)</string>
    </property>
   </action>
   <action name="actionOpen">

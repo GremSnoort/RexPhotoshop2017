@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "optionsfornewfile.h"
+
 
 #include <QMainWindow>
 #include <QString>
@@ -24,6 +26,7 @@
 
 namespace Ui {
 class MainWindow;
+
 }
 
 class MainWindow : public QMainWindow
@@ -42,12 +45,17 @@ public:
     QAction* zoomUp;
     QAction* zoomDown;
     QAction* openFile;
+    QAction* newFile;
     QAction* saveFileAs;
     QAction* setColor;
 
     QColorDialog* ColorDialog;
 
+    QColor currentColorOfBrush;
 
+
+    int X = 0;
+    int Y = 0;
 
 
 
@@ -55,16 +63,22 @@ private:
     Ui::MainWindow *ui;
 
     QString fileNameToOpen;
+    int CountOfZoom = 0;
+
+    OptionsForNewFile *OptionsForm;
+
 
 
 public slots:
     void FileOpen(bool);
+    void FileNew(bool);
+    void MakeNewFile();
     void FileClose(bool);
     void FileSaveAs(bool);
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
 
-    void SetColorView(QColor);
+    void SetColorView();
 
 };
 
