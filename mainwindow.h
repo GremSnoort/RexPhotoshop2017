@@ -23,6 +23,8 @@
 #include <QColorDialog>
 #include <QMouseEvent>
 
+#include <QStyle>
+#include <QDesktopWidget>
 
 namespace Ui {
 class MainWindow;

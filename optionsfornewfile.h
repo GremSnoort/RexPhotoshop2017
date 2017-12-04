@@ -6,6 +6,9 @@
 #include <QValidator>
 #include <QString>
 
+#include <QStyle>
+#include <QDesktopWidget>
+
 namespace Ui {
 class OptionsForNewFile;
 }

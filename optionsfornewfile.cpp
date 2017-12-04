@@ -5,6 +5,10 @@ OptionsForNewFile::OptionsForNewFile(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OptionsForNewFile)
 {
+
+    this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, this->size(), qApp->desktop()->availableGeometry()));
+
+
     ui->setupUi(this);
     QFont allFont("Misc Fixed", 16, QFont::Bold);
 
