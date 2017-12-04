@@ -155,7 +155,7 @@ void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/sa
 
 void MainWindow::FileNew(bool)
 {
-    if(!ui->NameOfFile->text().isEmpty())FileClose(true);
+
 
     OptionsForm->show();
 
@@ -168,16 +168,18 @@ void MainWindow::FileNew(bool)
 
 void MainWindow::MakeNewFile()
 {
+
     X = OptionsForm->W;
     Y = OptionsForm->H;
     if(X>0 && Y>0){
+        if(!ui->NameOfFile->text().isEmpty())FileClose(true);
 
-    QPixmap tmppixmap = QPixmap(X, Y);
-    tmppixmap.fill(QColor(255,255,255));
-    scene->addPixmap(tmppixmap);
+        QPixmap tmppixmap = QPixmap(X, Y);
+        tmppixmap.fill(QColor(255,255,255));
+        scene->addPixmap(tmppixmap);
 
-    ui->graphicsView->setScene(scene);
-    ui->NameOfFile->setText("New_file");
+        ui->graphicsView->setScene(scene);
+        ui->NameOfFile->setText("New_file");
     }
 
 }

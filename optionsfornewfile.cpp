@@ -68,7 +68,7 @@ void OptionsForNewFile::pressedOK()
 {
     H = atoi(ui->Height->text().toStdString().c_str());
     W = atoi(ui->Width->text().toStdString().c_str());
-    this->hide();
+    if(H>0 && W>0)this->hide();
 }
 
 
