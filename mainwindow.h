@@ -49,6 +49,8 @@ public:
     QAction* openFile;
     QAction* newFile;
     QAction* saveFileAs;
+    QAction* saveFile;
+    QAction* closeFile;
     QAction* setColor;
 
     QColorDialog* ColorDialog;
@@ -59,12 +61,14 @@ public:
     int X = 0;
     int Y = 0;
 
+    bool IsModified = false;
+
 
 
 private:
     Ui::MainWindow *ui;
 
-    QString fileNameToOpen;
+
     int CountOfZoom = 0;
 
     OptionsForNewFile *OptionsForm;
@@ -77,6 +81,7 @@ public slots:
     void MakeNewFile();
     void FileClose(bool);
     void FileSaveAs(bool);
+    void FileSave(bool);
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
 

@@ -25,6 +25,8 @@ OptionsForNewFile::OptionsForNewFile(QWidget *parent) :
     ui->label_2->setStyleSheet(style);
 
 
+
+
     connect(ui->OK, SIGNAL(released()), this, SLOT(pressedOK()));
     connect(ui->Cancel, SIGNAL(released()), this, SLOT(pressedCancel()));
     connect(ui->OK, SIGNAL(released()), this, SLOT(EmitNewSignal()));
@@ -68,6 +70,7 @@ void OptionsForNewFile::pressedOK()
     W = atoi(ui->Width->text().toStdString().c_str());
     this->hide();
 }
+
 
 
 OptionsForNewFile::~OptionsForNewFile()

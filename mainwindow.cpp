@@ -82,7 +82,13 @@ MainWindow::MainWindow(QWidget *parent) :
     //NEW FILE
 
     //CLOSE FILE
+    closeFile = new QAction(this);
+    closeFile->setShortcut(tr("Ctrl+X"));
+    connect(closeFile, SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
+    ui->menuBar->addAction(closeFile);
+
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
+    //CLOSE FILE
 
     //SAVE AS FILE
     saveFileAs = new QAction(this);
@@ -93,6 +99,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
     //SAVE AS FILE
 
+
+    //SAVE
+    saveFile = new QAction(this);
+    saveFile->setShortcut(tr("Ctrl+S"));
+    connect(saveFile, SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
+    ui->menuBar->addAction(saveFile);
+
+    connect(ui->menuFile->actions().at(2), SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
+    //SAVE
 
     //------
 
@@ -127,11 +142,11 @@ void MainWindow::zoomDownEvent(bool)
     }
 }
 
-void MainWindow::FileOpen(bool)
+void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/saving-a-qgraphicsscene-to-svg-changes-scaling
 {
 
-    fileNameToOpen = QFileDialog::getOpenFileName(this,
-        tr("Open Image"), "/home/kor", tr("Image Files (*.png *.jpg *.bmp *.svg)"));
+    QString fileNameToOpen = QFileDialog::getOpenFileName(this,
+        tr("Open Image"), "/home/kor", tr("Image Files (*.jpg *.svg)"));
 
     scene->addPixmap(QPixmap(fileNameToOpen));    
     ui->graphicsView->setScene(scene);
@@ -140,6 +155,8 @@ void MainWindow::FileOpen(bool)
 
 void MainWindow::FileNew(bool)
 {
+    if(!ui->NameOfFile->text().isEmpty())FileClose(true);
+
     OptionsForm->show();
 
     connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
@@ -167,13 +184,17 @@ void MainWindow::MakeNewFile()
 
 void MainWindow::FileClose(bool)
 {
-
+    if(!IsModified)
+    {
+        scene->clear();
+        ui->NameOfFile->clear();
+    }else FileSaveAs(true);
 
 }
 
 void MainWindow::FileSaveAs(bool)
 {
-
+    if(!ui->NameOfFile->text().isEmpty()){
         QString newPath = QFileDialog::getSaveFileName(this, trUtf8("Save SVG"),
             "/home/kor", tr("SVG files (*.svg)"));
 
@@ -193,9 +214,35 @@ void MainWindow::FileSaveAs(bool)
         QPainter painter;
         painter.begin(&generator);
         scene->render(&painter);
+
         painter.end();
 
+    }
+}
 
+void MainWindow::FileSave(bool)
+{
+    if(!ui->NameOfFile->text().isEmpty()){
+
+        QString newPath = ui->NameOfFile->text();
+        if(newPath=="New_file" || newPath.contains(".jpg")) FileSaveAs(true);
+        else{
+
+            QSvgGenerator generator;
+            generator.setFileName(newPath);
+            generator.setSize(QSize(scene->width(), scene->height()));
+            generator.setViewBox(QRect(0, 0, scene->width(), scene->height()));
+            generator.setTitle(trUtf8("Name"));
+            generator.setDescription(trUtf8("File SVG"));
+
+
+            QPainter painter;
+            painter.begin(&generator);
+            scene->render(&painter);
+
+            painter.end();
+        }
+    }
 }
 
 ///ZOOM IN MOUSE. BUT IT WORKS BAD WITH SCROLL

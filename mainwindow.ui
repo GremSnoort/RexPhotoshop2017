@@ -150,7 +150,10 @@
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>&amp;Save</string>
+    <string>&amp;Save (Ctrl+S)</string>
+   </property>
+   <property name="iconText">
+    <string>Save (Ctrl+S)</string>
    </property>
   </action>
   <action name="actionSave_as">
@@ -188,7 +191,13 @@
   </action>
   <action name="actionClose_file">
    <property name="text">
-    <string>&amp;Close file</string>
+    <string>&amp;Close file (Ctrl+X)</string>
+   </property>
+   <property name="iconText">
+    <string>Close file (Ctrl+X)</string>
+   </property>
+   <property name="toolTip">
+    <string>Close file (Ctrl+X)</string>
    </property>
   </action>
   <action name="actionHow_to_work">

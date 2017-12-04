@@ -24,6 +24,7 @@ public:
     int H = 0;
     int W = 0;
 
+
 signals:
 
     void Signal();
@@ -32,6 +33,7 @@ signals:
 public slots:
     void Limit(QString);
     void pressedOK();
+
     void pressedCancel();
     void EmitNewSignal();
 
