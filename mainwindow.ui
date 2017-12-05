@@ -17,34 +17,6 @@
    <string notr="true">background-color: rgb(45, 48, 59);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>80</y>
-      <width>950</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>950</width>
-      <height>800</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>950</width>
-      <height>800</height>
-     </size>
-    </property>
-    <property name="cursor" stdset="0">
-     <cursorShape>CrossCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(35, 38, 49);</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="NameOfFile">
     <property name="geometry">
      <rect>
@@ -245,6 +217,17 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
     <property name="text">
      <string>Tools:</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>80</y>
+      <width>951</width>
+      <height>811</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

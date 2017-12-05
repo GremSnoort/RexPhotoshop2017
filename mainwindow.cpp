@@ -8,7 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     OptionsForm = new OptionsForNewFile();
     OptionsForm->hide();
-    scene = new QGraphicsScene;
+
+    myWorkSpace = new GraphicsViewClass();
+    ui->gridLayout->addWidget(myWorkSpace);
+
     ColorDialog = new QColorDialog(this);
     currentColorOfBrush = QColor(255, 255, 255);
 
@@ -88,14 +91,14 @@ MainWindow::MainWindow(QWidget *parent) :
     zoomUp->setShortcut(tr("Ctrl+Up"));
     zoomDown->setShortcut(tr("Ctrl+Down"));
 
-    connect(zoomUp, SIGNAL(triggered(bool)), this, SLOT(zoomUpEvent(bool)));
-    connect(zoomDown, SIGNAL(triggered(bool)), this, SLOT(zoomDownEvent(bool)));
+    connect(zoomUp, SIGNAL(triggered(bool)), myWorkSpace, SLOT(zoomUpEvent(bool)));
+    connect(zoomDown, SIGNAL(triggered(bool)), myWorkSpace, SLOT(zoomDownEvent(bool)));
 
-    ui->graphicsView->addAction(zoomUp);
-    ui->graphicsView->addAction(zoomDown);
+    myWorkSpace->addAction(zoomUp);
+    myWorkSpace->addAction(zoomDown);
 
-    connect(ui->pushButtonZoom_ActualPixels, SIGNAL(released()), this, SLOT(ActualPixelsPressed()));
-    connect(ui->pushButtonZoom_FitScreen, SIGNAL(released()), this, SLOT(FitScreenPressed()));
+    connect(ui->pushButtonZoom_ActualPixels, SIGNAL(released()), myWorkSpace, SLOT(ActualPixelsPressed()));
+    connect(ui->pushButtonZoom_FitScreen, SIGNAL(released()), myWorkSpace, SLOT(FitScreenPressed()));
     //ZOOM
 
     //OPEN FILE
@@ -156,6 +159,8 @@ void MainWindow::MakeFill()
     {
         //scene->
     }
+
+
 }
 
 
@@ -167,131 +172,8 @@ void MainWindow::SetColorView()
 
 
 //ZOOM
-void MainWindow::zoomUpEvent(bool)
-{
-    if(CountOfZoom<30){
-    ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    double scaleFactor = 1.07;
-    ui->graphicsView-> scale(scaleFactor, scaleFactor);
-    CountOfZoom++;
-    }
-}
-
-void MainWindow::zoomDownEvent(bool)
-{
-    if(CountOfZoom>(-30)){
-    ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    double scaleFactor = 1.07;
-    ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-    CountOfZoom--;
-    }
-}
-
-void MainWindow::ActualPixelsPressed()
-{
-    ui->pushButtonZoom_ActualPixels->setChecked(false);
-    if(CountOfZoom>0)
-    {
-        ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        double scaleFactor = 1.07;
-        for(int i=0; i<abs(CountOfZoom); i++)
-        {
-            ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-        }
-        CountOfZoom=0;
-    }
-    else if(CountOfZoom<0)
-    {
-        ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        double scaleFactor = 1.07;
-        for(int i=0; i<abs(CountOfZoom); i++)
-        {
-            ui->graphicsView-> scale(scaleFactor, scaleFactor);
-        }
-        CountOfZoom=0;
-    }
 
 
-}
-
-void MainWindow::FitScreenPressed()
-{
-    ActualPixelsPressed();
-    double scaleFactor = 1.07;
-    if(scene->height()>=scene->width())
-    {
-        double Z = scene->height();
-        if(scene->height()>=ui->graphicsView->size().height()) //8888888
-        {
-            while(Z>ui->graphicsView->size().height())
-            {
-                    Z/=scaleFactor;
-                    CountOfZoom--;
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-            }
-        }else//scene->height()<ui->graphicsView->size().height()
-        {
-            while(true)
-            {
-                    Z*=scaleFactor;
-                    CountOfZoom++;
-                    if(Z>=ui->graphicsView->size().height())
-                    {
-                        Z/=scaleFactor;
-                        CountOfZoom--;
-                        break;
-                    }
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                ui->graphicsView->scale(scaleFactor,  scaleFactor);
-            }
-        }
-    }
-    else
-    {
-
-        double Z = scene->width();
-
-        if(scene->width()>ui->graphicsView->size().width()) //8888888
-        {
-            while(Z>ui->graphicsView->size().width())
-            {
-                    Z/=scaleFactor;
-                    CountOfZoom--;
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-            }
-        }else//scene->height()<ui->graphicsView->size().height()
-        {
-            while(true)
-            {
-                    Z*=scaleFactor;
-                    CountOfZoom++;
-                    if(Z>=ui->graphicsView->size().width())
-                    {
-                        Z/=scaleFactor;
-                        CountOfZoom--;
-                        break;
-                    }
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                ui->graphicsView->scale(scaleFactor,  scaleFactor);
-            }
-        }
-
-    }
-}
 
 //ZOOM
 ///https://evileg.com/ru/post/149/
@@ -325,18 +207,11 @@ void MainWindow::FileNew(bool)
 void MainWindow::MakeNewFile()
 {
 
-    X = OptionsForm->W;
-    Y = OptionsForm->H;
+    int X = OptionsForm->W;
+    int Y = OptionsForm->H;
     if(X>0 && Y>0){
         if(!ui->NameOfFile->text().isEmpty())FileClose(true);
-
-
-        QPixmap tmppixmap = QPixmap(X, Y);
-        tmppixmap.fill(QColor(255,255,255));
-        scene=new QGraphicsScene;
-        scene->addPixmap(tmppixmap);
-
-        ui->graphicsView->setScene(scene);
+        myWorkSpace->CreateNew(X, Y);
         ui->NameOfFile->setText("New_file");
 
     }
@@ -347,9 +222,7 @@ void MainWindow::FileClose(bool)
 {
     if(!IsModified)
     {
-
-        scene->clear();
-        ui->graphicsView->setScene(scene);
+        myWorkSpace->scene->clear();
         ui->NameOfFile->clear();
     }else FileSaveAs(true);
 
@@ -368,15 +241,15 @@ void MainWindow::FileSaveAs(bool)
 
         QSvgGenerator generator;
         generator.setFileName(newPath);
-        generator.setSize(QSize(scene->width(), scene->height()));
-        generator.setViewBox(QRect(0, 0, scene->width(), scene->height()));
+        generator.setSize(QSize(myWorkSpace->scene->width(), myWorkSpace->scene->height()));
+        generator.setViewBox(QRect(0, 0, myWorkSpace->scene->width(), myWorkSpace->scene->height()));
         generator.setTitle(trUtf8("Name"));
         generator.setDescription(trUtf8("File SVG"));
 
 
         QPainter painter;
         painter.begin(&generator);
-        scene->render(&painter);
+        myWorkSpace->scene->render(&painter);
 
         painter.end();
 
@@ -393,15 +266,15 @@ void MainWindow::FileSave(bool)
 
             QSvgGenerator generator;
             generator.setFileName(newPath);
-            generator.setSize(QSize(scene->width(), scene->height()));
-            generator.setViewBox(QRect(0, 0, scene->width(), scene->height()));
+            generator.setSize(QSize(myWorkSpace->scene->width(), myWorkSpace->scene->height()));
+            generator.setViewBox(QRect(0, 0, myWorkSpace->scene->width(), myWorkSpace->scene->height()));
             generator.setTitle(trUtf8("Name"));
             generator.setDescription(trUtf8("File SVG"));
 
 
             QPainter painter;
             painter.begin(&generator);
-            scene->render(&painter);
+            myWorkSpace->scene->render(&painter);
 
             painter.end();
         }

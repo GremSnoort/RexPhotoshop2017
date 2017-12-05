@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "optionsfornewfile.h"
+#include "graphicsviewclass.h"
 
 #include <QDebug>
 
@@ -44,7 +45,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QGraphicsScene *scene;
+
     QAction* zoomUp;
     QAction* zoomDown;
     //QAction* openFile;
@@ -59,8 +60,7 @@ public:
     QColor currentColorOfBrush;
 
 
-    int X = 0;
-    int Y = 0;
+
 
     bool IsModified = false;
 
@@ -70,9 +70,10 @@ private:
     Ui::MainWindow *ui;
 
 
-    int CountOfZoom = 0;
+
 
     OptionsForNewFile *OptionsForm;
+    GraphicsViewClass* myWorkSpace;
 
 
 
@@ -83,12 +84,10 @@ public slots:
     void FileClose(bool);
     void FileSaveAs(bool);
     void FileSave(bool);
-    void zoomUpEvent(bool);
-    void zoomDownEvent(bool);
+
 
     //ZOOM
-    void ActualPixelsPressed();
-    void FitScreenPressed();
+
     //ZOOM
 
     void MakeFill();
