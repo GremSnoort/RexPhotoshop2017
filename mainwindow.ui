@@ -165,12 +165,29 @@
       <string/>
      </property>
     </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>59</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Zoom:</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_Zoom">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>110</y>
       <width>60</width>
       <height>60</height>
      </rect>
@@ -189,6 +206,44 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_FillAll">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Tools">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>59</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tools:</string>
     </property>
    </widget>
   </widget>

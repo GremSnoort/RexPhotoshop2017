@@ -91,6 +91,8 @@ public slots:
     void FitScreenPressed();
     //ZOOM
 
+    void MakeFill();
+
 
 
     void SetColorView();

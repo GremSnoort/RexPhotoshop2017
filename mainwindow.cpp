@@ -22,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->radioButtonZoom->setIcon(IcRZoom);
     ui->radioButtonZoom->setIconSize(QSize(30, 30));
 
+    QIcon IcFill = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png"));
+    ui->pushButton_FillAll->setIcon(IcFill);
+    ui->pushButton_FillAll->setIconSize(QSize(40, 40));
+
 
     //STYLE
     QFont allFont("Misc Fixed", 16, QFont::Bold);
@@ -47,7 +51,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->SetColorButton->setFont(fFont);
     ui->SetColorButton->setStyleSheet(style1);
 
-    ui->pushButton_Zoom->setStyleSheet(style1);
+    ui->Tools->setStyleSheet(style);
+    ui->Tools->setFont(fFont);
+
     ui->pushButtonZoom_ActualPixels->setFont(fFont);
     ui->pushButtonZoom_ActualPixels->setStyleSheet(style1);
     ui->pushButtonZoom_FitScreen->setFont(fFont);
@@ -142,6 +148,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+}
+
+void MainWindow::MakeFill()
+{
+    if(!ui->NameOfFile->text().isEmpty())
+    {
+        //scene->
+    }
 }
 
 
