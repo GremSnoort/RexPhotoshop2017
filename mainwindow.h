@@ -3,6 +3,7 @@
 
 #include "optionsfornewfile.h"
 
+#include <QDebug>
 
 #include <QMainWindow>
 #include <QString>
@@ -46,7 +47,7 @@ public:
     QGraphicsScene *scene;
     QAction* zoomUp;
     QAction* zoomDown;
-    QAction* openFile;
+    //QAction* openFile;
     QAction* newFile;
     QAction* saveFileAs;
     QAction* saveFile;
@@ -76,7 +77,7 @@ private:
 
 
 public slots:
-    void FileOpen(bool);
+    //void FileOpen(bool);
     void FileNew(bool);
     void MakeNewFile();
     void FileClose(bool);
@@ -84,6 +85,13 @@ public slots:
     void FileSave(bool);
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
+
+    //ZOOM
+    void ActualPixelsPressed();
+    void FitScreenPressed();
+    //ZOOM
+
+
 
     void SetColorView();
 
