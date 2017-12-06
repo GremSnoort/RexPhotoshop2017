@@ -43,6 +43,8 @@ public slots:
     void FitScreenPressed();
     //ZOOM
 
+    void SetRectMode();
+
 
 
 };

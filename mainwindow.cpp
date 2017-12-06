@@ -29,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_FillAll->setIcon(IcFill);
     ui->pushButton_FillAll->setIconSize(QSize(40, 40));
 
+    QIcon IcRect = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/apple-cube.jpg"));
+    ui->pushButton_Rect->setIcon(IcRect);
+    ui->pushButton_Rect->setIconSize(QSize(40, 40));
+
 
     //STYLE
     QFont allFont("Misc Fixed", 16, QFont::Bold);

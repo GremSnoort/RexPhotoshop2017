@@ -8,7 +8,11 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 
 
 
+void GraphicsViewClass::SetRectMode()
+{
 
+    scene->RectMODE=true;
+}
 
 
 //NEW
@@ -22,10 +26,14 @@ void GraphicsViewClass::CreateNew(int X, int Y)
     tmppixmap.fill(QColor(255,255,255));
     scene = new SceneClass();
     scene->addPixmap(tmppixmap);
+    scene->CountOfItems+=1;
 
     this->setScene(scene);
    \
     scene->CurrentPixmap = tmppixmap;
+
+
+    out<<scene->items().size()<<endl;
 
 
     //out<<scene->items().at(0)->boundingRect().center().rx()<<"  "<<scene->items().at(0)->boundingRect().center().ry()<<"  "<<items().at(0)->boundingRect().bottomLeft().rx()<<endl;

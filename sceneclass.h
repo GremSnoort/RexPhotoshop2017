@@ -24,6 +24,7 @@ public:
 
     void mousePressEvent(QGraphicsSceneMouseEvent * event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
     QPointF     previousPoint;
 
@@ -32,6 +33,14 @@ public:
     void MakeNew(int X, int Y);
 
     QPixmap CurrentPixmap;
+
+    bool FirstRect = false;
+    int CountOfItems = 0;
+
+    //MODE
+    bool RectMODE = false;
+
+    //MODE
 
 signals:
 

@@ -15,41 +15,43 @@ void SceneClass::MakeNew(int X, int Y)
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
     if(event->scenePos().x()<CurrentPixmap.width() && event->scenePos().y()<CurrentPixmap.height() && event->scenePos().x()>0 && event->scenePos().y()>0){
 
         this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(Qt::red));
-
-
-    /*this->addEllipse(event->scenePos().x() - 1,
-               event->scenePos().y() - 1,
-               10,
-               10,
-               QPen(Qt::NoPen),
-               QBrush(Qt::red));*/
-
-    previousPoint = event->scenePos();
+        FirstRect = true;
+        previousPoint = event->scenePos();
     }
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->scenePos().x()<CurrentPixmap.width() && event->scenePos().y()<CurrentPixmap.height() && event->scenePos().x()>0 && event->scenePos().y()>0){
 
+    qreal prX = previousPoint.x();
+    qreal prY = previousPoint.y();
 
-        this->addRect(QRectF(previousPoint, QSize(event->scenePos().x()-previousPoint.x(), event->scenePos().y()-previousPoint.y())), QPen(Qt::NoPen), QBrush(Qt::red));
+    qreal newX = event->scenePos().x();
+    qreal newY = event->scenePos().y();
 
-       // this->removeItem(this->items().at(this->items().size()));
-        //this->addRect( event->scenePos().x(), event->scenePos().y(), previousPoint.rx(), previousPoint.ry(),QPen(Qt::NoPen), QBrush(Qt::red));
+    if(newX>CurrentPixmap.width())newX = CurrentPixmap.width();
+    if(newY>CurrentPixmap.height())newY = CurrentPixmap.height();
+    if(newX<0)newX=0;
+    if(newY<0)newY=0;
 
-  /*  this->addLine(previousPoint.x(),
-            previousPoint.y(),
-            event->scenePos().x(),
-            event->scenePos().y(),
-            QPen(Qt::red,1,Qt::SolidLine,Qt::RoundCap));*/
+    if(FirstRect==true)
+    {
+        if(this->items().size()>CountOfItems)this->removeItem(this->items().first());
 
-    //previousPoint = event->scenePos();
+        if(prX>newX && prY>newY)this->addRect(QRectF(QPointF(newX, newY), QSize(prX-newX, prY-newY)), QPen(Qt::NoPen), QBrush(Qt::red));
+        else if(newX>prX && newY>prY)this->addRect(QRectF(QPointF(prX, prY), QSize(newX-prX, newY-prY)), QPen(Qt::NoPen), QBrush(Qt::red));
+        else if(newX>prX && newY<prY)this->addRect(QRectF(QPointF(prX, newY), QSize(newX-prX, prY-newY)), QPen(Qt::NoPen), QBrush(Qt::red));
+        else if(newX<prX && newY>prY)this->addRect(QRectF(QPointF(newX, prY), QSize(prX-newX, newY-prY)), QPen(Qt::NoPen), QBrush(Qt::red));
     }
+}
+
+void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    FirstRect=false;
+    CountOfItems+=1;
 }
 
 
