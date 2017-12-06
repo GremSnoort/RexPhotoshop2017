@@ -12,8 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
     myWorkSpace = new GraphicsViewClass();
     ui->gridLayout->addWidget(myWorkSpace);
 
-    ColorDialog = new QColorDialog(this);
+    ColorDialog = new QColorDialog(this);    
     currentColorOfBrush = QColor(255, 255, 255);
+
+
+    myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+
 
 
     ui->widget_Zoom->hide();
@@ -29,9 +33,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_FillAll->setIcon(IcFill);
     ui->pushButton_FillAll->setIconSize(QSize(40, 40));
 
-    QIcon IcRect = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/apple-cube.jpg"));
+    QIcon IcRect = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png"));
     ui->pushButton_Rect->setIcon(IcRect);
-    ui->pushButton_Rect->setIconSize(QSize(40, 40));
+    ui->pushButton_Rect->setIconSize(QSize(50, 50));
+
+    QIcon IcCircle = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png"));
+    ui->pushButton_Circle->setIcon(IcCircle);
+    ui->pushButton_Circle->setIconSize(QSize(50, 50));
+
+    QIcon IcColor = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png"));
+    ui->SetColorButton->setIcon(IcColor);
+    ui->SetColorButton->setIconSize(QSize(50, 50));
 
 
     //STYLE
@@ -50,13 +62,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->NameOfFile->setAlignment(Qt::AlignCenter);
     ui->NameOfFile->setStyleSheet(style1);
 
-    ui->label->setFont(fFont);
-    ui->label->setStyleSheet(style);
-    ui->label->setAlignment(Qt::AlignCenter);
 
 
-    ui->SetColorButton->setFont(fFont);
-    ui->SetColorButton->setStyleSheet(style1);
+    ColorDialog->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+
+
+
+
 
     ui->Tools->setStyleSheet(style);
     ui->Tools->setFont(fFont);
@@ -72,23 +84,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->NameOfFile->setReadOnly(true);
 
+
+
+
     //BUTTONS
 
 
 
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Zoom, SLOT(show()));
-
-
+    connect(ui->pushButton_Zoom, SIGNAL(released()), myWorkSpace, SLOT(SetZoomMode()));
+    connect(ui->pushButton_Rect, SIGNAL(released()), myWorkSpace, SLOT(SetRectMode()));
+    connect(ui->pushButton_Circle, SIGNAL(released()), myWorkSpace, SLOT(SetCircleMode()));
 
     //BUTTONS
 
     //COLOR
-    connect(ui->SetColorButton, SIGNAL(released()), this, SLOT(SetColorView()));
+    connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
 
     setColor = new QAction(this);
     setColor->setShortcut(tr("Ctrl+P"));
-    connect(setColor, SIGNAL(triggered(bool)), this, SLOT(SetColorView()));
+    connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
     ui->SetColorButton->addAction(setColor);
+
+
+    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));
     //COLOR
 
 
@@ -161,22 +180,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-void MainWindow::MakeFill()
+
+void MainWindow::ChangeColor(QColor q)
 {
-    if(!ui->NameOfFile->text().isEmpty())
-    {
-        //scene->
-    }
-
-
-}
-
-
-void MainWindow::SetColorView()
-{    
-    currentColorOfBrush = ColorDialog->getColor();
+    currentColorOfBrush = q;
+    myWorkSpace->SetColor(q);
     ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
+
 }
+
 
 
 //ZOOM
@@ -220,6 +232,7 @@ void MainWindow::MakeNewFile()
     if(X>0 && Y>0){
         if(!ui->NameOfFile->text().isEmpty())FileClose(true);
         myWorkSpace->CreateNew(X, Y);
+        myWorkSpace->SetColor(currentColorOfBrush);
         ui->NameOfFile->setText("New_file");
 
     }

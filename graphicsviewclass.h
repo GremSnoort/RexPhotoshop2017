@@ -44,6 +44,9 @@ public slots:
     //ZOOM
 
     void SetRectMode();
+    void SetCircleMode();
+    void SetZoomMode();
+    void SetColor(QColor q);
 
 
 

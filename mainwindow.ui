@@ -22,7 +22,7 @@
      <rect>
       <x>80</x>
       <y>50</y>
-      <width>941</width>
+      <width>991</width>
       <height>21</height>
      </rect>
     </property>
@@ -33,44 +33,55 @@
    <widget class="QPushButton" name="SetColorButton">
     <property name="geometry">
      <rect>
-      <x>1040</x>
-      <y>210</y>
-      <width>121</width>
-      <height>31</height>
+      <x>1090</x>
+      <y>170</y>
+      <width>60</width>
+      <height>60</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>Change color</string>
+     <string/>
     </property>
    </widget>
    <widget class="QWidget" name="Color" native="true">
     <property name="geometry">
      <rect>
-      <x>1040</x>
-      <y>90</y>
-      <width>121</width>
-      <height>111</height>
+      <x>1080</x>
+      <y>80</y>
+      <width>80</width>
+      <height>80</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>80</width>
+      <height>80</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>80</width>
+      <height>80</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);
 </string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>240</y>
-      <width>81</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>(Ctrl+P)</string>
     </property>
    </widget>
    <widget class="QWidget" name="widget_Zoom" native="true">
@@ -223,7 +234,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <rect>
       <x>80</x>
       <y>80</y>
-      <width>951</width>
+      <width>991</width>
       <height>811</height>
      </rect>
     </property>
@@ -234,6 +245,31 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <rect>
       <x>10</x>
       <y>250</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Circle">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
       <width>60</width>
       <height>60</height>
      </rect>

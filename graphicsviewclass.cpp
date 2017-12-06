@@ -10,8 +10,26 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 
 void GraphicsViewClass::SetRectMode()
 {
-
+    scene->CircleMODE=false;
+    scene->ZoomMODE=false;
     scene->RectMODE=true;
+}
+void GraphicsViewClass::SetCircleMode()
+{
+    scene->CircleMODE=true;
+    scene->RectMODE=false;
+    scene->ZoomMODE=false;
+}
+void GraphicsViewClass::SetZoomMode()
+{
+    scene->CircleMODE=false;
+    scene->RectMODE=false;
+    scene->ZoomMODE=true;
+}
+
+void GraphicsViewClass::SetColor(QColor q)
+{
+    scene->COLOR=q;
 }
 
 

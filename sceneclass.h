@@ -30,15 +30,22 @@ public:
 
     QGraphicsScene* scene;
 
-    void MakeNew(int X, int Y);
+
 
     QPixmap CurrentPixmap;
 
     bool FirstRect = false;
+    bool FirstEllipse = false;
+
+
     int CountOfItems = 0;
+
+    QColor COLOR = QColor(255, 255, 255);
 
     //MODE
     bool RectMODE = false;
+    bool CircleMODE = false;
+    bool ZoomMODE = false;
 
     //MODE
 

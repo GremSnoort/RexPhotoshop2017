@@ -85,16 +85,8 @@ public slots:
     void FileSaveAs(bool);
     void FileSave(bool);
 
+    void ChangeColor(QColor q);
 
-    //ZOOM
-
-    //ZOOM
-
-    void MakeFill();
-
-
-
-    void SetColorView();
 
 };
 
