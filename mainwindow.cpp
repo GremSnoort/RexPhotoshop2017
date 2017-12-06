@@ -62,7 +62,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonZoom_FitScreen->setFont(fFont);
     ui->pushButtonZoom_FitScreen->setStyleSheet(style1);
 
+    ui->gridLayoutWidget->setStyleSheet(style1);
+
     //STYLE
+
+    ui->NameOfFile->setReadOnly(true);
 
     //BUTTONS
 

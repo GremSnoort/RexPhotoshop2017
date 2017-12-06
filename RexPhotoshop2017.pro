@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     optionsfornewfile.cpp \
-    graphicsviewclass.cpp
+    graphicsviewclass.cpp \
+    sceneclass.cpp
 
 HEADERS += \
         mainwindow.h \
     optionsfornewfile.h \
-    graphicsviewclass.h
+    graphicsviewclass.h \
+    sceneclass.h
 
 FORMS += \
         mainwindow.ui \

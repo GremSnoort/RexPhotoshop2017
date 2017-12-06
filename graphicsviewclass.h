@@ -8,6 +8,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QPixmap>
+#include <QGraphicsSceneMouseEvent>
+#include <QTextStream>
+
+#include "sceneclass.h"
 
 class GraphicsViewClass : public QGraphicsView
 {
@@ -16,12 +20,18 @@ public:
     explicit GraphicsViewClass(QWidget *parent = nullptr);
     ~GraphicsViewClass();
 
-    QGraphicsScene* scene;
+    SceneClass* scene;
 
     int CountOfZoom = 0;
     double scaleFactor = 1.07;
 
     void CreateNew(int X, int Y);
+
+
+
+private:
+
+
 
 signals:
 
@@ -32,6 +42,7 @@ public slots:
     void ActualPixelsPressed();
     void FitScreenPressed();
     //ZOOM
+
 
 
 };

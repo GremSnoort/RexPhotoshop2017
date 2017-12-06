@@ -2,19 +2,33 @@
 
 GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 {
-    scene=new QGraphicsScene();
+    scene=new SceneClass();
     this->setScene(scene);
 }
+
+
+
+
+
 
 //NEW
 
 void GraphicsViewClass::CreateNew(int X, int Y)
 {
+
+
+    QTextStream out(stdout);
     QPixmap tmppixmap = QPixmap(X, Y);
     tmppixmap.fill(QColor(255,255,255));
-    scene=new QGraphicsScene();
+    scene = new SceneClass();
     scene->addPixmap(tmppixmap);
+
     this->setScene(scene);
+   \
+    scene->CurrentPixmap = tmppixmap;
+
+
+    //out<<scene->items().at(0)->boundingRect().center().rx()<<"  "<<scene->items().at(0)->boundingRect().center().ry()<<"  "<<items().at(0)->boundingRect().bottomLeft().rx()<<endl;
 }
 
 
@@ -66,6 +80,7 @@ void GraphicsViewClass::ActualPixelsPressed()
 
 void GraphicsViewClass::FitScreenPressed()
 {
+    if(scene->height()>0 &&  scene->width()>0){
     ActualPixelsPressed();
     if(scene->height()>=scene->width())
     {
@@ -140,6 +155,7 @@ void GraphicsViewClass::FitScreenPressed()
         }
 
     }
+  }
 }
 //ZOOM
 
