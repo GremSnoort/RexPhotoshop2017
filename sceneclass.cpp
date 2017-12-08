@@ -74,11 +74,13 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
     FirstRect=false;
     CountOfItems+=1;
+    IsModified=true;
     }
     if(CircleMODE==true)
     {
     FirstEllipse=false;
     CountOfItems+=1;
+    IsModified=true;
     }
 }
 

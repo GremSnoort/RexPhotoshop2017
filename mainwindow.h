@@ -63,7 +63,7 @@ public:
 
 
 
-    bool IsModified = false;
+
 
 
 

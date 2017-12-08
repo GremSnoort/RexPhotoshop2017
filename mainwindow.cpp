@@ -191,13 +191,8 @@ void MainWindow::ChangeColor(QColor q)
 
 
 
-//ZOOM
 
-
-
-//ZOOM
-///https://evileg.com/ru/post/149/
-void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/saving-a-qgraphicsscene-to-svg-changes-scaling
+void MainWindow::FileOpen(bool)
 {
 
     QString fileNameToOpen = QFileDialog::getOpenFileName(this,
@@ -214,12 +209,14 @@ void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/sa
     {
         QGraphicsRectItem *rect = item;
         myWorkSpace->scene->addItem(rect);
+        myWorkSpace->scene->CountOfItems+=1;
     }
 
     foreach (QGraphicsEllipseItem *item, SVGOpen::getEllipseElements(fileNameToOpen))
     {
         QGraphicsEllipseItem *ell = item;
         myWorkSpace->scene->addItem(ell);
+        myWorkSpace->scene->CountOfItems+=1;
     }
 
 
@@ -257,7 +254,7 @@ void MainWindow::MakeNewFile()
 
 void MainWindow::FileClose(bool)
 {
-    if(!IsModified)
+    if(!myWorkSpace->scene->IsModified)
     {
         myWorkSpace->scene->clear();
         ui->NameOfFile->clear();
@@ -290,6 +287,10 @@ void MainWindow::FileSaveAs(bool)
 
         painter.end();
 
+        ui->NameOfFile->setText(newPath);
+
+        myWorkSpace->scene->IsModified=false;
+
     }
 }
 
@@ -314,6 +315,8 @@ void MainWindow::FileSave(bool)
             myWorkSpace->scene->render(&painter);
 
             painter.end();
+
+            myWorkSpace->scene->IsModified=false;
         }
     }
 }

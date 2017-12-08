@@ -42,6 +42,8 @@ public:
 
     int CountOfItems = 0;
 
+    bool IsModified = false;
+
     QColor COLOR = QColor(255, 255, 255);
 
     //MODE

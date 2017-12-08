@@ -32,10 +32,10 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
         ell->setFlag(QGraphicsItem::ItemIsMovable);
 
         QDomElement gElement = gNode.toElement();
-        ell = new QGraphicsEllipseItem(atof(ellipse.attribute("cx").toStdString().c_str()),
-                      atof(ellipse.attribute("cy").toStdString().c_str()),
-                      atof(ellipse.attribute("rx").toStdString().c_str()),
-                      atof(ellipse.attribute("ry").toStdString().c_str()));
+        ell = new QGraphicsEllipseItem(atof(ellipse.attribute("cx").toStdString().c_str())-atof(ellipse.attribute("rx").toStdString().c_str()),
+                      atof(ellipse.attribute("cy").toStdString().c_str())-atof(ellipse.attribute("ry").toStdString().c_str()),
+                      2*atof(ellipse.attribute("rx").toStdString().c_str()),
+                      2*atof(ellipse.attribute("ry").toStdString().c_str()));
 
 
         QColor fillColor(gElement.attribute("fill", "#ffffff"));
