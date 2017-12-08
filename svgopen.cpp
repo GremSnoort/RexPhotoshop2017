@@ -121,5 +121,5 @@ QRectF SVGOpen::getSizes(const QString filename)
                       parameters.at(2).toInt(),
                       parameters.at(3).toInt());
     }
-    return QRectF(0,0,200,200);
+    return QRectF(0,0,700,700);
 }

@@ -63,7 +63,7 @@ void GraphicsViewClass::CreateNew(int X, int Y)
 //ZOOM
 void GraphicsViewClass::zoomUpEvent(bool)
 {
-    if(CountOfZoom<30){
+    if(CountOfZoom<60){
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this-> scale(scaleFactor, scaleFactor);
     CountOfZoom++;
@@ -72,7 +72,7 @@ void GraphicsViewClass::zoomUpEvent(bool)
 
 void GraphicsViewClass::zoomDownEvent(bool)
 {
-    if(CountOfZoom>(-30)){
+    if(CountOfZoom>(-60)){
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     CountOfZoom--;
