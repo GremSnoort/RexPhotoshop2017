@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg
+QT       += core gui svg xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     optionsfornewfile.cpp \
     graphicsviewclass.cpp \
-    sceneclass.cpp
+    sceneclass.cpp \
+    svgopen.cpp
 
 HEADERS += \
         mainwindow.h \
     optionsfornewfile.h \
     graphicsviewclass.h \
-    sceneclass.h
+    sceneclass.h \
+    svgopen.h
 
 FORMS += \
         mainwindow.ui \

@@ -129,12 +129,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //ZOOM
 
     //OPEN FILE
- /*   openFile = new QAction(this);
+    openFile = new QAction(this);
     openFile->setShortcut(tr("Ctrl+O"));
     connect(openFile, SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
     ui->menuBar->addAction(openFile);
 
-    connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));*/
+    connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
     //OPEN FILE
 
     //NEW FILE
@@ -197,19 +197,35 @@ void MainWindow::ChangeColor(QColor q)
 
 //ZOOM
 ///https://evileg.com/ru/post/149/
-/*void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/saving-a-qgraphicsscene-to-svg-changes-scaling
+void MainWindow::FileOpen(bool)//https://stackoverflow.com/questions/34183996/saving-a-qgraphicsscene-to-svg-changes-scaling
 {
 
     QString fileNameToOpen = QFileDialog::getOpenFileName(this,
         tr("Open Image"), "/home/kor", tr("Image Files (*.jpg *.svg)"));
 
-    scene->addPixmap(QPixmap(fileNameToOpen));
+    if (fileNameToOpen.isEmpty())
+        return;
 
-    ui->graphicsView->setScene(scene);
+    myWorkSpace->CreateNew(SVGOpen::getSizes(fileNameToOpen).width(), SVGOpen::getSizes(fileNameToOpen).height());
+    myWorkSpace->SetColor(currentColorOfBrush);
+    //myWorkSpace->scene->setSceneRect(SVGOpen::getSizes(fileNameToOpen));
+
+    foreach (QGraphicsRectItem *item, SVGOpen::getRectElements(fileNameToOpen))
+    {
+        QGraphicsRectItem *rect = item;
+        myWorkSpace->scene->addItem(rect);
+    }
+
+    foreach (QGraphicsEllipseItem *item, SVGOpen::getEllipseElements(fileNameToOpen))
+    {
+        QGraphicsEllipseItem *ell = item;
+        myWorkSpace->scene->addItem(ell);
+    }
+
 
     ui->NameOfFile->setText(fileNameToOpen);
 
-}*/
+}
 
 void MainWindow::FileNew(bool)
 {

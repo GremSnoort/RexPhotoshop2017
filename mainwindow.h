@@ -3,6 +3,7 @@
 
 #include "optionsfornewfile.h"
 #include "graphicsviewclass.h"
+#include "svgopen.h"
 
 #include <QDebug>
 
@@ -48,7 +49,7 @@ public:
 
     QAction* zoomUp;
     QAction* zoomDown;
-    //QAction* openFile;
+    QAction* openFile;
     QAction* newFile;
     QAction* saveFileAs;
     QAction* saveFile;
@@ -78,7 +79,7 @@ private:
 
 
 public slots:
-    //void FileOpen(bool);
+    void FileOpen(bool);
     void FileNew(bool);
     void MakeNewFile();
     void FileClose(bool);
