@@ -4,6 +4,7 @@
 #include "optionsfornewfile.h"
 #include "graphicsviewclass.h"
 #include "svgopen.h"
+#include "askforsave.h"
 
 #include <QDebug>
 
@@ -74,6 +75,7 @@ private:
 
 
     OptionsForNewFile *OptionsForm;
+    AskForSave *AskSaveDialog;
     GraphicsViewClass* myWorkSpace;
 
 

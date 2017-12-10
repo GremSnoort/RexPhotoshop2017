@@ -29,15 +29,18 @@ SOURCES += \
     optionsfornewfile.cpp \
     graphicsviewclass.cpp \
     sceneclass.cpp \
-    svgopen.cpp
+    svgopen.cpp \
+    askforsave.cpp
 
 HEADERS += \
         mainwindow.h \
     optionsfornewfile.h \
     graphicsviewclass.h \
     sceneclass.h \
-    svgopen.h
+    svgopen.h \
+    askforsave.h
 
 FORMS += \
         mainwindow.ui \
-    optionsfornewfile.ui
+    optionsfornewfile.ui \
+    askforsave.ui

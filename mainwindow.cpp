@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     OptionsForm = new OptionsForNewFile();
     OptionsForm->hide();
+    AskSaveDialog = new AskForSave();
+    AskSaveDialog->hide();
 
     myWorkSpace = new GraphicsViewClass();
     ui->gridLayout->addWidget(myWorkSpace);
@@ -83,6 +85,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //STYLE
 
     ui->NameOfFile->setReadOnly(true);
+
+    connect(AskSaveDialog, SIGNAL(Save(bool)), this, SLOT(FileSave(bool)));
+    connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
 
 
 
@@ -194,6 +199,13 @@ void MainWindow::ChangeColor(QColor q)
 
 void MainWindow::FileOpen(bool)
 {
+    if(myWorkSpace->scene->IsModified==true)
+    {
+        AskSaveDialog->show();
+    }
+
+    if(AskSaveDialog->isHidden())
+    {
 
     QString fileNameToOpen = QFileDialog::getOpenFileName(this,
         tr("Open Image"), "/home/kor", tr("Image Files (*.jpg *.svg)"));
@@ -221,11 +233,18 @@ void MainWindow::FileOpen(bool)
 
 
     ui->NameOfFile->setText(fileNameToOpen);
-
+    }
 }
 
 void MainWindow::FileNew(bool)
 {
+    if(myWorkSpace->scene->IsModified==true)
+    {
+        AskSaveDialog->show();
+    }
+
+    if(AskSaveDialog->isHidden())
+    {
 
 
     OptionsForm->show();
@@ -233,7 +252,7 @@ void MainWindow::FileNew(bool)
     connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
 
 
-
+    }
 
 }
 
@@ -254,11 +273,16 @@ void MainWindow::MakeNewFile()
 
 void MainWindow::FileClose(bool)
 {
-    if(!myWorkSpace->scene->IsModified)
+    if(myWorkSpace->scene->IsModified==true)
+    {
+        AskSaveDialog->show();
+    }
+
+    if(AskSaveDialog->isHidden())
     {
         myWorkSpace->scene->clear();
         ui->NameOfFile->clear();
-    }else FileSaveAs(true);
+    }
 
 }
 
@@ -343,4 +367,5 @@ void MainWindow::wheelEvent(QWheelEvent *event){
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
