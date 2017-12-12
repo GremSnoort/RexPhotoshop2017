@@ -181,10 +181,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //------
 
+    deleteIt = new QAction(this);
+    deleteIt->setShortcut(tr("Ctrl+E"));
+    connect(deleteIt, SIGNAL(triggered(bool)), this, SLOT(RemoveIt(bool)));
+    myWorkSpace->addAction(deleteIt);
 
 
 }
 
+
+void MainWindow::RemoveIt(bool)
+{
+    //this->items().first()->setFocus();
+    int i = myWorkSpace->scene->items().size();
+    QTextStream out(stdout);
+    out<<i<<"  "<<myWorkSpace->scene->CountOfItems<<endl;
+    /*QGraphicsItem *It = scene->focusItem();
+    scene->removeItem(It);
+
+    CountOfItems--;*/
+}
 
 void MainWindow::ChangeColor(QColor q)
 {

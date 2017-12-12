@@ -3,6 +3,7 @@
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
     scene = new QGraphicsScene();
+    CountOfItems=0;
 }
 
 
@@ -15,6 +16,8 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstRect = true;
+
+            //auto itemClick = dynamic_cast<QGraphicsRectItem*>(this->itemAt(event->pos()));
         }
         if(CircleMODE==true)
         {
@@ -23,6 +26,10 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         previousPoint = event->scenePos();
     }
+
+    int i = this->items().size();
+    QTextStream out(stdout);
+    out<<i<<"  "<<CountOfItems<<endl;
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -66,6 +73,11 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         else if(newX<prX && newY>prY)this->addEllipse(QRectF(QPointF(newX, prY), QSize(prX-newX, newY-prY)), QPen(Qt::NoPen), QBrush(COLOR));
     }
     }
+
+
+    int i = this->items().size();
+    QTextStream out(stdout);
+    out<<i<<"  "<<CountOfItems<<endl;
 }
 
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -75,13 +87,21 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     FirstRect=false;
     CountOfItems+=1;
     IsModified=true;
+    this->items().first()->setFlag(QGraphicsItem::ItemIsMovable);
     }
     if(CircleMODE==true)
     {
     FirstEllipse=false;
     CountOfItems+=1;
     IsModified=true;
+    this->items().first()->setFlag(QGraphicsItem::ItemIsMovable);
     }
+
+
+    int i = this->items().size();
+    QTextStream out(stdout);
+    out<<i<<"  "<<CountOfItems<<endl;
+
 }
 
 

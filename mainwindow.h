@@ -56,6 +56,7 @@ public:
     QAction* saveFile;
     QAction* closeFile;
     QAction* setColor;
+    QAction* deleteIt;
 
     QColorDialog* ColorDialog;
 
@@ -90,6 +91,7 @@ public slots:
 
     void ChangeColor(QColor q);
 
+    void RemoveIt(bool);
 
 };
 

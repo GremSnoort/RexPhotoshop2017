@@ -40,7 +40,7 @@ public:
     bool FirstEllipse = false;
 
 
-    int CountOfItems = 0;
+    int CountOfItems;
 
     bool IsModified = false;
 
@@ -56,6 +56,8 @@ public:
 signals:
 
 public slots:
+
+
 };
 
 #endif // SCENECLASS_H
