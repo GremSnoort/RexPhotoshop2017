@@ -1,8 +1,8 @@
 #include "askforsave.h"
 #include "ui_askforsave.h"
 
-AskForSave::AskForSave(QWidget *parent) :
-    QWidget(parent),
+AskForSave::AskForSave(QMainWindow *parent) :
+    QMainWindow(parent),
     ui(new Ui::AskForSave)
 {
 

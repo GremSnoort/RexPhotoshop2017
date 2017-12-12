@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QValidator>
 #include <QString>
-
+#include <QMainWindow>
 #include <QStyle>
 #include <QDesktopWidget>
 
@@ -13,12 +13,12 @@ namespace Ui {
 class OptionsForNewFile;
 }
 
-class OptionsForNewFile : public QWidget
+class OptionsForNewFile : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit OptionsForNewFile(QWidget *parent = 0);
+    explicit OptionsForNewFile(QMainWindow *parent);
     ~OptionsForNewFile();
 
     int H = 0;

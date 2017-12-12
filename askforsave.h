@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QObject>
 
-
+#include <QMainWindow>
 #include <QStyle>
 #include <QDesktopWidget>
 
@@ -12,7 +12,7 @@ namespace Ui {
 class AskForSave;
 }
 
-class AskForSave : public QWidget
+class AskForSave : public QMainWindow
 {
     Q_OBJECT
 
@@ -26,7 +26,7 @@ public slots:
      void MakeSaveAs();
 
 public:
-    explicit AskForSave(QWidget *parent = 0);
+    explicit AskForSave(QMainWindow *parent);
     ~AskForSave();
 
 private:

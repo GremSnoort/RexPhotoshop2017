@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>250</width>
+    <width>315</width>
     <height>125</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>250</width>
+    <width>315</width>
     <height>125</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>250</width>
+    <width>315</width>
     <height>125</height>
    </size>
   </property>
@@ -31,7 +31,7 @@
   <widget class="QPushButton" name="SAVE">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>50</x>
      <y>70</y>
      <width>88</width>
      <height>34</height>
@@ -44,7 +44,7 @@
   <widget class="QPushButton" name="SAVE_AS">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>170</x>
      <y>70</y>
      <width>88</width>
      <height>34</height>
@@ -57,9 +57,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>20</y>
-     <width>251</width>
+     <width>301</width>
      <height>31</height>
     </rect>
    </property>

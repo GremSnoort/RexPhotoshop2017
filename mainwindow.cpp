@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    OptionsForm = new OptionsForNewFile();
+    OptionsForm = new OptionsForNewFile(this);
     OptionsForm->hide();
-    AskSaveDialog = new AskForSave();
+    AskSaveDialog = new AskForSave(this);
     AskSaveDialog->hide();
 
     myWorkSpace = new GraphicsViewClass();
@@ -202,6 +202,7 @@ void MainWindow::FileOpen(bool)
     if(myWorkSpace->scene->IsModified==true)
     {
         AskSaveDialog->show();
+
     }
 
     if(AskSaveDialog->isHidden())
@@ -367,5 +368,4 @@ void MainWindow::wheelEvent(QWheelEvent *event){
 MainWindow::~MainWindow()
 {
     delete ui;
-
 }

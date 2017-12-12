@@ -1,8 +1,8 @@
 #include "optionsfornewfile.h"
 #include "ui_optionsfornewfile.h"
 
-OptionsForNewFile::OptionsForNewFile(QWidget *parent) :
-    QWidget(parent),
+OptionsForNewFile::OptionsForNewFile(QMainWindow *parent) :
+    QMainWindow(parent),
     ui(new Ui::OptionsForNewFile)
 {
 
