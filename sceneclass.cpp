@@ -3,6 +3,7 @@
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
     scene = new QGraphicsScene();
+
     CountOfItems=0;
 }
 
@@ -17,7 +18,6 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
             this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstRect = true;
 
-            //auto itemClick = dynamic_cast<QGraphicsRectItem*>(this->itemAt(event->pos()));
         }
         if(CircleMODE==true)
         {
@@ -25,11 +25,26 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
             FirstEllipse = true;
         }
         previousPoint = event->scenePos();
+
+       if(QApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+           for(int i=0; i<(this->items().size()-1); i++)
+           {
+               QRectF Rec = this->items().at(i)->boundingRect();
+               QTextStream out(stdout);
+               out<<Rec.bottomLeft().x()<<"  "<<Rec.bottomRight().x()<<"  "<<Rec.topLeft().x()<<"  "<<Rec.topRight().x()<<"_________"<<event->scenePos().rx()<<Rec.contains(event->pos())<<endl;
+
+               if(Rec.contains(event->scenePos()))
+               {
+                   this->removeItem(this->items().at(i));
+                   CountOfItems-=1;
+               }
+           }
+        }
+
+
     }
 
-    int i = this->items().size();
-    QTextStream out(stdout);
-    out<<i<<"  "<<CountOfItems<<endl;
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -75,9 +90,7 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 
 
-    int i = this->items().size();
-    QTextStream out(stdout);
-    out<<i<<"  "<<CountOfItems<<endl;
+
 }
 
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -87,20 +100,24 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     FirstRect=false;
     CountOfItems+=1;
     IsModified=true;
-    this->items().first()->setFlag(QGraphicsItem::ItemIsMovable);
+
+
     }
     if(CircleMODE==true)
     {
     FirstEllipse=false;
     CountOfItems+=1;
     IsModified=true;
-    this->items().first()->setFlag(QGraphicsItem::ItemIsMovable);
+
     }
 
+   /* for(int i=0; i<this->items().size(); i++)
+    {
+        this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable);
+        this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, 1);
+    }*/
 
-    int i = this->items().size();
-    QTextStream out(stdout);
-    out<<i<<"  "<<CountOfItems<<endl;
+
 
 }
 

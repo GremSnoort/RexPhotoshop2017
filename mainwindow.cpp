@@ -196,10 +196,20 @@ void MainWindow::RemoveIt(bool)
     int i = myWorkSpace->scene->items().size();
     QTextStream out(stdout);
     out<<i<<"  "<<myWorkSpace->scene->CountOfItems<<endl;
-    /*QGraphicsItem *It = scene->focusItem();
-    scene->removeItem(It);
 
-    CountOfItems--;*/
+
+    for(int i=0; i<myWorkSpace->scene->selectedItems().size(); i++)
+    {
+        QGraphicsItem *it = myWorkSpace->scene->selectedItems().at(i);
+        myWorkSpace->scene->removeItem(it);
+        myWorkSpace->scene->CountOfItems-=1;
+    }
+
+
+    /*
+    myWorkSpace->scene->removeItem(myWorkSpace->scene->items().first());
+
+    myWorkSpace->scene->CountOfItems--;*/
 }
 
 void MainWindow::ChangeColor(QColor q)
@@ -238,6 +248,7 @@ void MainWindow::FileOpen(bool)
     {
         QGraphicsRectItem *rect = item;
         myWorkSpace->scene->addItem(rect);
+
         myWorkSpace->scene->CountOfItems+=1;
     }
 
@@ -245,9 +256,15 @@ void MainWindow::FileOpen(bool)
     {
         QGraphicsEllipseItem *ell = item;
         myWorkSpace->scene->addItem(ell);
+
         myWorkSpace->scene->CountOfItems+=1;
     }
 
+  /*  for(int i=0; i<myWorkSpace->scene->items().size(); i++)
+    {
+        myWorkSpace->scene->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable);
+        myWorkSpace->scene->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, 1);
+    }*/
 
     ui->NameOfFile->setText(fileNameToOpen);
     }

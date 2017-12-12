@@ -8,7 +8,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
-
+#include <QApplication>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
