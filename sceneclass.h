@@ -56,15 +56,19 @@ public:
     bool CircleMODE = false;
     bool ZoomMODE = false;
 
-
+    bool firstmove = false;
 
     bool RedrawMODE = true;
     bool firstredraw = false;
     //MODE
 
+    QColor getColor(qreal newX, qreal newY);
+
 
     void rec(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
     void ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
+
+    void shiftmoveadd(qreal newX, qreal newY);
 
 signals:
 

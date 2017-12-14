@@ -9,7 +9,15 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 
 }
 
-
+QColor SceneClass::getColor(qreal newX, qreal newY)
+{
+    QPixmap paintDevice(this->width(), this->height());
+    QPainter *painter = new QPainter(&paintDevice);
+    this->render(painter);
+    QImage pixels = paintDevice.toImage();
+    QRgb colorAt = pixels.pixel(newX,newY);
+    return QColor(colorAt);
+}
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -39,29 +47,22 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
            {
                if(this->items().at(i)->isUnderMouse())
                {
-
                    F = this->items().at(i)->boundingRect();
-
-                   QPixmap paintDevice(this->width(), this->height());
-                   QPainter *painter = new QPainter(&paintDevice);
-                   this->render(painter);
-                   QImage pixels = paintDevice.toImage();
-                   QRgb colorAt = pixels.pixel(event->scenePos().x(),event->scenePos().y());
-                   Q = QColor(colorAt);
-
-                   this->removeItem(this->items().at(i));
-                   CountOfItems-=1;
 
                    qreal prX = F.topLeft().x();
                    qreal prY = F.topLeft().y();
-
                    qreal newX = event->scenePos().x();
                    qreal newY = event->scenePos().y();
-
                    if(prX>CurrentPixmap.width())prX = CurrentPixmap.width();
                    if(prY>CurrentPixmap.height())prY = CurrentPixmap.height();
                    if(prX<0)prX=0;
                    if(prY<0)prY=0;
+
+
+                   Q = getColor(newX, newY);
+
+                   this->removeItem(this->items().at(i));
+                   CountOfItems-=1;
 
 
 
@@ -71,14 +72,34 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
                    firstredraw=true;
-                   IsModified=true;
+
                    break;
                }
            }
         }
 
+        if(QApplication::keyboardModifiers()==Qt::ShiftModifier)
+        {
+            for(int i=0; i<(this->items().size()-1); i++)
+            {
+                if(this->items().at(i)->isUnderMouse())
+                {
+                    F = this->items().at(i)->boundingRect();
+                    Q = getColor(F.center().x(), F.center().y());
+                    this->removeItem(this->items().at(i));
+                    CountOfItems-=1;
 
-       if(QApplication::keyboardModifiers() == Qt::ShiftModifier)
+                    shiftmoveadd(event->scenePos().x(), event->scenePos().y());
+
+                    firstmove=true;
+                    break;
+                }
+            }
+        }
+
+
+
+       if(QApplication::keyboardModifiers() == Qt::MetaModifier)
         {
            for(int i=0; i<(this->items().size()-1); i++)
            {
@@ -121,6 +142,30 @@ void SceneClass::ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q)
     else if(newX<prX && newY>prY)this->addEllipse(QRectF(QPointF(newX, prY), QSize(prX-newX, newY-prY)), QPen(Qt::NoPen), QBrush(Q));
 }
 
+void SceneClass::shiftmoveadd(qreal newX, qreal newY)
+{
+    qreal x1 = newX-(F.width()/2);
+    qreal x2 = newX+(F.width()/2);
+    qreal y1 = newY-(F.height()/2);
+    qreal y2 = newY+(F.height()/2);
+
+    if(x1>CurrentPixmap.width())x1 = CurrentPixmap.width();
+    if(y1>CurrentPixmap.height())y1 = CurrentPixmap.height();
+    if(x1<0)x1=0;
+    if(y1<0)y1=0;
+
+    if(x2>CurrentPixmap.width())x2 = CurrentPixmap.width();
+    if(y2>CurrentPixmap.height())y2 = CurrentPixmap.height();
+    if(x2<0)x2=0;
+    if(y2<0)y2=0;
+
+
+    if(RectMODE)rec(x1, y1, x2, y2, Q);
+    if(CircleMODE)ell(x1, y1, x2, y2, Q);
+
+
+}
+
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -153,6 +198,11 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         if(RectMODE)rec(prX, prY, newX, newY, Q);
         else if(CircleMODE)ell(prX, prY, newX, newY, Q);
     }
+
+
+    if(QApplication::keyboardModifiers()==Qt::ShiftModifier && firstmove)shiftmoveadd(newX, newY);
+
+
     }
 }
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -176,7 +226,23 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     }
 
-    if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace)firstredraw=false;
+    if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace)
+    {
+        firstredraw=false;
+        CountOfItems+=1;
+        IsModified=true;
+        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
+        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
+    }
+
+    if(QApplication::keyboardModifiers()==Qt::ShiftModifier && IsWorkSpace)
+    {
+        CountOfItems+=1;
+        IsModified=true;
+        firstmove=false;
+        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
+        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
+    }
 }
 
 
