@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     currentColorOfBrush = QColor(255, 255, 255);
 
 
-    myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+   // myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+
+
 
 
 
@@ -26,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QIcon IcZoom = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/file1339191946.png"));
     ui->pushButton_Zoom->setIcon(IcZoom);
     ui->pushButton_Zoom->setIconSize(QSize(40, 40));
+
+
+
 
     QIcon IcRZoom = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561339196101ZoomIn256x256.png"));
     ui->radioButtonZoom->setIcon(IcRZoom);
@@ -90,20 +95,31 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(AskSaveDialog, SIGNAL(Save(bool)), this, SLOT(FileSave(bool)));
     connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
-    connect(AskSaveDialog, SIGNAL(Cancel()), this, SLOT(myWorkSpace->scene->clear();
-            ui->NameOfFile->clear();));
-   // connect(AskSaveDialog, SIGNAL(Cancel()), AskSaveDialog, SLOT(hide()));
+
 
 
 
     //BUTTONS
 
 
+    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
+
+
+
+    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
+
 
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Zoom, SLOT(show()));
+
+
+
+
     connect(ui->pushButton_Zoom, SIGNAL(released()), myWorkSpace, SLOT(SetZoomMode()));
     connect(ui->pushButton_Rect, SIGNAL(released()), myWorkSpace, SLOT(SetRectMode()));
     connect(ui->pushButton_Circle, SIGNAL(released()), myWorkSpace, SLOT(SetCircleMode()));
+
+
+
 
     //BUTTONS
 
@@ -250,6 +266,10 @@ void MainWindow::open()
 
 
     ui->NameOfFile->setText(fileNameToOpen);
+    myWorkSpace->scene->IsWorkSpace=true;
+
+
+    ui->widget_Zoom->hide();
 }
 
 
@@ -294,6 +314,10 @@ void MainWindow::MakeNewFile()
         myWorkSpace->SetColor(currentColorOfBrush);
         ui->NameOfFile->setText("New_file");
 
+
+        myWorkSpace->scene->IsWorkSpace=true;
+        ui->widget_Zoom->hide();
+
     }
 
 }
@@ -303,6 +327,11 @@ void MainWindow::close()
     myWorkSpace->scene->clear();
     myWorkSpace->scene->IsModified=false;
     ui->NameOfFile->clear();
+
+    myWorkSpace->scene->IsWorkSpace=false;
+
+
+    ui->widget_Zoom->hide();
 }
 
 void MainWindow::FileClose(bool)

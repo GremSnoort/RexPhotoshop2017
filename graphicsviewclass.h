@@ -46,6 +46,8 @@ public slots:
     void SetRectMode();
     void SetCircleMode();
     void SetZoomMode();
+    void SetRedrawRectMode(int i);
+    void SetRedrawEllMode(int i);
     void SetColor(QColor q);
 
 

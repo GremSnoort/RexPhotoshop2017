@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1168</width>
+    <width>1176</width>
     <height>961</height>
    </rect>
   </property>
@@ -89,7 +89,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1171</width>
+      <width>631</width>
       <height>41</height>
      </rect>
     </property>
@@ -117,19 +117,6 @@
      </property>
      <property name="text">
       <string>Fit Screen</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="geometry">
-      <rect>
-       <x>610</x>
-       <y>0</y>
-       <width>88</width>
-       <height>34</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButtonZoom">
@@ -290,13 +277,23 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <string/>
     </property>
    </widget>
+   <zorder>NameOfFile</zorder>
+   <zorder>SetColorButton</zorder>
+   <zorder>Color</zorder>
+   <zorder>pushButton_Zoom</zorder>
+   <zorder>pushButton_FillAll</zorder>
+   <zorder>Tools</zorder>
+   <zorder>gridLayoutWidget</zorder>
+   <zorder>pushButton_Rect</zorder>
+   <zorder>pushButton_Circle</zorder>
+   <zorder>widget_Zoom</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1168</width>
+     <width>1176</width>
      <height>30</height>
     </rect>
    </property>
@@ -322,7 +319,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>A&amp;bout</string>
+     <string>Abo&amp;ut</string>
     </property>
     <addaction name="actionHow_to_work"/>
    </widget>

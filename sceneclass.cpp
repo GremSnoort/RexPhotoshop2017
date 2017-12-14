@@ -13,23 +13,27 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->scenePos().x()<CurrentPixmap.width() && event->scenePos().y()<CurrentPixmap.height() && event->scenePos().x()>0 && event->scenePos().y()>0){
 
-        if(RectMODE==true)
+    if(event->scenePos().x()<CurrentPixmap.width() && event->scenePos().y()<CurrentPixmap.height() && event->scenePos().x()>0 && event->scenePos().y()>0 && IsWorkSpace)
+    {
+
+        previousPoint = event->scenePos();
+
+        if(RectMODE && !RedrawMODE)
         {
             this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstRect = true;
-
         }
-        if(CircleMODE==true)
+        if(CircleMODE && !RedrawMODE)
         {
             this->addEllipse(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstEllipse = true;
         }
 
-        previousPoint = event->scenePos();
 
-        if(RedrawMODE==true)
+
+
+        if(QApplication::keyboardModifiers()==Qt::ControlModifier)
         {
            for(int i=0; i<(this->items().size()-1); i++)
            {
@@ -46,6 +50,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
                    Q = QColor(colorAt);
 
                    this->removeItem(this->items().at(i));
+                   CountOfItems-=1;
 
                    qreal prX = F.topLeft().x();
                    qreal prY = F.topLeft().y();
@@ -58,12 +63,15 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
                    if(prX<0)prX=0;
                    if(prY<0)prY=0;
 
-                   //this->addRect(QRectF(F.topLeft(), QSize(event->scenePos().x()-F.topLeft().x(), event->scenePos().y()-F.topLeft().y())), QPen(Qt::NoPen), QBrush(Q));
-
-                   rec(prX, prY, newX, newY, Q);
 
 
-                   CountOfItems-=1;
+                   if(RectMODE)rec(prX, prY, newX, newY, Q);
+                   else if(CircleMODE)ell(prX, prY, newX, newY, Q);
+
+
+
+                   firstredraw=true;
+                   IsModified=true;
                    break;
                }
            }
@@ -74,7 +82,6 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
            for(int i=0; i<(this->items().size()-1); i++)
            {
-
                if(this->items().at(i)->isUnderMouse())
                {
                    this->removeItem(this->items().at(i));
@@ -117,7 +124,8 @@ void SceneClass::ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q)
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    if(IsWorkSpace)
+    {
     qreal prX = previousPoint.x();
     qreal prY = previousPoint.y();
 
@@ -129,18 +137,10 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if(newX<0)newX=0;
     if(newY<0)newY=0;
 
-    if(RectMODE==true)
-    {
-        if(FirstRect==true)rec(prX, prY, newX, newY, COLOR);
-    }
+    if(RectMODE && !RedrawMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
+    if(CircleMODE && !RedrawMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
 
-    if(CircleMODE==true)
-    {
-        if(FirstEllipse==true)ell(prX, prY, newX, newY, COLOR);
-    }
-
-
-    if(RedrawMODE==true)
+    if(QApplication::keyboardModifiers()==Qt::ControlModifier && firstredraw)
     {
         qreal prX = F.topLeft().x();
         qreal prY = F.topLeft().y();
@@ -150,19 +150,14 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         if(prX<0)prX=0;
         if(prY<0)prY=0;
 
-
-        rec(prX, prY, newX, newY, Q);
+        if(RectMODE)rec(prX, prY, newX, newY, Q);
+        else if(CircleMODE)ell(prX, prY, newX, newY, Q);
     }
-
-
-
+    }
 }
-
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
-
-    if(RectMODE==true)
+    if(RectMODE && IsWorkSpace)
     {
     FirstRect=false;
     CountOfItems+=1;
@@ -171,7 +166,7 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     this->items().first()->setFlag(QGraphicsRectItem::ItemIsMovable);
 
     }
-    if(CircleMODE==true)
+    if(CircleMODE && IsWorkSpace)
     {
     FirstEllipse=false;
     CountOfItems+=1;
@@ -181,19 +176,7 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     }
 
-    if(RedrawMODE==true)
-    {
-        CountOfItems+=1;
-        IsModified=true;
-    }
-
-    //scene->setSelectionArea(QPainterPath(previousPoint), QTransform(1, 0, 0, 1, event->scenePos().x()-previousPoint.x(), event->scenePos().y()-previousPoint.y()));
-
-
-
-
-
-
+    if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace)firstredraw=false;
 }
 
 

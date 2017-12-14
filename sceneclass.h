@@ -43,6 +43,7 @@ public:
     int CountOfItems;
 
     bool IsModified = false;
+    bool IsWorkSpace = false;
 
     QColor COLOR = QColor(255, 255, 255);
 
@@ -55,9 +56,10 @@ public:
     bool CircleMODE = false;
     bool ZoomMODE = false;
 
-    bool SelectionMODE = true;
+
 
     bool RedrawMODE = true;
+    bool firstredraw = false;
     //MODE
 
 
