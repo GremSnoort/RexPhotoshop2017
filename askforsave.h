@@ -20,14 +20,17 @@ signals:
 
     void Save(bool);
     void SaveAs(bool);
+    void Cancel();
 
 public slots:
      void MakeSave();
      void MakeSaveAs();
+     void MakeCancel();
 
 public:
     explicit AskForSave(QMainWindow *parent);
     ~AskForSave();
+
 
 private:
     Ui::AskForSave *ui;

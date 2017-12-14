@@ -15,14 +15,17 @@ AskForSave::AskForSave(QMainWindow *parent) :
 
     ui->SAVE->setStyleSheet(style1);
     ui->SAVE_AS->setStyleSheet(style1);
+    ui->Cancel->setStyleSheet(style1);
     ui->label->setStyleSheet(style);
     ui->label->setFont(fFont);
     ui->SAVE->setFont(allFont);
     ui->SAVE_AS->setFont(allFont);
+    ui->Cancel->setFont(allFont);
     ui->label->setAlignment(Qt::AlignCenter);
 
     connect(ui->SAVE, SIGNAL(released()), this, SLOT(MakeSave()));
     connect(ui->SAVE_AS, SIGNAL(released()), this, SLOT(MakeSaveAs()));
+    connect(ui->Cancel, SIGNAL(released()), this, SLOT(MakeCancel()));
 }
 
 void AskForSave::MakeSave()
@@ -35,6 +38,12 @@ void AskForSave::MakeSaveAs()
 {
     this->hide();
     emit SaveAs(true);
+}
+
+void AskForSave::MakeCancel()
+{
+    this->hide();
+    emit Cancel();
 }
 
 AskForSave::~AskForSave()

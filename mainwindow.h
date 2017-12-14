@@ -72,12 +72,15 @@ public:
 private:
     Ui::MainWindow *ui;
 
-
+    QString MODE = "";
 
 
     OptionsForNewFile *OptionsForm;
     AskForSave *AskSaveDialog;
     GraphicsViewClass* myWorkSpace;
+
+
+
 
 
 
@@ -88,6 +91,10 @@ public slots:
     void FileClose(bool);
     void FileSaveAs(bool);
     void FileSave(bool);
+
+    void open();
+    void close();
+    void newone();
 
     void ChangeColor(QColor q);
 

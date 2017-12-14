@@ -86,9 +86,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->NameOfFile->setReadOnly(true);
 
+
+
     connect(AskSaveDialog, SIGNAL(Save(bool)), this, SLOT(FileSave(bool)));
     connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
-
+    connect(AskSaveDialog, SIGNAL(Cancel()), this, SLOT(myWorkSpace->scene->clear();
+            ui->NameOfFile->clear();));
+   // connect(AskSaveDialog, SIGNAL(Cancel()), AskSaveDialog, SLOT(hide()));
 
 
 
@@ -192,7 +196,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::RemoveIt(bool)
 {
-    //this->items().first()->setFocus();
+
     int i = myWorkSpace->scene->items().size();
     QTextStream out(stdout);
     out<<i<<"  "<<myWorkSpace->scene->CountOfItems<<endl;
@@ -203,13 +207,7 @@ void MainWindow::RemoveIt(bool)
         QGraphicsItem *it = myWorkSpace->scene->selectedItems().at(i);
         myWorkSpace->scene->removeItem(it);
         myWorkSpace->scene->CountOfItems-=1;
-    }
-
-
-    /*
-    myWorkSpace->scene->removeItem(myWorkSpace->scene->items().first());
-
-    myWorkSpace->scene->CountOfItems--;*/
+    }    
 }
 
 void MainWindow::ChangeColor(QColor q)
@@ -220,19 +218,8 @@ void MainWindow::ChangeColor(QColor q)
 
 }
 
-
-
-
-void MainWindow::FileOpen(bool)
+void MainWindow::open()
 {
-    if(myWorkSpace->scene->IsModified==true)
-    {
-        AskSaveDialog->show();
-
-    }
-
-    if(AskSaveDialog->isHidden())
-    {
 
     QString fileNameToOpen = QFileDialog::getOpenFileName(this,
         tr("Open Image"), "/home/kor", tr("Image Files (*.jpg *.svg)"));
@@ -260,14 +247,28 @@ void MainWindow::FileOpen(bool)
         myWorkSpace->scene->CountOfItems+=1;
     }
 
-  /*  for(int i=0; i<myWorkSpace->scene->items().size(); i++)
-    {
-        myWorkSpace->scene->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable);
-        myWorkSpace->scene->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, 1);
-    }*/
+
 
     ui->NameOfFile->setText(fileNameToOpen);
-    }
+}
+
+
+void MainWindow::FileOpen(bool)
+{
+    if(myWorkSpace->scene->IsModified==true)
+    {
+        AskSaveDialog->show();
+        connect(AskSaveDialog, SIGNAL(Cancel()), this, SLOT(open()));
+        MODE="open";
+
+    }else open();
+
+}
+
+void MainWindow::newone()
+{
+    OptionsForm->show();
+    connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
 }
 
 void MainWindow::FileNew(bool)
@@ -275,18 +276,10 @@ void MainWindow::FileNew(bool)
     if(myWorkSpace->scene->IsModified==true)
     {
         AskSaveDialog->show();
-    }
+        connect(AskSaveDialog, SIGNAL(Cancel()), this, SLOT(newone()));
+        MODE="new";
 
-    if(AskSaveDialog->isHidden())
-    {
-
-
-    OptionsForm->show();
-
-    connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
-
-
-    }
+    }else newone();
 
 }
 
@@ -305,18 +298,22 @@ void MainWindow::MakeNewFile()
 
 }
 
+void MainWindow::close()
+{
+    myWorkSpace->scene->clear();
+    myWorkSpace->scene->IsModified=false;
+    ui->NameOfFile->clear();
+}
+
 void MainWindow::FileClose(bool)
 {
     if(myWorkSpace->scene->IsModified==true)
     {
         AskSaveDialog->show();
-    }
+        connect(AskSaveDialog, SIGNAL(Cancel()), this, SLOT(close()));
+        MODE="close";
 
-    if(AskSaveDialog->isHidden())
-    {
-        myWorkSpace->scene->clear();
-        ui->NameOfFile->clear();
-    }
+    }else close();
 
 }
 
@@ -348,6 +345,11 @@ void MainWindow::FileSaveAs(bool)
         ui->NameOfFile->setText(newPath);
 
         myWorkSpace->scene->IsModified=false;
+        if(MODE=="open")open();
+        if(MODE=="close")close();
+        if(MODE=="new")newone();
+
+        MODE="";
 
     }
 }
@@ -375,6 +377,11 @@ void MainWindow::FileSave(bool)
             painter.end();
 
             myWorkSpace->scene->IsModified=false;
+            if(MODE=="open")open();
+            if(MODE=="close")close();
+            if(MODE=="new")newone();
+
+            MODE="";
         }
     }
 }

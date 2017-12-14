@@ -46,12 +46,23 @@ public:
 
     QColor COLOR = QColor(255, 255, 255);
 
+    QRectF F;
+    int I;
+    QColor Q;
+
     //MODE
     bool RectMODE = false;
     bool CircleMODE = false;
     bool ZoomMODE = false;
 
+    bool SelectionMODE = true;
+
+    bool RedrawMODE = true;
     //MODE
+
+
+    void rec(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
+    void ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
 
 signals:
 
