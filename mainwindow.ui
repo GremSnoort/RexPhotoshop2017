@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1176</width>
+    <width>1358</width>
     <height>961</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
      <rect>
       <x>80</x>
       <y>50</y>
-      <width>991</width>
+      <width>1181</width>
       <height>21</height>
      </rect>
     </property>
@@ -33,7 +33,7 @@
    <widget class="QPushButton" name="SetColorButton">
     <property name="geometry">
      <rect>
-      <x>1090</x>
+      <x>1280</x>
       <y>170</y>
       <width>60</width>
       <height>60</height>
@@ -61,7 +61,7 @@
    <widget class="QWidget" name="Color" native="true">
     <property name="geometry">
      <rect>
-      <x>1080</x>
+      <x>1270</x>
       <y>80</y>
       <width>80</width>
       <height>80</height>
@@ -178,7 +178,31 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_FillAll">
+   <widget class="QLabel" name="Tools">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>59</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tools:</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>80</y>
+      <width>1181</width>
+      <height>811</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Rect">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -203,31 +227,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="Tools">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>59</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tools:</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>80</y>
-      <width>991</width>
-      <height>811</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout"/>
-   </widget>
-   <widget class="QPushButton" name="pushButton_Rect">
+   <widget class="QPushButton" name="pushButton_Circle">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -252,48 +252,417 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_Circle">
+   <widget class="QWidget" name="widget_Rect" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>320</y>
-      <width>60</width>
-      <height>60</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1331</width>
+      <height>51</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Rectangle:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ShiftMouse">
+     <property name="geometry">
+      <rect>
+       <x>148</x>
+       <y>-1</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Shift+Mouse to move</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_MoveRect">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>0</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Ctrl+Mouse to redraw</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ResizeRect">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>700</x>
+       <y>0</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Win+Mouse to delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DelRect">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>980</x>
+       <y>10</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>AnyKey+Mouse to fill</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_fillR">
+     <property name="geometry">
+      <rect>
+       <x>1170</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_Ell" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1331</width>
+      <height>51</height>
+     </rect>
     </property>
-    <property name="maximumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Ellipse:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ShiftMouse_2">
+     <property name="geometry">
+      <rect>
+       <x>148</x>
+       <y>-1</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Shift+Mouse to move</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_MoveEll">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>0</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Ctrl+Mouse to redraw</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ResizeEll">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>700</x>
+       <y>0</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Win+Mouse to delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DelEll">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_fillE">
+     <property name="geometry">
+      <rect>
+       <x>1170</x>
+       <y>0</y>
+       <width>50</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>980</x>
+       <y>10</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(160, 200, 180);
+font: 75 12pt &quot;Misc Fixed&quot;;</string>
+     </property>
+     <property name="text">
+      <string>AnyKey+Mouse to fill</string>
+     </property>
+    </widget>
    </widget>
    <zorder>NameOfFile</zorder>
    <zorder>SetColorButton</zorder>
    <zorder>Color</zorder>
    <zorder>pushButton_Zoom</zorder>
-   <zorder>pushButton_FillAll</zorder>
    <zorder>Tools</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>pushButton_Rect</zorder>
    <zorder>pushButton_Circle</zorder>
    <zorder>widget_Zoom</zorder>
+   <zorder>widget_Rect</zorder>
+   <zorder>widget_Ell</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1176</width>
+     <width>1358</width>
      <height>30</height>
     </rect>
    </property>

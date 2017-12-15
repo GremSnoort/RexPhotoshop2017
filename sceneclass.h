@@ -5,6 +5,9 @@
 
 
 
+#include <QAbstractGraphicsShapeItem>
+#include <QStyleOptionGraphicsItem>
+#include <QGraphicsItem>
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -58,7 +61,7 @@ public:
 
     bool firstmove = false;
 
-    bool RedrawMODE = true;
+
     bool firstredraw = false;
     //MODE
 
@@ -69,6 +72,8 @@ public:
     void ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
 
     void shiftmoveadd(qreal newX, qreal newY);
+
+    void fill();
 
 signals:
 

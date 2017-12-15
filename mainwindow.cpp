@@ -18,9 +18,35 @@ MainWindow::MainWindow(QWidget *parent) :
     currentColorOfBrush = QColor(255, 255, 255);
 
 
-   // myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+    myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
 
 
+
+    ui->widget_Rect->hide();
+
+    QPixmap PixmapMoveRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/moverect.png" );
+    ui->label_MoveRect->setPixmap(PixmapMoveRect);
+
+    QPixmap PixmapResizeRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Resize.png" );
+    ui->label_ResizeRect->setPixmap(PixmapResizeRect);
+
+    QPixmap PixmapDelRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/DeleteRect.png" );
+    ui->label_DelRect->setPixmap(PixmapDelRect);
+
+    ui->widget_Ell->hide();
+
+    QPixmap PixmapResizeEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/ResizeEll.png");
+    ui->label_ResizeEll->setPixmap(PixmapResizeEll);
+
+    QPixmap PixmapDelEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/DeleteEll.png");
+    ui->label_DelEll->setPixmap(PixmapDelEll);
+
+    QPixmap PixmapMoveEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Move1.png");
+    ui->label_MoveEll->setPixmap(PixmapMoveEll);
+
+    QPixmap Fill("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png");
+    ui->label_fillR->setPixmap(Fill);
+    ui->label_fillE->setPixmap(Fill);
 
 
 
@@ -36,9 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->radioButtonZoom->setIcon(IcRZoom);
     ui->radioButtonZoom->setIconSize(QSize(30, 30));
 
-    QIcon IcFill = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png"));
-    ui->pushButton_FillAll->setIcon(IcFill);
-    ui->pushButton_FillAll->setIconSize(QSize(40, 40));
+
 
     QIcon IcRect = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png"));
     ui->pushButton_Rect->setIcon(IcRect);
@@ -103,13 +127,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
+    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
+    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Ell, SLOT(show()));
 
 
 
     connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
+    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Rect, SLOT(show()));
+    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
 
 
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Zoom, SLOT(show()));
+    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
+    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
 
 
 
@@ -117,6 +147,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_Zoom, SIGNAL(released()), myWorkSpace, SLOT(SetZoomMode()));
     connect(ui->pushButton_Rect, SIGNAL(released()), myWorkSpace, SLOT(SetRectMode()));
     connect(ui->pushButton_Circle, SIGNAL(released()), myWorkSpace, SLOT(SetCircleMode()));
+
 
 
 
@@ -270,6 +301,8 @@ void MainWindow::open()
 
 
     ui->widget_Zoom->hide();
+    ui->widget_Rect->hide();
+    ui->widget_Ell->hide();
 }
 
 
@@ -317,6 +350,8 @@ void MainWindow::MakeNewFile()
 
         myWorkSpace->scene->IsWorkSpace=true;
         ui->widget_Zoom->hide();
+        ui->widget_Rect->hide();
+        ui->widget_Ell->hide();
 
     }
 
@@ -332,6 +367,8 @@ void MainWindow::close()
 
 
     ui->widget_Zoom->hide();
+    ui->widget_Rect->hide();
+    ui->widget_Ell->hide();
 }
 
 void MainWindow::FileClose(bool)

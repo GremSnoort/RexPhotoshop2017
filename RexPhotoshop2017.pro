@@ -44,3 +44,5 @@ FORMS += \
         mainwindow.ui \
     optionsfornewfile.ui \
     askforsave.ui
+
+DISTFILES +=

@@ -13,58 +13,25 @@ void GraphicsViewClass::SetRectMode()
     scene->CircleMODE=false;
     scene->ZoomMODE=false;
     scene->RectMODE=true;
-    scene->RedrawMODE=false;
+
 }
 void GraphicsViewClass::SetCircleMode()
 {
     scene->CircleMODE=true;
     scene->RectMODE=false;
     scene->ZoomMODE=false;
-    scene->RedrawMODE=false;
+
 }
 void GraphicsViewClass::SetZoomMode()
 {
     scene->CircleMODE=false;
     scene->RectMODE=false;
     scene->ZoomMODE=true;
-    scene->RedrawMODE=false;
+
 }
 
-void GraphicsViewClass::SetRedrawRectMode(int i)
-{
-    if(i==2)
-    {
-        scene->CircleMODE=false;
-        scene->RectMODE=true;
-        scene->ZoomMODE=false;
-        scene->RedrawMODE=true;
-    }
-    else if(i==0)
-    {
-        scene->CircleMODE=false;
-        scene->RectMODE=true;
-        scene->ZoomMODE=false;
-        scene->RedrawMODE=false;
-    }
-}
 
-void GraphicsViewClass::SetRedrawEllMode(int i)
-{
-    if(i==2)
-    {
-        scene->CircleMODE=true;
-        scene->RectMODE=false;
-        scene->ZoomMODE=false;
-        scene->RedrawMODE=true;
-    }
-    else if(i==0)
-    {
-        scene->CircleMODE=true;
-        scene->RectMODE=false;
-        scene->ZoomMODE=false;
-        scene->RedrawMODE=false;
-    }
-}
+
 
 void GraphicsViewClass::SetColor(QColor q)
 {
