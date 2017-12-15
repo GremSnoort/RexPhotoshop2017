@@ -4,6 +4,7 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 {
     scene=new SceneClass();
     this->setScene(scene);
+
 }
 
 

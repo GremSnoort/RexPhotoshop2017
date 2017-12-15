@@ -4,6 +4,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
     scene = new QGraphicsScene();
 
+
     CountOfItems=0;
 
 
@@ -63,10 +64,58 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->scenePos().x()<CurrentPixmap.width() && event->scenePos().y()<CurrentPixmap.height() && event->scenePos().x()>0 && event->scenePos().y()>0 && IsWorkSpace)
     {
+        previousPoint = event->scenePos();
+        qreal prX = previousPoint.x();
+        qreal prY = previousPoint.y();
 
+        for(int i=0; i<this->items().size()-1; i++)
+        {
+            this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, true);
+            this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);
+            //this->items().at(i)->setFlag(QGraphicsItem::Item
+        }
+
+        QPainterPath P(previousPoint);
+        P.addRect(prX, prY, 1, 1);
+        this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());
+
+        if(QApplication::keyboardModifiers()==Qt::ShiftModifier)shiftmoveadd(prX, prY);
+
+
+
+        if(QApplication::keyboardModifiers()==Qt::ControlModifier)
+        {
+            for(int i=0; i<(this->selectedItems().size()); i++)
+            {
+                qreal xc = this->selectedItems().at(i)->boundingRect().center().x();
+                qreal yc = this->selectedItems().at(i)->boundingRect().center().y();
+                qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
+                qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
+
+                qreal dx = abs(prX-xc);
+                qreal dy = abs(prY-yc);
+
+                qreal M = dx/w2;
+                if(M<(dy/h2))M = dy/h2;
+                QPointF F = this->selectedItems().at(i)->scenePos();
+                this->selectedItems().at(i)->setScale(1.34);
+                this->selectedItems().at(i)->setPos(F.x()-this->selectedItems().at(i)->boundingRect().x(), F.y()-this->selectedItems().at(i)->boundingRect().y());
+                        //setTransform(QTransform(1.25, 0, 0, 1.25, 0, 0), true);
+            }
+        }
+
+
+        ///____________
         if(QApplication::keyboardModifiers()==Qt::KeyboardModifier())fill();
 
-        previousPoint = event->scenePos();
+
+
+
+
+
+
+
+
 
         if(RectMODE)
         {
@@ -82,61 +131,9 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-        if(QApplication::keyboardModifiers()==Qt::ControlModifier)
-        {
-           for(int i=0; i<(this->items().size()-1); i++)
-           {
-               if(this->items().at(i)->isUnderMouse())
-               {
-                   F = this->items().at(i)->boundingRect();
-
-                   qreal prX = F.topLeft().x();
-                   qreal prY = F.topLeft().y();
-                   qreal newX = event->scenePos().x();
-                   qreal newY = event->scenePos().y();
-                   if(prX>CurrentPixmap.width())prX = CurrentPixmap.width();
-                   if(prY>CurrentPixmap.height())prY = CurrentPixmap.height();
-                   if(prX<0)prX=0;
-                   if(prY<0)prY=0;
-
-
-                   Q = getColor(F.center().x(), F.center().y());
-
-                   this->removeItem(this->items().at(i));
-                   CountOfItems-=1;
 
 
 
-                   if(RectMODE)rec(prX, prY, newX, newY, Q);
-                   else if(CircleMODE)ell(prX, prY, newX, newY, Q);
-
-
-
-                   firstredraw=true;
-
-                   break;
-               }
-           }
-        }
-
-        if(QApplication::keyboardModifiers()==Qt::ShiftModifier)
-        {
-            for(int i=0; i<(this->items().size()-1); i++)
-            {
-                if(this->items().at(i)->isUnderMouse())
-                {
-                    F = this->items().at(i)->boundingRect();
-                    Q = getColor(F.center().x(), F.center().y());
-                    this->removeItem(this->items().at(i));
-                    CountOfItems-=1;
-
-                    shiftmoveadd(event->scenePos().x(), event->scenePos().y());
-
-                    firstmove=true;
-                    break;
-                }
-            }
-        }
 
 
 
@@ -189,25 +186,22 @@ void SceneClass::ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q)
 
 void SceneClass::shiftmoveadd(qreal newX, qreal newY)
 {
-    qreal x1 = newX-(F.width()/2);
-    qreal x2 = newX+(F.width()/2);
-    qreal y1 = newY-(F.height()/2);
-    qreal y2 = newY+(F.height()/2);
+    for(int i=0; i<(this->selectedItems().size()); i++)
+    {
+        qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
+        qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
 
-    if(x1>CurrentPixmap.width())x1 = CurrentPixmap.width();
-    if(y1>CurrentPixmap.height())y1 = CurrentPixmap.height();
-    if(x1<0)x1=0;
-    if(y1<0)y1=0;
+        if(newX<w2)newX = w2;
+        if(newX>CurrentPixmap.width()-w2)newX = CurrentPixmap.width()-w2;
 
-    if(x2>CurrentPixmap.width())x2 = CurrentPixmap.width();
-    if(y2>CurrentPixmap.height())y2 = CurrentPixmap.height();
-    if(x2<0)x2=0;
-    if(y2<0)y2=0;
+        if(newY<h2)newY = h2;
+        if(newY>CurrentPixmap.height()-h2)newY = CurrentPixmap.height()-h2;
 
+        qreal x = newX-this->selectedItems().at(i)->boundingRect().center().x();
+        qreal y = newY-this->selectedItems().at(i)->boundingRect().center().y();
 
-    if(RectMODE)rec(x1, y1, x2, y2, Q);
-    if(CircleMODE)ell(x1, y1, x2, y2, Q);
-
+        this->selectedItems().at(i)->setPos(x, y);
+    }
 
 }
 
@@ -227,6 +221,10 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if(newX<0)newX=0;
     if(newY<0)newY=0;
 
+    /*QPainterPath P(previousPoint);
+    P.addRect(prX, prY, newX-prX, newY-prY);
+    this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());*/
+
     if(RectMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
     if(CircleMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
 
@@ -245,20 +243,38 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 
 
-    if(QApplication::keyboardModifiers()==Qt::ShiftModifier && firstmove)shiftmoveadd(newX, newY);
+    if(QApplication::keyboardModifiers()==Qt::ShiftModifier)shiftmoveadd(newX, newY);
+
+
+    if(SelectMODE)
+    {
+        for(int i=0; i<this->items().size()-1; i++)
+        {
+            this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, true);
+            this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);
+        }
+
+        QTextStream out(stdout);
+        out<<this->selectedItems().size()<<endl;
+//this->items().at(2)->setPos(event->scenePos().x()-this->items().at(2)->boundingRect().center().x(), event->scenePos().y()-this->items().at(2)->boundingRect().center().y());
+    }
 
 
     }
 }
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(QApplication::keyboardModifiers()==Qt::ShiftModifier)
+    {
+        this->clearSelection();
+    }
+
+
     if(RectMODE && IsWorkSpace)
     {
     FirstRect=false;
     CountOfItems+=1;
     IsModified=true;
-    this->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable);
-    this->items().first()->setFlag(QGraphicsRectItem::ItemIsMovable);
 
     }
     if(CircleMODE && IsWorkSpace)
@@ -266,8 +282,7 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     FirstEllipse=false;
     CountOfItems+=1;
     IsModified=true;
-    this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
-    this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
+
 
     }
 
@@ -276,8 +291,7 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         firstredraw=false;
         CountOfItems+=1;
         IsModified=true;
-        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
-        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
+
     }
 
     if(QApplication::keyboardModifiers()==Qt::ShiftModifier && IsWorkSpace)
@@ -285,8 +299,7 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         CountOfItems+=1;
         IsModified=true;
         firstmove=false;
-        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
-        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
+
     }
 }
 

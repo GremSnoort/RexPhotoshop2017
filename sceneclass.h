@@ -4,7 +4,7 @@
 #define private public
 
 
-
+#include <QTransform>
 #include <QAbstractGraphicsShapeItem>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsItem>
@@ -58,6 +58,7 @@ public:
     bool RectMODE = false;
     bool CircleMODE = false;
     bool ZoomMODE = false;
+    bool SelectMODE = false;
 
     bool firstmove = false;
 
