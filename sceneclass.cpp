@@ -124,7 +124,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
         ///____________
-      /*  if(QApplication::keyboardModifiers()==Qt::KeyboardModifier())fill();
+      // if(QApplication::keyboardModifiers()==Qt::KeyboardModifier())fill();
 
 
 
@@ -140,7 +140,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
             this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstRect = true;
         }
-        if(CircleMODE)
+        else if(CircleMODE)
         {
             this->addEllipse(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstEllipse = true;
@@ -148,7 +148,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-*/
+
 
 
 
@@ -238,8 +238,8 @@ void SceneClass::controlresize(qreal newX, qreal newY)
         qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
         qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
 
-        qreal dx = newX-xc;
-        qreal dy = newY-yc;
+        qreal dx = abs(newX-xc);
+        qreal dy = abs(newY-yc);
 
         qreal M = dx/w2;
         if(M<(dy/h2))M = dy/h2;
@@ -252,33 +252,48 @@ void SceneClass::controlresize(qreal newX, qreal newY)
         t.scale(M, M);
         t.translate(-F.x(), -F.y());
 
-        QGraphicsItem *it = this->selectedItems().at(i);
-it->setTransform(t);
+        qreal tx = (this->selectedItems().at(i)->sceneBoundingRect().width()*M/2)-this->selectedItems().at(i)->sceneBoundingRect().width();
+        qreal ty = (this->selectedItems().at(i)->sceneBoundingRect().height()*M/2)-this->selectedItems().at(i)->sceneBoundingRect().height();
+
+        if(M<1 || this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()-tx>0 &&
+                this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()-ty>0 &&
+                this->selectedItems().at(i)->sceneBoundingRect().topRight().x()+tx<CurrentPixmap.width() &&
+                this->selectedItems().at(i)->sceneBoundingRect().topRight().y()-ty>0 &&
+                this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().x()-tx>0 &&
+                this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().y()+ty<CurrentPixmap.height() &&
+                this->selectedItems().at(i)->sceneBoundingRect().bottomRight().x()-tx<CurrentPixmap.width() &&
+                this->selectedItems().at(i)->sceneBoundingRect().bottomRight().y()+ty<CurrentPixmap.height())
+        {
+            this->selectedItems().at(i)->setTransform(t);
+        }
+
+/*
+        //QGraphicsItem *it = this->selectedItems().at(i);
+//it->setTransform(t);
 QTextStream out(stdout);
 
-bool tlX = it->sceneBoundingRect().topLeft().x()>0 && it->sceneBoundingRect().topLeft().x()<CurrentPixmap.width();
-bool tlY = it->sceneBoundingRect().topLeft().y()>0 && it->sceneBoundingRect().topLeft().y()<CurrentPixmap.height();
+qreal scCX = this->selectedItems().at(i)->sceneBoundingRect().center().x();
+qreal scCY = this->selectedItems().at(i)->sceneBoundingRect().center().y();
+qreal scW = this->selectedItems().at(i)->sceneBoundingRect().width();
+qreal scH = this->selectedItems().at(i)->sceneBoundingRect().height();
 
-bool trX = it->sceneBoundingRect().topRight().x()<CurrentPixmap.width() && it->sceneBoundingRect().topRight().x()>0;
-bool trY = it->sceneBoundingRect().topRight().y()<CurrentPixmap.height() && it->sceneBoundingRect().topRight().y()>0;
+bool tX = scCX-(scW*M/2)>0 && scCX+(scW*M/2)<CurrentPixmap.width();
+bool tY = scCY-(scH*M/2)>0 && scCY+(scH*M/2)<CurrentPixmap.height();
 
-bool blX = it->sceneBoundingRect().bottomLeft().x()<CurrentPixmap.width() && it->sceneBoundingRect().bottomLeft().x()>0;
-bool blY = it->sceneBoundingRect().bottomLeft().y()<CurrentPixmap.height() && it->sceneBoundingRect().bottomLeft().y()>0;
 
-bool brX = it->sceneBoundingRect().bottomRight().x()<CurrentPixmap.width() && it->sceneBoundingRect().bottomRight().x()>0;
-bool brY = it->sceneBoundingRect().bottomRight().y()<CurrentPixmap.height() && it->sceneBoundingRect().bottomRight().y()>0;
 
-        if(tlX&&tlY&&trX&&trY&&blX&&blY&&brX&&brY){
-            out<<"!!!"<<it->sceneBoundingRect().topLeft().x()<<endl;
+        if(tX && tY || M<1){
+            out<<"!!!"<<this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()<<endl;
+
             this->selectedItems().at(i)->setTransform(t);
-            out<<it->sceneBoundingRect().topLeft().x()<<endl;
+            out<<M<<"  "<<this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()<<endl;
         }
 
 
 
 
 
-
+*/
         /*if(this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()<0 && this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()<0 && this->selectedItems().at(i)->sceneBoundingRect().topRight().x()>CurrentPixmap.width() && this->selectedItems().at(i)->sceneBoundingRect().topRight().y()<0 && this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().x()<0 && this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().y()>CurrentPixmap.height() && this->selectedItems().at(i)->sceneBoundingRect().bottomRight().x()>CurrentPixmap.width() && this->selectedItems().at(i)->sceneBoundingRect().bottomRight().y()>CurrentPixmap.height())
         {
             //out<<dx/w2<<" "<<dy/h2<<"     "<<xc<<"  "<<yc<<"____________"<<xc-tmpX<<"  "<<xc+tmpX<<"  "<<yc-tmpY<<"  "<<yc+tmpY<<endl;
@@ -323,8 +338,8 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     P.addRect(prX, prY, newX-prX, newY-prY);
     this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());*/
 
-   // if(RectMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
-   // if(CircleMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
+    if(RectMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
+    else if(CircleMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
 
     if(QApplication::keyboardModifiers()==Qt::ControlModifier)
     {
