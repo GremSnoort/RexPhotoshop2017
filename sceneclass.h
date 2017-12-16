@@ -17,7 +17,7 @@
 #include <QGraphicsItem>
 #include <QPixmap>
 #include <QGraphicsSceneMouseEvent>
-#include <QTextStream>
+
 #include <QPixmap>
 
 class SceneClass : public QGraphicsScene
@@ -66,7 +66,7 @@ public:
     bool firstredraw = false;
     //MODE
 
-    QColor getColor(qreal newX, qreal newY);
+
 
 
     void rec(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
@@ -75,7 +75,7 @@ public:
     void shiftmoveadd(qreal newX, qreal newY);
     void controlresize(qreal newX, qreal newY);
 
-    void fill();
+
 
 signals:
 

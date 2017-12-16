@@ -392,7 +392,7 @@ void MainWindow::FileSaveAs(bool)
         if (newPath.isEmpty())
             return;
 
-
+myWorkSpace->scene->clearSelection();
 
         QSvgGenerator generator;
         generator.setFileName(newPath);
@@ -427,7 +427,7 @@ void MainWindow::FileSave(bool)
         QString newPath = ui->NameOfFile->text();
         if(newPath=="New_file" || newPath.contains(".jpg")) FileSaveAs(true);
         else{
-
+myWorkSpace->scene->clearSelection();
             QSvgGenerator generator;
             generator.setFileName(newPath);
             generator.setSize(QSize(myWorkSpace->scene->width(), myWorkSpace->scene->height()));

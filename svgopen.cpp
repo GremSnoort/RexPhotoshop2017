@@ -29,7 +29,7 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
 
         QGraphicsEllipseItem *ell = new QGraphicsEllipseItem();
 
-        ell->setFlag(QGraphicsItem::ItemIsMovable);
+        ell->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 
         QDomElement gElement = gNode.toElement();
         ell = new QGraphicsEllipseItem(atof(ellipse.attribute("cx").toStdString().c_str())-atof(ellipse.attribute("rx").toStdString().c_str()),
@@ -47,6 +47,33 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
         strokeColor.setAlphaF(gElement.attribute("stroke-opacity").toFloat());
 
         ell->setPen(QPen(strokeColor,gElement.attribute("stroke-width", "0").toInt()));
+
+        //addition for transform
+
+
+        QString matrixstr(gElement.attribute("transform"));
+        QList<QString> data = {"", "", "", "", "", ""};
+        QList<qreal> values = {0, 0, 0, 0, 0, 0};
+
+        int u=0;
+        for(int i=7; i<matrixstr.size(); i++)
+        {
+            if(matrixstr[i]!=',' && matrixstr[i]!=')')data[u]+=matrixstr[i];
+            else
+            {
+                values[u]=atof(data[u].toStdString().c_str());
+                u++;
+            }
+        }
+
+        QTransform t(values[0], values[1], values[2], values[3], values[4], values[5]);
+
+        ell->setTransform(t);
+
+
+
+        //______________________
+
         itmList.append(ell);
     }
 
@@ -76,7 +103,7 @@ QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
 
             QGraphicsRectItem *rect = new QGraphicsRectItem();
 
-            rect->setFlag(QGraphicsItem::ItemIsMovable);
+            rect->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 
             QDomElement gElement = gNode.toElement();
             rect->setRect(rectangle.attribute("x").toInt(),
@@ -94,6 +121,33 @@ QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
             strokeColor.setAlphaF(gElement.attribute("stroke-opacity").toFloat());
 
             rect->setPen(QPen(strokeColor,gElement.attribute("stroke-width", "0").toInt()));
+
+            //addition for transform
+
+
+            QString matrixstr(gElement.attribute("transform"));
+            QList<QString> data = {"", "", "", "", "", ""};
+            QList<qreal> values = {0, 0, 0, 0, 0, 0};
+
+            int u=0;
+            for(int i=7; i<matrixstr.size(); i++)
+            {
+                if(matrixstr[i]!=',' && matrixstr[i]!=')')data[u]+=matrixstr[i];
+                else
+                {
+                    values[u]=atof(data[u].toStdString().c_str());
+                    u++;
+                }
+            }
+
+            QTransform t(values[0], values[1], values[2], values[3], values[4], values[5]);
+
+            rect->setTransform(t);
+
+
+
+            //______________________
+
             itmList.append(rect);
         }
 

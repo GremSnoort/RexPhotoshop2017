@@ -10,54 +10,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 
 }
 
-QColor SceneClass::getColor(qreal newX, qreal newY)
-{
-    QPixmap paintDevice(this->width(), this->height());
-    QPainter *painter = new QPainter(&paintDevice);
-    this->render(painter);
-    QImage pixels = paintDevice.toImage();
-    QRgb colorAt = pixels.pixel(newX,newY);
-    return QColor(colorAt);
-}
 
-void SceneClass::fill()
-{
-    for(int i=0; i<(this->items().size()-1); i++)
-    {
-        if(this->items().at(i)->isUnderMouse())
-        {
-            QGraphicsItem *I = this->items().at(i);
-
-            if(RectMODE)
-            {
-                this->removeItem(this->items().at(i));
-                this->addRect(I->boundingRect(), QPen(Qt::NoPen), QBrush(COLOR));
-            }
-
-            if(CircleMODE)
-            {
-                this->removeItem(this->items().at(i));
-                this->addEllipse(I->boundingRect(), QPen(Qt::NoPen), QBrush(COLOR));
-            }
-
-
-                /*
-            QPainter *painter ;
-
-            painter->setMatrix(this->items().at(i)->sceneMatrix(), true);
-                      painter->setBrush(QBrush (COLOR));
-
-
-                      this->setPalette(QPalette(COLOR));
-
-             //this->items().at(i)->QAbstractGraphicsShapeItem::setBrush(QBrush(COLOR));
-                             // paint(painter, new QStyleOptionGraphicsItem());*/
-
-        }
-
-    }
-
-}
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -71,8 +24,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         for(int i=0; i<this->items().size()-1; i++)
         {
             this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, true);
-            this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);
-            //this->items().at(i)->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+            this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);            
         }
 
         QPainterPath P(previousPoint);
@@ -176,8 +128,7 @@ void SceneClass::shiftmoveadd(qreal newX, qreal newY)
         this->selectedItems().at(i)->update();
 
 
-        QTextStream out(stdout);
-        out<<this->selectedItems().at(i)->sceneBoundingRect().center().x()<<endl;
+
 
     }
 
@@ -207,27 +158,74 @@ void SceneClass::controlresize(qreal newX, qreal newY)
         t.scale(dx/w2, dy/h2);
         t.translate(-F.x(), -F.y());
 
-        qreal tx = (this->selectedItems().at(i)->sceneBoundingRect().width()*(dx/w2)/2)-this->selectedItems().at(i)->sceneBoundingRect().width();
-        qreal ty = (this->selectedItems().at(i)->sceneBoundingRect().height()*(dy/h2)/2)-this->selectedItems().at(i)->sceneBoundingRect().height();
 
-        if(M<1 || this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()-tx>0 &&
-                this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()-ty>0 &&
-                this->selectedItems().at(i)->sceneBoundingRect().topRight().x()+tx<CurrentPixmap.width() &&
-                this->selectedItems().at(i)->sceneBoundingRect().topRight().y()-ty>0 &&
-                this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().x()-tx>0 &&
-                this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().y()+ty<CurrentPixmap.height() &&
-                this->selectedItems().at(i)->sceneBoundingRect().bottomRight().x()-tx<CurrentPixmap.width() &&
-                this->selectedItems().at(i)->sceneBoundingRect().bottomRight().y()+ty<CurrentPixmap.height())
+        this->selectedItems().at(i)->setTransform(t);
+
+        qreal leftX = this->selectedItems().at(i)->sceneBoundingRect().topLeft().x();
+        qreal upY = this->selectedItems().at(i)->sceneBoundingRect().topLeft().y();
+
+        qreal rightX = this->selectedItems().at(i)->sceneBoundingRect().topRight().x();
+        qreal downY = this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().y();
+
+
+
+
+        qreal d;
+        F = this->selectedItems().at(i)->boundingRect().center();
+
+        if(leftX<0)
         {
-            QTextStream out(stdout);
+            d = (this->selectedItems().at(i)->sceneBoundingRect().width()+2*leftX)/this->selectedItems().at(i)->sceneBoundingRect().width();
 
-            out<<"!!"<<this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()-ty<<"  "<<dx/w2<<"    "<<endl;
+            t.translate(F.x(), F.y());
+            t.scale(d, 1);
+            t.translate(-F.x(), -F.y());
+
             this->selectedItems().at(i)->setTransform(t);
-            //this->selectedItems().at(i)->update();
-            out<<this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()<<"  "<<dx/w2<<"    "<<endl;
+
         }
 
-    }
+        if(rightX>CurrentPixmap.width())
+        {
+            d = (this->selectedItems().at(i)->sceneBoundingRect().width()-2*(rightX-CurrentPixmap.width()))/this->selectedItems().at(i)->sceneBoundingRect().width();
+
+            t.translate(F.x(), F.y());
+            t.scale(d, 1);
+            t.translate(-F.x(), -F.y());
+
+            this->selectedItems().at(i)->setTransform(t);
+
+        }
+
+        if(upY<0)
+        {
+            d = (this->selectedItems().at(i)->sceneBoundingRect().height()+2*upY)/this->selectedItems().at(i)->sceneBoundingRect().height();
+
+            t.translate(F.x(), F.y());
+            t.scale(1, d);
+            t.translate(-F.x(), -F.y());
+
+            this->selectedItems().at(i)->setTransform(t);
+
+        }
+
+        if(downY>CurrentPixmap.height())
+        {
+            d = (this->selectedItems().at(i)->sceneBoundingRect().height()-2*(downY-CurrentPixmap.height()))/this->selectedItems().at(i)->sceneBoundingRect().height();
+
+            t.translate(F.x(), F.y());
+            t.scale(1, d);
+            t.translate(-F.x(), -F.y());
+
+            this->selectedItems().at(i)->setTransform(t);
+
+        }
+
+
+
+        }
+
+
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -267,8 +265,7 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);
         }
 
-        QTextStream out(stdout);
-        out<<this->selectedItems().size()<<endl;
+
 //this->items().at(2)->setPos(event->scenePos().x()-this->items().at(2)->boundingRect().center().x(), event->scenePos().y()-this->items().at(2)->boundingRect().center().y());
     }
 }
@@ -296,14 +293,13 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace)
     {
         firstredraw=false;
-        CountOfItems+=1;
         IsModified=true;
 
     }
 
     if(QApplication::keyboardModifiers()==Qt::ShiftModifier && IsWorkSpace)
     {
-        CountOfItems+=1;
+
         IsModified=true;
         firstmove=false;
 

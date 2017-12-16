@@ -1,7 +1,7 @@
 #ifndef SVGOPEN_H
 #define SVGOPEN_H
 
-
+#include <QTextStream>
 #include <QList>
 #include <QGraphicsRectItem>
 #include <QString>
@@ -21,6 +21,8 @@ public:
     static QList<QGraphicsRectItem *> getRectElements(const QString filename);
     static QList<QGraphicsEllipseItem *> getEllipseElements(const QString filename);
     static QRectF getSizes(const QString filename);
+
+
 };
 
 
