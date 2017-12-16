@@ -72,7 +72,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, true);
             this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);
-            //this->items().at(i)->setFlag(QGraphicsItem::Item
+            //this->items().at(i)->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
         }
 
         QPainterPath P(previousPoint);
@@ -83,30 +83,47 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-        if(QApplication::keyboardModifiers()==Qt::ControlModifier)
+        else if(QApplication::keyboardModifiers()==Qt::ControlModifier)
         {
             for(int i=0; i<(this->selectedItems().size()); i++)
             {
-                qreal xc = this->selectedItems().at(i)->boundingRect().center().x();
-                qreal yc = this->selectedItems().at(i)->boundingRect().center().y();
-                qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
-                qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
+                qreal xc = this->selectedItems().at(i)->sceneBoundingRect().center().x();
+                qreal yc = this->selectedItems().at(i)->sceneBoundingRect().center().y();
+                qreal h2 = this->selectedItems().at(i)->sceneBoundingRect().height()/2;
+                qreal w2 = this->selectedItems().at(i)->sceneBoundingRect().width()/2;
 
                 qreal dx = abs(prX-xc);
                 qreal dy = abs(prY-yc);
 
                 qreal M = dx/w2;
                 if(M<(dy/h2))M = dy/h2;
-                QPointF F = this->selectedItems().at(i)->scenePos();
-                this->selectedItems().at(i)->setScale(1.34);
-                this->selectedItems().at(i)->setPos(F.x()-this->selectedItems().at(i)->boundingRect().x(), F.y()-this->selectedItems().at(i)->boundingRect().y());
-                        //setTransform(QTransform(1.25, 0, 0, 1.25, 0, 0), true);
+                QPointF F = this->selectedItems().at(i)->sceneBoundingRect().center();
+
+                QTransform t;
+
+                t.translate(F.x(), F.y());
+                //t.rotate(30);
+                t.scale(M, M);
+                t.translate(-F.x(), -F.y());
+
+
+                qreal tmpX=M*w2;
+                qreal tmpY=M*h2;
+
+
+                if(xc-tmpX>=0 && xc+tmpX<=CurrentPixmap.width() && yc-tmpY>=0 && yc+tmpY<=CurrentPixmap.height())
+                {
+                this->selectedItems().at(i)->setTransform(t);
+
+                this->selectedItems().at(i)->setSelected(true);
+                }
+
             }
         }
 
 
         ///____________
-        if(QApplication::keyboardModifiers()==Qt::KeyboardModifier())fill();
+      /*  if(QApplication::keyboardModifiers()==Qt::KeyboardModifier())fill();
 
 
 
@@ -130,14 +147,14 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 
+*/
 
 
 
 
 
 
-
-       if(QApplication::keyboardModifiers()==Qt::MetaModifier)
+       else if(QApplication::keyboardModifiers()==Qt::MetaModifier)
         {
            for(int i=0; i<(this->items().size()-1); i++)
            {
@@ -201,10 +218,20 @@ void SceneClass::shiftmoveadd(qreal newX, qreal newY)
         qreal y = newY-this->selectedItems().at(i)->boundingRect().center().y();
 
         this->selectedItems().at(i)->setPos(x, y);
+
+
+        QTextStream out(stdout);
+        out<<this->selectedItems().at(i)->sceneBoundingRect().center().x()<<endl;
+
     }
 
 }
 
+
+void SceneClass::controlresize()
+{
+
+}
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -225,21 +252,50 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     P.addRect(prX, prY, newX-prX, newY-prY);
     this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());*/
 
-    if(RectMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
-    if(CircleMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
+   // if(RectMODE && FirstRect)rec(prX, prY, newX, newY, COLOR);
+   // if(CircleMODE && FirstEllipse)ell(prX, prY, newX, newY, COLOR);
 
-    if(QApplication::keyboardModifiers()==Qt::ControlModifier && firstredraw)
+    if(QApplication::keyboardModifiers()==Qt::ControlModifier)
     {
-        qreal prX = F.topLeft().x();
-        qreal prY = F.topLeft().y();
+        for(int i=0; i<(this->selectedItems().size()); i++)
+        {
+            qreal xc = this->selectedItems().at(i)->sceneBoundingRect().center().x();
+            qreal yc = this->selectedItems().at(i)->sceneBoundingRect().center().y();
+            qreal h2 = this->selectedItems().at(i)->sceneBoundingRect().height()/2;
+            qreal w2 = this->selectedItems().at(i)->sceneBoundingRect().width()/2;
 
-        if(prX>CurrentPixmap.width())prX = CurrentPixmap.width();
-        if(prY>CurrentPixmap.height())prY = CurrentPixmap.height();
-        if(prX<0)prX=0;
-        if(prY<0)prY=0;
+            qreal dx = newX-xc;
+            qreal dy = newY-yc;
 
-        if(RectMODE)rec(prX, prY, newX, newY, Q);
-        else if(CircleMODE)ell(prX, prY, newX, newY, Q);
+            qreal M = dx/w2;
+            if(M<(dy/h2))M = dy/h2;
+            QPointF F = this->selectedItems().at(i)->sceneBoundingRect().center();
+
+            QTransform t;
+
+            t.translate(F.x(), F.y());
+
+            t.scale(M, M);
+            t.translate(-F.x(), -F.y());
+
+            qreal tmpX=M*w2;
+            qreal tmpY=M*h2;
+
+QTextStream out(stdout);
+
+            if(this->selectedItems().at(i)->sceneBoundingRect().topLeft().x()>0 && this->selectedItems().at(i)->sceneBoundingRect().topLeft().y()>0 && this->selectedItems().at(i)->sceneBoundingRect().topRight().x()<CurrentPixmap.width() && this->selectedItems().at(i)->sceneBoundingRect().topRight().y()>0 && this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().x()>0 && this->selectedItems().at(i)->sceneBoundingRect().bottomLeft().y()<CurrentPixmap.height() && this->selectedItems().at(i)->sceneBoundingRect().bottomRight().x()<CurrentPixmap.width() && this->selectedItems().at(i)->sceneBoundingRect().bottomRight().y()<CurrentPixmap.height())
+            {
+                out<<dx/w2<<" "<<dy/h2<<"     "<<xc<<"  "<<yc<<"____________"<<xc-tmpX<<"  "<<xc+tmpX<<"  "<<yc-tmpY<<"  "<<yc+tmpY<<endl;
+                this->selectedItems().at(i)->setTransform(t);
+                this->selectedItems().at(i)->update(xc-tmpX, yc-tmpY, tmpX*2, tmpY*2);
+            }
+
+
+
+
+
+
+        }
     }
 
 
