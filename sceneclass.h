@@ -73,6 +73,7 @@ public:
     void ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
 
     void shiftmoveadd(qreal newX, qreal newY);
+    void controlresize(qreal newX, qreal newY);
 
     void fill();
 
