@@ -44,9 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap PixmapMoveEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Move1.png");
     ui->label_MoveEll->setPixmap(PixmapMoveEll);
 
-    QPixmap Fill("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png");
-    ui->label_fillR->setPixmap(Fill);
-    ui->label_fillE->setPixmap(Fill);
+
 
 
 
@@ -61,6 +59,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QIcon IcRZoom = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561339196101ZoomIn256x256.png"));
     ui->radioButtonZoom->setIcon(IcRZoom);
     ui->radioButtonZoom->setIconSize(QSize(30, 30));
+
+    QIcon IcFill = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png"));
+    ui->pushButton_Fill->setIcon(IcFill);
+    ui->pushButton_Fill->setIconSize(QSize(40, 40));
 
 
 
@@ -142,17 +144,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
 
 
-
+//Set MODE
 
     connect(ui->pushButton_Zoom, SIGNAL(released()), myWorkSpace, SLOT(SetZoomMode()));
     connect(ui->pushButton_Rect, SIGNAL(released()), myWorkSpace, SLOT(SetRectMode()));
     connect(ui->pushButton_Circle, SIGNAL(released()), myWorkSpace, SLOT(SetCircleMode()));
+    connect(ui->pushButton_Fill, SIGNAL(released()), myWorkSpace, SLOT(SetFillMode()));
+
+//~Set MODE
 
 
 
-
-
-    //BUTTONS
+    //~BUTTONS
 
     //COLOR
     connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
@@ -282,6 +285,8 @@ void MainWindow::open()
     {
         QGraphicsRectItem *rect = item;
         myWorkSpace->scene->addItem(rect);
+        myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
     }
@@ -290,6 +295,8 @@ void MainWindow::open()
     {
         QGraphicsEllipseItem *ell = item;
         myWorkSpace->scene->addItem(ell);
+        myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
     }

@@ -206,7 +206,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
+      <y>250</y>
       <width>60</width>
       <height>60</height>
      </rect>
@@ -231,7 +231,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>320</y>
       <width>60</width>
       <height>60</height>
      </rect>
@@ -404,51 +404,6 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>980</x>
-       <y>10</y>
-       <width>201</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(160, 200, 180);
-font: 75 12pt &quot;Misc Fixed&quot;;</string>
-     </property>
-     <property name="text">
-      <string>AnyKey+Mouse to fill</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_fillR">
-     <property name="geometry">
-      <rect>
-       <x>1170</x>
-       <y>0</y>
-       <width>50</width>
-       <height>45</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>50</width>
-       <height>45</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>50</width>
-       <height>45</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="widget_Ell" native="true">
     <property name="geometry">
@@ -602,48 +557,31 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="label_fillE">
-     <property name="geometry">
-      <rect>
-       <x>1170</x>
-       <y>0</y>
-       <width>50</width>
-       <height>45</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>50</width>
-       <height>45</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>50</width>
-       <height>45</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>980</x>
-       <y>10</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(160, 200, 180);
-font: 75 12pt &quot;Misc Fixed&quot;;</string>
-     </property>
-     <property name="text">
-      <string>AnyKey+Mouse to fill</string>
-     </property>
-    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Fill">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <zorder>NameOfFile</zorder>
    <zorder>SetColorButton</zorder>
@@ -654,8 +592,9 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
    <zorder>pushButton_Rect</zorder>
    <zorder>pushButton_Circle</zorder>
    <zorder>widget_Zoom</zorder>
-   <zorder>widget_Rect</zorder>
    <zorder>widget_Ell</zorder>
+   <zorder>pushButton_Fill</zorder>
+   <zorder>widget_Rect</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -17,7 +17,7 @@
 #include <QGraphicsItem>
 #include <QPixmap>
 #include <QGraphicsSceneMouseEvent>
-
+#include <QTextStream>
 #include <QPixmap>
 
 class SceneClass : public QGraphicsScene
@@ -58,6 +58,8 @@ public:
     bool RectMODE = false;
     bool CircleMODE = false;
     bool ZoomMODE = false;
+    bool FillMODE = false;
+
     bool SelectMODE = false;
 
     bool firstmove = false;
@@ -74,6 +76,9 @@ public:
 
     void shiftmoveadd(qreal newX, qreal newY);
     void controlresize(qreal newX, qreal newY);
+
+    void fill();
+    QColor getColor(qreal newX, qreal newY);
 
 
 

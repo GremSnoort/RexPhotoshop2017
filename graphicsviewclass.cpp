@@ -14,6 +14,7 @@ void GraphicsViewClass::SetRectMode()
     scene->CircleMODE=false;
     scene->ZoomMODE=false;
     scene->RectMODE=true;
+    scene->FillMODE=false;
 
 }
 void GraphicsViewClass::SetCircleMode()
@@ -21,6 +22,7 @@ void GraphicsViewClass::SetCircleMode()
     scene->CircleMODE=true;
     scene->RectMODE=false;
     scene->ZoomMODE=false;
+    scene->FillMODE=false;
 
 }
 void GraphicsViewClass::SetZoomMode()
@@ -28,7 +30,15 @@ void GraphicsViewClass::SetZoomMode()
     scene->CircleMODE=false;
     scene->RectMODE=false;
     scene->ZoomMODE=true;
+    scene->FillMODE=false;
 
+}
+void GraphicsViewClass::SetFillMode()
+{
+    scene->CircleMODE=false;
+    scene->RectMODE=false;
+    scene->ZoomMODE=false;
+    scene->FillMODE=true;
 }
 
 
@@ -54,7 +64,7 @@ void GraphicsViewClass::CreateNew(int X, int Y)
     scene->CountOfItems+=1;
 
     this->setScene(scene);
-   \
+
     scene->CurrentPixmap = tmppixmap;
 
 
