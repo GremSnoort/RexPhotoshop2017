@@ -35,7 +35,7 @@ public:
 
     QGraphicsScene* scene;
 
-
+    bool IsRect = false;
 
     QPixmap CurrentPixmap;
 

@@ -51,7 +51,7 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
         ell->setPen(QPen(strokeColor,gElement.attribute("stroke-width", "0").toInt()));
 
         //addition for transform
-
+/*
 
         QString matrixstr(gElement.attribute("transform"));
         QList<QString> data = {"", "", "", "", "", ""};
@@ -73,7 +73,7 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
 
         ell->setTransform(t);
 
-
+*/
 
         //______________________
 
@@ -129,7 +129,7 @@ QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
             rect->setPen(QPen(strokeColor,gElement.attribute("stroke-width", "0").toInt()));
 
             //addition for transform
-
+/*
 
             QString matrixstr(gElement.attribute("transform"));
             QList<QString> data = {"", "", "", "", "", ""};
@@ -152,7 +152,7 @@ QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
             rect->setTransform(t);
 
 
-
+*/
             //______________________
 
             itmList.append(rect);
