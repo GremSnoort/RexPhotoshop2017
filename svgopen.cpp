@@ -3,13 +3,15 @@
 
 SVGOpen::SVGOpen()
 {
-
+    T = new QList<QTransform>();
 }
 
 QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename)
 {
 
     QList<QGraphicsEllipseItem *> itmList;
+    T = new QList<QTransform>();
+
 
     QDomDocument doc;
     QFile file(filename);
@@ -67,6 +69,7 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
         }
 
         QTransform t(values[0], values[1], values[2], values[3], values[4], values[5]);
+        T->append(QTransform (values[0], values[1], values[2], values[3], values[4], values[5]));
 
         ell->setTransform(t);
 
@@ -85,6 +88,9 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
 QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
 {
     QList<QGraphicsRectItem *> itmList;
+    T = new QList<QTransform>();
+
+
 
     QDomDocument doc;
     QFile file(filename);
@@ -141,6 +147,7 @@ QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
             }
 
             QTransform t(values[0], values[1], values[2], values[3], values[4], values[5]);
+            T->append(QTransform (values[0], values[1], values[2], values[3], values[4], values[5]));
 
             rect->setTransform(t);
 

@@ -18,9 +18,12 @@ class SVGOpen
 {
 public:
     SVGOpen();
-    static QList<QGraphicsRectItem *> getRectElements(const QString filename);
-    static QList<QGraphicsEllipseItem *> getEllipseElements(const QString filename);
-    static QRectF getSizes(const QString filename);
+
+    QList<QTransform> *T;
+
+    QList<QGraphicsRectItem *> getRectElements(const QString filename);
+    QList<QGraphicsEllipseItem *> getEllipseElements(const QString filename);
+    QRectF getSizes(const QString filename);
 
 
 };

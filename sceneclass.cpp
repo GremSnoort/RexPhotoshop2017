@@ -60,11 +60,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
         qreal prX = previousPoint.x();
         qreal prY = previousPoint.y();
 
-        /*for(int i=0; i<this->items().size()-1; i++)
-        {
-            this->items().at(i)->setFlag(QGraphicsItem::ItemIsSelectable, true);
-            this->items().at(i)->setFlag(QGraphicsItem::ItemIsMovable, true);            
-        }*/
+
 
         QPainterPath P(previousPoint);
         P.addRect(prX, prY, 1, 1);
@@ -101,19 +97,12 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-
-
-
-
-
-
-
-        if(RectMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()==Qt::NoModifier)
+        if(RectMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()!=Qt::ShiftModifier)
         {
             this->addRect(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstRect = true;
         }
-        if(CircleMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()==Qt::NoModifier)
+        if(CircleMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()!=Qt::ShiftModifier)
         {
             this->addEllipse(QRectF(event->scenePos(), QSize(1, 1)), QPen(Qt::NoPen), QBrush(COLOR));
             FirstEllipse = true;
@@ -151,20 +140,33 @@ void SceneClass::shiftmoveadd(qreal newX, qreal newY)
 {
     for(int i=0; i<(this->selectedItems().size()); i++)
     {
-        qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
-        qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
+        //qreal h2 = this->selectedItems().at(i)->sceneBoundingRect().height()/2;
+        //qreal w2 = this->selectedItems().at(i)->sceneBoundingRect().width()/2;
 
-        if(newX<this->selectedItems().at(i)->sceneBoundingRect().width()/2)newX = this->selectedItems().at(i)->sceneBoundingRect().width()/2;
-        if(newX>CurrentPixmap.width()-this->selectedItems().at(i)->sceneBoundingRect().width()/2)newX = CurrentPixmap.width()-this->selectedItems().at(i)->sceneBoundingRect().width()/2;
+        if(newX<0)newX = 0;
+        if(newX>CurrentPixmap.width()-this->selectedItems().at(i)->sceneBoundingRect().width())newX = CurrentPixmap.width()-this->selectedItems().at(i)->sceneBoundingRect().width();
 
-        if(newY<this->selectedItems().at(i)->sceneBoundingRect().height()/2)newY = this->selectedItems().at(i)->sceneBoundingRect().height()/2;
-        if(newY>CurrentPixmap.height()-this->selectedItems().at(i)->sceneBoundingRect().height()/2)newY = CurrentPixmap.height()-this->selectedItems().at(i)->sceneBoundingRect().height()/2;
+        if(newY<0)newY = 0;
+        if(newY>CurrentPixmap.height()-this->selectedItems().at(i)->sceneBoundingRect().height())newY = CurrentPixmap.height()-this->selectedItems().at(i)->sceneBoundingRect().height();
 
-        qreal x = newX-this->selectedItems().at(i)->boundingRect().center().x();
-        qreal y = newY-this->selectedItems().at(i)->boundingRect().center().y();
+        qreal x = newX-this->selectedItems().at(i)->boundingRect().topLeft().x();
+        qreal y = newY-this->selectedItems().at(i)->boundingRect().topLeft().y();
 
-        this->selectedItems().at(i)->setPos(x, y);
-        //this->selectedItems().at(i)->update();
+        //this->selectedItems().at(i)->setPos(x, y);
+
+        QPointF F = this->selectedItems().at(i)->sceneBoundingRect().center();
+
+
+
+        QTransform t;
+        t.translate(F.x(), F.y());
+
+        t.translate(x, y);
+        t.translate(-F.x(), -F.y());
+
+
+        this->selectedItems().at(i)->setTransform(t);
+        this->selectedItems().at(i)->update(this->selectedItems().at(i)->sceneBoundingRect());
 
 
 
@@ -183,19 +185,22 @@ void SceneClass::controlresize(qreal newX, qreal newY)
         qreal h2 = this->selectedItems().at(i)->boundingRect().height()/2;
         qreal w2 = this->selectedItems().at(i)->boundingRect().width()/2;
 
+        this->selectedItems().at(i)->scenePos();
+
         qreal dx = abs(newX-xc);
         qreal dy = abs(newY-yc);
 
         qreal M = dx/w2;
         if(M<(dy/h2))M = dy/h2;
-        QPointF F = this->selectedItems().at(i)->boundingRect().center();        
+        QPointF F = this->selectedItems().at(i)->boundingRect().center();
 
-        QTransform t;
 
+        QTransform t ;
         t.translate(F.x(), F.y());
 
         t.scale(dx/w2, dy/h2);
         t.translate(-F.x(), -F.y());
+
 
 
         this->selectedItems().at(i)->setTransform(t);
@@ -260,7 +265,7 @@ void SceneClass::controlresize(qreal newX, qreal newY)
 
         }
 
-
+this->selectedItems().at(i)->update(this->selectedItems().at(i)->sceneBoundingRect());
 
         }
 

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     myWorkSpace = new GraphicsViewClass();
     ui->gridLayout->addWidget(myWorkSpace);
 
-    ColorDialog = new QColorDialog(this);    
+    ColorDialog = new QColorDialog(this);
     currentColorOfBrush = QColor(255, 255, 255);
 
 
@@ -257,7 +257,7 @@ void MainWindow::RemoveIt(bool)
         QGraphicsItem *it = myWorkSpace->scene->selectedItems().at(i);
         myWorkSpace->scene->removeItem(it);
         myWorkSpace->scene->CountOfItems-=1;
-    }    
+    }
 }
 
 void MainWindow::ChangeColor(QColor q)
@@ -277,28 +277,38 @@ void MainWindow::open()
     if (fileNameToOpen.isEmpty())
         return;
 
-    myWorkSpace->CreateNew(SVGOpen::getSizes(fileNameToOpen).width(), SVGOpen::getSizes(fileNameToOpen).height());
+    SVGOpen SVGO;
+
+
+    myWorkSpace->CreateNew(SVGO.getSizes(fileNameToOpen).width(), SVGO.getSizes(fileNameToOpen).height());
     myWorkSpace->SetColor(currentColorOfBrush);
     //myWorkSpace->scene->setSceneRect(SVGOpen::getSizes(fileNameToOpen));
+    //
 
-    foreach (QGraphicsRectItem *item, SVGOpen::getRectElements(fileNameToOpen))
+
+    //int i=0;
+    foreach (QGraphicsRectItem *item, SVGO.getRectElements(fileNameToOpen))
     {
         QGraphicsRectItem *rect = item;
         myWorkSpace->scene->addItem(rect);
+        //myWorkSpace->scene->items().first()->setTransform(SVGO.T->at(i));
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
+        //i++;
     }
-
-    foreach (QGraphicsEllipseItem *item, SVGOpen::getEllipseElements(fileNameToOpen))
+    //i=0;
+    foreach (QGraphicsEllipseItem *item, SVGO.getEllipseElements(fileNameToOpen))
     {
         QGraphicsEllipseItem *ell = item;
         myWorkSpace->scene->addItem(ell);
+        //myWorkSpace->scene->items().first()->setTransform(SVGO.T->at(i));
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
+        //i++;
     }
 
 
@@ -462,10 +472,7 @@ myWorkSpace->scene->clearSelection();
 ///ZOOM IN MOUSE. BUT IT WORKS BAD WITH SCROLL
 /*
 void MainWindow::wheelEvent(QWheelEvent *event){
-
         ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-
-
         // Scale the view / do the zoom
         double scaleFactor = 1.15;
         if(event->delta()>0 ) {
