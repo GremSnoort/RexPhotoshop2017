@@ -277,38 +277,40 @@ void MainWindow::open()
     if (fileNameToOpen.isEmpty())
         return;
 
-    SVGOpen SVGO;
 
 
-    myWorkSpace->CreateNew(SVGO.getSizes(fileNameToOpen).width(), SVGO.getSizes(fileNameToOpen).height());
+
+    myWorkSpace->CreateNew(SVGOpen::getSizes(fileNameToOpen).width(), SVGOpen::getSizes(fileNameToOpen).height());
     myWorkSpace->SetColor(currentColorOfBrush);
+
+
     //myWorkSpace->scene->setSceneRect(SVGOpen::getSizes(fileNameToOpen));
     //
 
 
-    //int i=0;
-    foreach (QGraphicsRectItem *item, SVGO.getRectElements(fileNameToOpen))
+
+    foreach (QGraphicsRectItem *item, SVGOpen::getRectElements(fileNameToOpen))
     {
         QGraphicsRectItem *rect = item;
         myWorkSpace->scene->addItem(rect);
-        //myWorkSpace->scene->items().first()->setTransform(SVGO.T->at(i));
+
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
-        //i++;
+
     }
-    //i=0;
-    foreach (QGraphicsEllipseItem *item, SVGO.getEllipseElements(fileNameToOpen))
+
+    foreach (QGraphicsEllipseItem *item, SVGOpen::getEllipseElements(fileNameToOpen))
     {
         QGraphicsEllipseItem *ell = item;
         myWorkSpace->scene->addItem(ell);
-        //myWorkSpace->scene->items().first()->setTransform(SVGO.T->at(i));
+
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         myWorkSpace->scene->CountOfItems+=1;
-        //i++;
+
     }
 
 

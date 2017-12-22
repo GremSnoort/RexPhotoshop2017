@@ -3,14 +3,14 @@
 
 SVGOpen::SVGOpen()
 {
-    T = new QList<QTransform>();
+
 }
 
 QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename)
 {
 
     QList<QGraphicsEllipseItem *> itmList;
-    T = new QList<QTransform>();
+
 
 
     QDomDocument doc;
@@ -88,7 +88,6 @@ QList<QGraphicsEllipseItem *> SVGOpen::getEllipseElements(const QString filename
 QList<QGraphicsRectItem *> SVGOpen::getRectElements(const QString filename)
 {
     QList<QGraphicsRectItem *> itmList;
-    T = new QList<QTransform>();
 
 
 

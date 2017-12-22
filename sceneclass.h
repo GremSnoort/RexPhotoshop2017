@@ -35,6 +35,8 @@ public:
 
     QGraphicsScene* scene;
 
+
+
     bool IsRect = false;
 
     QPixmap CurrentPixmap;
@@ -79,6 +81,8 @@ public:
 
     void fill();
     QColor getColor(qreal newX, qreal newY);
+
+    bool TypeIsRect(QGraphicsItem* I);
 
 
 

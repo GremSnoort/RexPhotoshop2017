@@ -61,7 +61,7 @@ void GraphicsViewClass::CreateNew(int X, int Y)
     tmppixmap.fill(QColor(255,255,255));
     scene = new SceneClass();
     scene->addPixmap(tmppixmap);
-    scene->CountOfItems+=1;
+    scene->CountOfItems=1;
 
     this->setScene(scene);
 
