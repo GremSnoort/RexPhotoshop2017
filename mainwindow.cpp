@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     currentColorOfBrush = QColor(255, 255, 255);
 
 
-    //myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+    ///myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
     myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
 
 
@@ -198,77 +198,57 @@ MainWindow::MainWindow(QWidget *parent) :
     //ZOOM
 
     //OPEN FILE
-    openFile = new QAction(this);
-    openFile->setShortcut(tr("Ctrl+O"));
-    connect(openFile, SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
-    ui->menuBar->addAction(openFile);
+
+    ui->menuFile->actions().at(1)->setShortcut(tr("Ctrl+O"));
+    ui->menuFile->actions().at(1)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/open-file-icon.png")));
+
+
 
     connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
     //OPEN FILE
 
     //NEW FILE
-    newFile = new QAction(this);
-    newFile->setShortcut(tr("Ctrl+N"));
-    connect(newFile, SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
-    ui->menuBar->addAction(newFile);
+
+    ui->menuFile->actions().at(0)->setShortcut(tr("Ctrl+N"));
+    ui->menuFile->actions().at(0)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newfileicon.png")));
 
     connect(ui->menuFile->actions().at(0), SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
     //NEW FILE
 
     //CLOSE FILE
-    closeFile = new QAction(this);
-    closeFile->setShortcut(tr("Ctrl+X"));
-    connect(closeFile, SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
-    ui->menuBar->addAction(closeFile);
+
+    ui->menuFile->actions().at(4)->setShortcut(tr("Ctrl+X"));
+    ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/closefileicon.png")));
+
 
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
     //CLOSE FILE
 
     //SAVE AS FILE
-    saveFileAs = new QAction(this);
-    saveFileAs->setShortcut(tr("Ctrl+Shift+S"));
-    connect(saveFileAs, SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
-    ui->menuBar->addAction(saveFileAs);
+
+    ui->menuFile->actions().at(3)->setShortcut(tr("Ctrl+Shift+S"));
+    ui->menuFile->actions().at(3)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Save-as-icon.png")));
 
     connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
     //SAVE AS FILE
 
 
     //SAVE
-    saveFile = new QAction(this);
-    saveFile->setShortcut(tr("Ctrl+S"));
-    connect(saveFile, SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
-    ui->menuBar->addAction(saveFile);
+
+    ui->menuFile->actions().at(2)->setShortcut(tr("Ctrl+S"));
+    ui->menuFile->actions().at(2)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Saveicon.png")));
 
     connect(ui->menuFile->actions().at(2), SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
     //SAVE
 
     //------
 
-    deleteIt = new QAction(this);
-    deleteIt->setShortcut(tr("Ctrl+E"));
-    connect(deleteIt, SIGNAL(triggered(bool)), this, SLOT(RemoveIt(bool)));
-    myWorkSpace->addAction(deleteIt);
 
 
 }
 
 
-void MainWindow::RemoveIt(bool)
-{
 
-    int i = myWorkSpace->scene->items().size();
-    QTextStream out(stdout);
-    out<<i<<"  "<<myWorkSpace->scene->CountOfItems<<endl;
-
-
-    for(int i=0; i<myWorkSpace->scene->selectedItems().size(); i++)
-    {
-        QGraphicsItem *it = myWorkSpace->scene->selectedItems().at(i);
-        myWorkSpace->scene->removeItem(it);
-        myWorkSpace->scene->CountOfItems-=1;
-    }
-}
 
 void MainWindow::ChangeColor(QColor q)
 {
@@ -294,8 +274,7 @@ void MainWindow::open()
     myWorkSpace->SetColor(currentColorOfBrush);
 
 
-    //myWorkSpace->scene->setSceneRect(SVGOpen::getSizes(fileNameToOpen));
-    //
+
 
 
 
@@ -332,6 +311,7 @@ void MainWindow::open()
     ui->widget_Zoom->hide();
     ui->widget_Rect->hide();
     ui->widget_Ell->hide();
+    ui->widget_Fill->hide();
 }
 
 
@@ -381,6 +361,7 @@ void MainWindow::MakeNewFile()
         ui->widget_Zoom->hide();
         ui->widget_Rect->hide();
         ui->widget_Ell->hide();
+        ui->widget_Fill->hide();
 
     }
 
@@ -398,6 +379,7 @@ void MainWindow::close()
     ui->widget_Zoom->hide();
     ui->widget_Rect->hide();
     ui->widget_Ell->hide();
+    ui->widget_Fill->hide();
 }
 
 void MainWindow::FileClose(bool)

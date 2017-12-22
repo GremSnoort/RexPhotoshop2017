@@ -305,19 +305,18 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 }
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    QTextStream out(stdout);
-    out<<CountOfItems<<"  "<<this->items().size()<<endl;
 
-    if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace &&firstredraw&&!firstmove&&!FirstEllipse && !FirstRect)
+
+    if(QApplication::keyboardModifiers()==Qt::ControlModifier && IsWorkSpace &&firstredraw)
         {
             ++CountOfItems;
-            firstredraw=false;
             this->clearSelection();
+            firstredraw=false;            
             IsModified=true;
             this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
             this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
         }
-    else if(QApplication::keyboardModifiers()==Qt::ShiftModifier && IsWorkSpace&&firstmove&&!FirstEllipse && !FirstRect&&!firstredraw)
+    else if(QApplication::keyboardModifiers()==Qt::ShiftModifier && IsWorkSpace&&firstmove)
     {
         ++CountOfItems;
         this->clearSelection();

@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1359</width>
-    <height>961</height>
+    <width>1500</width>
+    <height>1000</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1500</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1500</width>
+    <height>1000</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -22,7 +34,7 @@
      <rect>
       <x>80</x>
       <y>50</y>
-      <width>1181</width>
+      <width>1321</width>
       <height>21</height>
      </rect>
     </property>
@@ -33,7 +45,7 @@
    <widget class="QPushButton" name="SetColorButton">
     <property name="geometry">
      <rect>
-      <x>1280</x>
+      <x>1420</x>
       <y>170</y>
       <width>60</width>
       <height>60</height>
@@ -64,7 +76,7 @@
    <widget class="QWidget" name="Color" native="true">
     <property name="geometry">
      <rect>
-      <x>1270</x>
+      <x>1410</x>
       <y>80</y>
       <width>80</width>
       <height>80</height>
@@ -208,8 +220,8 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <rect>
       <x>80</x>
       <y>80</y>
-      <width>1181</width>
-      <height>811</height>
+      <width>1321</width>
+      <height>851</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
@@ -609,7 +621,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1361</width>
+      <width>1501</width>
       <height>51</height>
      </rect>
     </property>
@@ -636,7 +648,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1359</width>
+     <width>1500</width>
      <height>30</height>
     </rect>
    </property>
@@ -681,34 +693,43 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew">
    <property name="text">
-    <string>&amp;New* (Ctrl+N)</string>
+    <string/>
    </property>
    <property name="iconText">
-    <string>New* (Ctrl+N)</string>
+    <string/>
+   </property>
+   <property name="font">
+    <font>
+     <family>Misc Fixed</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
   </action>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open (Ctrl+O)</string>
+    <string/>
    </property>
    <property name="iconText">
-    <string>Open (Ctrl+O)</string>
+    <string/>
+   </property>
+   <property name="toolTip">
+    <string/>
    </property>
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>&amp;Save (Ctrl+S)</string>
+    <string/>
    </property>
    <property name="iconText">
-    <string>Save (Ctrl+S)</string>
+    <string/>
    </property>
   </action>
   <action name="actionSave_as">
    <property name="text">
-    <string>Sa&amp;ve as (Ctrl+Shift+S)</string>
+    <string/>
    </property>
    <property name="iconText">
-    <string>Save as (Ctrl+Shift+S)</string>
+    <string/>
    </property>
   </action>
   <action name="actionUndo">
@@ -738,13 +759,13 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
   </action>
   <action name="actionClose_file">
    <property name="text">
-    <string>&amp;Close file (Ctrl+X)</string>
+    <string/>
    </property>
    <property name="iconText">
-    <string>Close file (Ctrl+X)</string>
+    <string/>
    </property>
    <property name="toolTip">
-    <string>Close file (Ctrl+X)</string>
+    <string/>
    </property>
   </action>
   <action name="actionHow_to_work">

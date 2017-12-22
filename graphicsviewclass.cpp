@@ -124,10 +124,14 @@ void GraphicsViewClass::ActualPixelsPressed()
 
 void GraphicsViewClass::FitScreenPressed()
 {
+    QTextStream out(stdout);
+    out<<scene->width()/scene->height() <<"  "<< this->size().width()/this->size().height()<<endl;
     if(scene->height()>0 &&  scene->width()>0){
     ActualPixelsPressed();
-    if(scene->height()>=scene->width())
+    //if(scene->height()>=scene->width())///zoom by height
+    if(scene->width()/scene->height() < 1.5588235294)
     {
+        out<<scene->width()/scene->height() <<"  "<< this->size().width()/this->size().height()<<endl;
         double Z = scene->height();
         if(scene->height()>=this->size().height()) //8888888
         {

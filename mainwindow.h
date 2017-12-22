@@ -98,7 +98,7 @@ public slots:
 
     void ChangeColor(QColor q);
 
-    void RemoveIt(bool);
+
 
 };
 
