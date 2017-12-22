@@ -51,6 +51,9 @@
       <height>60</height>
      </size>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
@@ -89,8 +92,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>631</width>
-      <height>41</height>
+      <width>1051</width>
+      <height>51</height>
      </rect>
     </property>
     <widget class="QPushButton" name="pushButtonZoom_ActualPixels">
@@ -101,6 +104,9 @@
        <width>131</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
       <string>Actual Pixels</string>
@@ -114,6 +120,9 @@
        <width>121</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
       <string>Fit Screen</string>
@@ -174,6 +183,9 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <height>60</height>
      </size>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -223,6 +235,9 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <height>60</height>
      </size>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -247,6 +262,9 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <width>60</width>
       <height>60</height>
      </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="text">
      <string/>
@@ -579,6 +597,9 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <height>60</height>
      </size>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -589,7 +610,7 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
       <x>0</x>
       <y>0</y>
       <width>1361</width>
-      <height>41</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -604,11 +625,11 @@ font: 75 12pt &quot;Misc Fixed&quot;;</string>
    <zorder>gridLayoutWidget</zorder>
    <zorder>pushButton_Rect</zorder>
    <zorder>pushButton_Circle</zorder>
-   <zorder>widget_Zoom</zorder>
    <zorder>widget_Ell</zorder>
    <zorder>pushButton_Fill</zorder>
    <zorder>widget_Rect</zorder>
    <zorder>widget_Fill</zorder>
+   <zorder>widget_Zoom</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

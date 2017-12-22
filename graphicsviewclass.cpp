@@ -39,6 +39,7 @@ void GraphicsViewClass::SetFillMode()
     scene->RectMODE=false;
     scene->ZoomMODE=false;
     scene->FillMODE=true;
+
 }
 
 

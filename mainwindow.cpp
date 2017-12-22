@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     currentColorOfBrush = QColor(255, 255, 255);
 
 
-    myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+    //myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
+    myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
 
 
 
