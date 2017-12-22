@@ -25,7 +25,7 @@ public:
     int CountOfZoom = 0;
     double scaleFactor = 1.07;
 
-    void CreateNew(int X, int Y);
+    void CreateNew();
 
 
 
@@ -36,17 +36,13 @@ private:
 signals:
 
 public slots:
-    //ZOOM
+
+    ///ZOOM
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
-    void ActualPixelsPressed();
-    void FitScreenPressed();
-    //ZOOM
 
-    void SetRectMode();
-    void SetCircleMode();
-    void SetZoomMode();
-    void SetFillMode();
+
+
 
 
     void SetColor(QColor q);

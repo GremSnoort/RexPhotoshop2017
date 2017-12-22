@@ -26,23 +26,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    optionsfornewfile.cpp \
     graphicsviewclass.cpp \
     sceneclass.cpp \
     svgopen.cpp \
-    askforsave.cpp
+    askforsave.cpp \
+    rect.cpp
 
 HEADERS += \
         mainwindow.h \
-    optionsfornewfile.h \
     graphicsviewclass.h \
     sceneclass.h \
     svgopen.h \
-    askforsave.h
+    askforsave.h \
+    rect.h
 
 FORMS += \
         mainwindow.ui \
-    optionsfornewfile.ui \
     askforsave.ui
 
 DISTFILES +=

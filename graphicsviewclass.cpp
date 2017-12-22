@@ -8,77 +8,23 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 }
 
 
-
-void GraphicsViewClass::SetRectMode()
-{
-    scene->CircleMODE=false;
-    scene->ZoomMODE=false;
-    scene->RectMODE=true;
-    scene->FillMODE=false;
-
-}
-void GraphicsViewClass::SetCircleMode()
-{
-    scene->CircleMODE=true;
-    scene->RectMODE=false;
-    scene->ZoomMODE=false;
-    scene->FillMODE=false;
-
-}
-void GraphicsViewClass::SetZoomMode()
-{
-    scene->CircleMODE=false;
-    scene->RectMODE=false;
-    scene->ZoomMODE=true;
-    scene->FillMODE=false;
-
-}
-void GraphicsViewClass::SetFillMode()
-{
-    scene->CircleMODE=false;
-    scene->RectMODE=false;
-    scene->ZoomMODE=false;
-    scene->FillMODE=true;
-
-}
-
-
-
-
 void GraphicsViewClass::SetColor(QColor q)
 {
     scene->COLOR=q;
 }
 
 
-//NEW
-
-void GraphicsViewClass::CreateNew(int X, int Y)
+///NEW
+void GraphicsViewClass::CreateNew()
 {
-
-
-    QTextStream out(stdout);
-    QPixmap tmppixmap = QPixmap(X, Y);
-    tmppixmap.fill(QColor(255,255,255));
     scene = new SceneClass();
-    scene->addPixmap(tmppixmap);
-    scene->CountOfItems=1;
-
+    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     this->setScene(scene);
-
-    scene->CurrentPixmap = tmppixmap;
-
-
-    out<<scene->items().size()<<endl;
-
-
-    //out<<scene->items().at(0)->boundingRect().center().rx()<<"  "<<scene->items().at(0)->boundingRect().center().ry()<<"  "<<items().at(0)->boundingRect().bottomLeft().rx()<<endl;
 }
 
 
-//NEW
 
-//ZOOM
+///ZOOM
 void GraphicsViewClass::zoomUpEvent(bool)
 {
     if(CountOfZoom<60){
@@ -87,7 +33,6 @@ void GraphicsViewClass::zoomUpEvent(bool)
     CountOfZoom++;
     }
 }
-
 void GraphicsViewClass::zoomDownEvent(bool)
 {
     if(CountOfZoom>(-60)){
@@ -97,115 +42,7 @@ void GraphicsViewClass::zoomDownEvent(bool)
     }
 }
 
-void GraphicsViewClass::ActualPixelsPressed()
-{
 
-    if(CountOfZoom>0)
-    {
-        this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        for(int i=0; i<abs(CountOfZoom); i++)
-        {
-            this->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-        }
-        CountOfZoom=0;
-    }
-    else if(CountOfZoom<0)
-    {
-        this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        for(int i=0; i<abs(CountOfZoom); i++)
-        {
-            this-> scale(scaleFactor, scaleFactor);
-        }
-        CountOfZoom=0;
-    }
-
-
-}
-
-void GraphicsViewClass::FitScreenPressed()
-{
-    QTextStream out(stdout);
-    out<<scene->width()/scene->height() <<"  "<< this->size().width()/this->size().height()<<endl;
-    if(scene->height()>0 &&  scene->width()>0){
-    ActualPixelsPressed();
-    //if(scene->height()>=scene->width())///zoom by height
-    if(scene->width()/scene->height() < 1.5588235294)
-    {
-        out<<scene->width()/scene->height() <<"  "<< this->size().width()/this->size().height()<<endl;
-        double Z = scene->height();
-        if(scene->height()>=this->size().height()) //8888888
-        {
-            while(Z>this->size().height())
-            {
-                    Z/=scaleFactor;
-                    CountOfZoom--;
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                this->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-            }
-        }else//scene->height()<ui->graphicsView->size().height()
-        {
-            while(true)
-            {
-                    Z*=scaleFactor;
-                    CountOfZoom++;
-                    if(Z>=this->size().height())
-                    {
-                        Z/=scaleFactor;
-                        CountOfZoom--;
-                        break;
-                    }
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                this->scale(scaleFactor,  scaleFactor);
-            }
-        }
-    }
-    else
-    {
-
-        double Z = scene->width();
-
-        if(scene->width()>this->size().width()) //8888888
-        {
-            while(Z>this->size().width())
-            {
-                    Z/=scaleFactor;
-                    CountOfZoom--;
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                this->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-            }
-        }else//scene->height()<ui->graphicsView->size().height()
-        {
-            while(true)
-            {
-                    Z*=scaleFactor;
-                    CountOfZoom++;
-                    if(Z>=this->size().width())
-                    {
-                        Z/=scaleFactor;
-                        CountOfZoom--;
-                        break;
-                    }
-            }
-            for(int i=0; i<abs(CountOfZoom); i++)
-            {
-                this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-                this->scale(scaleFactor,  scaleFactor);
-            }
-        }
-
-    }
-  }
-}
-//ZOOM
 
 GraphicsViewClass::~GraphicsViewClass()
 {

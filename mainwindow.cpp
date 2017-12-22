@@ -6,245 +6,95 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    OptionsForm = new OptionsForNewFile(this);
-    OptionsForm->hide();
+
+
+
+    ///form for correct save
     AskSaveDialog = new AskForSave(this);
     AskSaveDialog->hide();
-
-    myWorkSpace = new GraphicsViewClass();
-    ui->gridLayout->addWidget(myWorkSpace);
-
-    ColorDialog = new QColorDialog(this);
-    currentColorOfBrush = QColor(255, 255, 255);
-
-
-    ///myWorkSpace->setCursor(QCursor(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newcursor.png"), -1, -1));
-    myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
-
-
-
-    ui->widget_Rect->hide();
-    ui->widget_Fill->hide();
-
-    QPixmap PixmapMoveRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/moverect.png" );
-    ui->label_MoveRect->setPixmap(PixmapMoveRect);
-
-    QPixmap PixmapResizeRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Resize.png" );
-    ui->label_ResizeRect->setPixmap(PixmapResizeRect);
-
-    QPixmap PixmapDelRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/DeleteRect.png" );
-    ui->label_DelRect->setPixmap(PixmapDelRect);
-
-    ui->widget_Ell->hide();
-
-    QPixmap PixmapResizeEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/ResizeEll.png");
-    ui->label_ResizeEll->setPixmap(PixmapResizeEll);
-
-    QPixmap PixmapDelEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/DeleteEll.png");
-    ui->label_DelEll->setPixmap(PixmapDelEll);
-
-    QPixmap PixmapMoveEll("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Move1.png");
-    ui->label_MoveEll->setPixmap(PixmapMoveEll);
-
-
-
-
-
-    ui->widget_Zoom->hide();
-    QIcon IcZoom = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/file1339191946.png"));
-    ui->pushButton_Zoom->setIcon(IcZoom);
-    ui->pushButton_Zoom->setIconSize(QSize(40, 40));
-
-
-
-
-    QIcon IcRZoom = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561339196101ZoomIn256x256.png"));
-    ui->radioButtonZoom->setIcon(IcRZoom);
-    ui->radioButtonZoom->setIconSize(QSize(30, 30));
-
-    QIcon IcFill = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png"));
-    ui->pushButton_Fill->setIcon(IcFill);
-    ui->pushButton_Fill->setIconSize(QSize(40, 40));
-
-
-
-    QIcon IcRect = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png"));
-    ui->pushButton_Rect->setIcon(IcRect);
-    ui->pushButton_Rect->setIconSize(QSize(50, 50));
-
-    QIcon IcCircle = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png"));
-    ui->pushButton_Circle->setIcon(IcCircle);
-    ui->pushButton_Circle->setIconSize(QSize(50, 50));
-
-    QIcon IcColor = QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png"));
-    ui->SetColorButton->setIcon(IcColor);
-    ui->SetColorButton->setIconSize(QSize(50, 50));
-
-
-    //STYLE
-    QFont allFont("Misc Fixed", 16, QFont::Bold);
-    QFont fFont("Misc Fixed", 12, QFont::Bold);
-    QString style = "color: rgb(160, 200, 180);\n";
-    QString style1 = "background-color: rgb(35, 38, 49);color: rgb(160, 200, 180);\n";
-
-
-
-    ui->menuBar->setFont(allFont);
-    ui->menuBar->setStyleSheet(style1);
-    ui->menuFile->setFont(fFont);
-    ui->menuEdit->setFont(fFont);
-    ui->NameOfFile->setFont(fFont);
-    ui->NameOfFile->setAlignment(Qt::AlignCenter);
-    ui->NameOfFile->setStyleSheet(style1);
-
-
-
-    ColorDialog->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
-
-
-
-
-
-    ui->Tools->setStyleSheet(style);
-    ui->Tools->setFont(fFont);
-
-    ui->pushButtonZoom_ActualPixels->setFont(fFont);
-    ui->pushButtonZoom_ActualPixels->setStyleSheet(style1);
-    ui->pushButtonZoom_FitScreen->setFont(fFont);
-    ui->pushButtonZoom_FitScreen->setStyleSheet(style1);
-
-    ui->gridLayoutWidget->setStyleSheet(style1);
-
-    //STYLE
-
-    ui->NameOfFile->setReadOnly(true);
-
-
-
     connect(AskSaveDialog, SIGNAL(Save(bool)), this, SLOT(FileSave(bool)));
     connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
 
 
-
-
-    //BUTTONS
-
-    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
-    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
-    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
-    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Fill, SLOT(show()));
-
-
-    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
-    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
-    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Ell, SLOT(show()));
-    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
-
-
-
-    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
-    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Rect, SLOT(show()));
-    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
-    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
-
-
-    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Zoom, SLOT(show()));
-    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
-    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
-    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
-
-
-//Set MODE
-
-    connect(ui->pushButton_Zoom, SIGNAL(released()), myWorkSpace, SLOT(SetZoomMode()));
-    connect(ui->pushButton_Rect, SIGNAL(released()), myWorkSpace, SLOT(SetRectMode()));
-    connect(ui->pushButton_Circle, SIGNAL(released()), myWorkSpace, SLOT(SetCircleMode()));
-    connect(ui->pushButton_Fill, SIGNAL(released()), myWorkSpace, SLOT(SetFillMode()));
-
-//~Set MODE
-
-
-
-    //~BUTTONS
-
-    //COLOR
-    connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
-
-    setColor = new QAction(this);
-    setColor->setShortcut(tr("Ctrl+P"));
-    connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
-    ui->SetColorButton->addAction(setColor);
-
-
-    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));
-    //COLOR
-
+    ///GraphicsView
+    myWorkSpace = new GraphicsViewClass();
+    ui->gridLayout->addWidget(myWorkSpace);
+    myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
 
     //ZOOM
     zoomUp = new QAction(this);
-    zoomDown = new QAction(this);
-
     zoomUp->setShortcut(tr("Ctrl+Up"));
+    myWorkSpace->addAction(zoomUp);
+
+    zoomDown = new QAction(this);
     zoomDown->setShortcut(tr("Ctrl+Down"));
+    myWorkSpace->addAction(zoomDown);
 
     connect(zoomUp, SIGNAL(triggered(bool)), myWorkSpace, SLOT(zoomUpEvent(bool)));
     connect(zoomDown, SIGNAL(triggered(bool)), myWorkSpace, SLOT(zoomDownEvent(bool)));
 
-    myWorkSpace->addAction(zoomUp);
-    myWorkSpace->addAction(zoomDown);
 
-    connect(ui->pushButtonZoom_ActualPixels, SIGNAL(released()), myWorkSpace, SLOT(ActualPixelsPressed()));
-    connect(ui->pushButtonZoom_FitScreen, SIGNAL(released()), myWorkSpace, SLOT(FitScreenPressed()));
-    //ZOOM
+    ///COLOR form
+    ColorDialog = new QColorDialog(this);
+    ColorDialog->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+    currentColorOfBrush = QColor(0, 0, 0);
+    setColor = new QAction(this);
+    setColor->setShortcut(tr("Ctrl+P"));
+    ui->SetColorButton->addAction(setColor);
 
-    //OPEN FILE
-
-    ui->menuFile->actions().at(1)->setShortcut(tr("Ctrl+O"));
-    ui->menuFile->actions().at(1)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/open-file-icon.png")));
-
+    connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
+    connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
+    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));
 
 
-    connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
-    //OPEN FILE
+    ///Line for the File Name
+    ui->NameOfFile->setReadOnly(true);
+    ui->NameOfFile->setAlignment(Qt::AlignCenter);
 
-    //NEW FILE
 
+    ///BUTTONS STYLE
+    ui->pushButton_Zoom->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/file1339191946.png")));
+    ui->pushButton_Zoom->setIconSize(QSize(40, 40));
+
+    ui->pushButton_Fill->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png")));
+    ui->pushButton_Fill->setIconSize(QSize(40, 40));
+
+    ui->pushButton_Rect->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png")));
+    ui->pushButton_Rect->setIconSize(QSize(50, 50));
+
+    ui->pushButton_Circle->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png")));
+    ui->pushButton_Circle->setIconSize(QSize(50, 50));
+
+    ui->SetColorButton->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png")));
+    ui->SetColorButton->setIconSize(QSize(50, 50));
+
+
+
+    ///MENU BAR -> MENU FILE
+    //NEW
     ui->menuFile->actions().at(0)->setShortcut(tr("Ctrl+N"));
     ui->menuFile->actions().at(0)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newfileicon.png")));
-
     connect(ui->menuFile->actions().at(0), SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
-    //NEW FILE
 
-    //CLOSE FILE
-
-    ui->menuFile->actions().at(4)->setShortcut(tr("Ctrl+X"));
-    ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/closefileicon.png")));
-
-
-    connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
-    //CLOSE FILE
-
-    //SAVE AS FILE
-
-    ui->menuFile->actions().at(3)->setShortcut(tr("Ctrl+Shift+S"));
-    ui->menuFile->actions().at(3)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Save-as-icon.png")));
-
-    connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
-    //SAVE AS FILE
-
+    //OPEN
+    ui->menuFile->actions().at(1)->setShortcut(tr("Ctrl+O"));
+    ui->menuFile->actions().at(1)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/open-file-icon.png")));
+    connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
 
     //SAVE
-
     ui->menuFile->actions().at(2)->setShortcut(tr("Ctrl+S"));
     ui->menuFile->actions().at(2)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Saveicon.png")));
-
     connect(ui->menuFile->actions().at(2), SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
-    //SAVE
 
-    //------
+    //SAVE AS
+    ui->menuFile->actions().at(3)->setShortcut(tr("Ctrl+Shift+S"));
+    ui->menuFile->actions().at(3)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Save-as-icon.png")));
+    connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
 
-
-
+    //CLOSE
+    ui->menuFile->actions().at(4)->setShortcut(tr("Ctrl+X"));
+    ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/closefileicon.png")));
+    connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 }
 
 
@@ -270,7 +120,7 @@ void MainWindow::open()
 
 
 
-    myWorkSpace->CreateNew(SVGOpen::getSizes(fileNameToOpen).width(), SVGOpen::getSizes(fileNameToOpen).height());
+    myWorkSpace->CreateNew();
     myWorkSpace->SetColor(currentColorOfBrush);
 
 
@@ -308,10 +158,7 @@ void MainWindow::open()
     myWorkSpace->scene->IsWorkSpace=true;
 
 
-    ui->widget_Zoom->hide();
-    ui->widget_Rect->hide();
-    ui->widget_Ell->hide();
-    ui->widget_Fill->hide();
+
 }
 
 
@@ -329,8 +176,8 @@ void MainWindow::FileOpen(bool)
 
 void MainWindow::newone()
 {
-    OptionsForm->show();
-    connect(OptionsForm, SIGNAL(Signal()), this, SLOT(MakeNewFile()));
+
+    MakeNewFile();
 }
 
 void MainWindow::FileNew(bool)
@@ -348,22 +195,18 @@ void MainWindow::FileNew(bool)
 void MainWindow::MakeNewFile()
 {
 
-    int X = OptionsForm->W;
-    int Y = OptionsForm->H;
-    if(X>0 && Y>0){
+
+
         if(!ui->NameOfFile->text().isEmpty())FileClose(true);
-        myWorkSpace->CreateNew(X, Y);
+        myWorkSpace->CreateNew();
         myWorkSpace->SetColor(currentColorOfBrush);
         ui->NameOfFile->setText("New_file");
 
 
         myWorkSpace->scene->IsWorkSpace=true;
-        ui->widget_Zoom->hide();
-        ui->widget_Rect->hide();
-        ui->widget_Ell->hide();
-        ui->widget_Fill->hide();
 
-    }
+
+
 
 }
 
@@ -376,10 +219,7 @@ void MainWindow::close()
     myWorkSpace->scene->IsWorkSpace=false;
 
 
-    ui->widget_Zoom->hide();
-    ui->widget_Rect->hide();
-    ui->widget_Ell->hide();
-    ui->widget_Fill->hide();
+
 }
 
 void MainWindow::FileClose(bool)

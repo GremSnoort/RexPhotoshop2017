@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "sceneclass.h"
 
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
@@ -10,66 +11,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 
 }
 
-QColor SceneClass::getColor(qreal newX, qreal newY)
-{
-    QPixmap paintDevice(this->width(), this->height());
-    QPainter *painter = new QPainter(&paintDevice);
-    this->render(painter);
-    QImage pixels = paintDevice.toImage();
-    QRgb colorAt = pixels.pixel(newX,newY);
-    return QColor(colorAt);
-}
 
-bool SceneClass::TypeIsRect(QGraphicsItem *I)
-{
-    qreal x = I->sceneBoundingRect().topLeft().x();
-    qreal y = I->sceneBoundingRect().topLeft().y();
-    qreal xc = I->sceneBoundingRect().center().x();
-    qreal yc = I->sceneBoundingRect().center().y();
-
-    foreach (QGraphicsItem *it, this->items())
-    {
-        if(it!=I && it!=this->items().last())it->hide();
-    }
-
-    bool ans = getColor(x+5, y+5)==getColor(xc, yc);
-    Q = getColor(xc, yc);
-
-    foreach (QGraphicsItem *it, this->items())
-    {
-        if(it!=I && it!=this->items().last())it->show();
-    }
-
-    return ans;
-}
-
-void SceneClass::fill()
-{
-    foreach(QGraphicsItem *I, this->selectedItems())
-    {
-            QTextStream out(stdout);
-
-            if(TypeIsRect(I))
-            {
-                this->removeItem(I);
-
-                this->addRect(I->sceneBoundingRect(), QPen(Qt::NoPen), QBrush(COLOR));
-                this->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable);
-                this->items().first()->setFlag(QGraphicsRectItem::ItemIsMovable);
-            }
-
-            else
-            {
-                this->removeItem(I);
-
-                this->addEllipse(I->sceneBoundingRect(), QPen(Qt::NoPen), QBrush(COLOR));
-                this->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable);
-                this->items().first()->setFlag(QGraphicsRectItem::ItemIsMovable);
-            }
-
-    }
-
-}
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -78,13 +20,11 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
 
         previousPoint = event->scenePos();
-                qreal prX = previousPoint.x();
-                qreal prY = previousPoint.y();
+        qreal prX = previousPoint.x();
+        qreal prY = previousPoint.y();
 
-
-
-                QPainterPath P(previousPoint);
-                P.addRect(prX, prY, 1, 1);
+        QPainterPath P(previousPoint);
+        P.addRect(prX, prY, 1, 1);
         this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());
 
 
@@ -153,7 +93,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
                             }
                         }
 
-       else if(RectMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)
+       else if(true)
        {
            this->addRect(QRectF(event->scenePos(), QSize(10, 10)), QPen(Qt::NoPen), QBrush(COLOR));
 
@@ -294,7 +234,10 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     else if(QApplication::keyboardModifiers()==Qt::ShiftModifier && firstmove && !firstredraw && !FirstRect && !FirstEllipse)shiftmoveadd(newX, newY);
     else if(RectMODE && FirstRect && !firstredraw && !firstmove&& QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)rec(prX, prY, newX, newY, COLOR);
-    else if(CircleMODE && FirstEllipse && !firstredraw && !firstmove&& QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)ell(prX, prY, newX, newY, COLOR);
+    else if(CircleMODE && FirstEllipse && !firstredraw && !firstmove &&
+            QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)
+        dynamic_cast<QGraphicsEllipseItem*>(items().first())->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
+//        ell(prX, prY, newX, newY, COLOR);
 
    /*
 
@@ -322,10 +265,10 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         this->clearSelection();
         IsModified=true;
         firstmove=false;
-        this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable);
+        this->items().first()->setFlag(QGraphicsItem::ItemIsSelectable);
         this->items().first()->setFlag(QGraphicsEllipseItem::ItemIsMovable);
     }
-    else if(RectMODE && FirstRect && !firstredraw && !firstmove && QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)
+    else if(RectMODE && FirstRect && !firstredraw && !firstmove && (QApplication::keyboardModifiers()&(Qt::ControlModifier|Qt::ShiftModifier|Qt::MetaModifier)==0))
     {
     FirstRect=false;
     ++CountOfItems;

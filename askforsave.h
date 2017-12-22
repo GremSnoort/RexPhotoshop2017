@@ -3,10 +3,11 @@
 
 #include <QWidget>
 #include <QObject>
-
+#include <QDialog>
 #include <QMainWindow>
 #include <QStyle>
 #include <QDesktopWidget>
+#include <QAbstractButton>
 
 namespace Ui {
 class AskForSave;
@@ -23,9 +24,7 @@ signals:
     void Cancel();
 
 public slots:
-     void MakeSave();
-     void MakeSaveAs();
-     void MakeCancel();
+     void MakeSignal(QAbstractButton*b);
 
 public:
     explicit AskForSave(QMainWindow *parent);

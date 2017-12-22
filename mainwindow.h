@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "optionsfornewfile.h"
+
 #include "graphicsviewclass.h"
 #include "svgopen.h"
 #include "askforsave.h"
@@ -75,7 +75,7 @@ private:
     QString MODE = "";
 
 
-    OptionsForNewFile *OptionsForm;
+
     AskForSave *AskSaveDialog;
     GraphicsViewClass* myWorkSpace;
 
