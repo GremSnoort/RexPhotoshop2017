@@ -86,34 +86,20 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
                 QPainterPath P(previousPoint);
                 P.addRect(prX, prY, 1, 1);
         this->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());
-/*
-        if(FillMODE && QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)fill();
 
 
+                if(QApplication::keyboardModifiers()==Qt::MetaModifier)
+                        {
+                           for(int i=0; i<(this->selectedItems().size()); i++)
+                          {
+                                   this->removeItem(this->selectedItems().at(i));
+                                   --CountOfItems;
+                                   IsModified=true;
+                                   break;
 
-
-        else
-
-       else  i
-
-
-
-       else if(QApplication::keyboardModifiers()==Qt::MetaModifier&& !firstredraw && !firstmove)
-        {
-           for(int i=0; i<(this->selectedItems().size()); i++)
-          {
-                   this->removeItem(this->selectedItems().at(i));
-
-                   CountOfItems-=1;
-                   IsModified=true;
-                   break;
-
-           }
-        }
-
-*/
-
-                if(QApplication::keyboardModifiers()==Qt::ControlModifier)
+                           }
+                        }
+                else if(QApplication::keyboardModifiers()==Qt::ControlModifier)
                         {
                             for(int i=0; i<(this->selectedItems().size()); i++)
                            {
@@ -179,6 +165,9 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
            FirstEllipse = true;
        }
+       else if(FillMODE && !firstredraw && !firstmove && QApplication::keyboardModifiers()!=Qt::ControlModifier && QApplication::keyboardModifiers()!=Qt::ShiftModifier && QApplication::keyboardModifiers()!=Qt::MetaModifier)fill();
+
+
 
 
 

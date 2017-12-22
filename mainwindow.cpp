@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ui->widget_Rect->hide();
+    ui->widget_Fill->hide();
 
     QPixmap PixmapMoveRect( "/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/moverect.png" );
     ui->label_MoveRect->setPixmap(PixmapMoveRect);
@@ -127,21 +128,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //BUTTONS
 
+    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
+    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
+    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
+    connect(ui->pushButton_Fill, SIGNAL(released()), ui->widget_Fill, SLOT(show()));
+
 
     connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
     connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
     connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Ell, SLOT(show()));
+    connect(ui->pushButton_Circle, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
 
 
 
     connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Zoom, SLOT(hide()));
     connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Rect, SLOT(show()));
     connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
+    connect(ui->pushButton_Rect, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
 
 
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Zoom, SLOT(show()));
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Rect, SLOT(hide()));
     connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Ell, SLOT(hide()));
+    connect(ui->pushButton_Zoom, SIGNAL(released()), ui->widget_Fill, SLOT(hide()));
 
 
 //Set MODE
