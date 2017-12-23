@@ -1,10 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define private public
 
-#include "graphicsviewclass.h"
+#include "recttool.h"
+
 #include "svgopen.h"
 #include "askforsave.h"
+#include "sceneclass.h"
 
 #include <QDebug>
 
@@ -29,23 +32,35 @@
 
 #include <QStyle>
 #include <QDesktopWidget>
-
+#include "graphicsviewclass.h"
 namespace Ui {
 class MainWindow;
 
 }
 
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+
 
 protected:
     //virtual void wheelEvent(QWheelEvent* event);///ZOOM IN MOUSE
 
 
 public:
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+
+
+    RectTool *t;
+
+
+    GraphicsViewClass *myWorkSpace;
 
 
     QAction* zoomUp;
@@ -63,13 +78,6 @@ public:
     QColor currentColorOfBrush;
 
 
-
-
-
-
-
-
-private:
     Ui::MainWindow *ui;
 
     QString MODE = "";
@@ -77,7 +85,14 @@ private:
 
 
     AskForSave *AskSaveDialog;
-    GraphicsViewClass* myWorkSpace;
+
+    //GraphicsViewClass* myWorkSpace;
+
+
+
+
+private:
+
 
 
 

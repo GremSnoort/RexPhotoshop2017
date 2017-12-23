@@ -4,6 +4,7 @@
 #define private public
 
 
+#include "rect.h"
 #include <QTransform>
 #include <QAbstractGraphicsShapeItem>
 #include <QStyleOptionGraphicsItem>
@@ -31,62 +32,47 @@ public:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-    QPointF     previousPoint;
+
+    struct all_items
+    {
+        QGraphicsRectItem*R;
+        QGraphicsEllipseItem*E;
+        all_items()
+        {
+            R = new QGraphicsRectItem(QRectF(0, 0, 1, 1));
+            E = new QGraphicsEllipseItem(QRectF(0, 0, 1, 1));
+        }
+    };
+
+    QList<all_items*> *ItemsList;
+
+    Rect *itemsRECT;
 
     QGraphicsScene* scene;
 
 
-
-    bool IsRect = false;
-
-    QPixmap CurrentPixmap;
-
-    bool FirstRect = false;
-    bool FirstEllipse = false;
-
-
-    int CountOfItems;
-
+    QPointF     previousPoint;
     bool IsModified = false;
-    bool IsWorkSpace = false;
+
 
     QColor COLOR = QColor(255, 255, 255);
 
-    QRectF F;
-    int I;
-    QColor Q;
 
     //MODE
     bool RectMODE = false;
-    bool CircleMODE = false;
-    bool ZoomMODE = false;
-    bool FillMODE = false;
-
+    bool EllipseMODE = false;
     bool SelectMODE = false;
 
-    bool firstmove = false;
 
-
-    bool firstredraw = false;
     //MODE
 
 
 
-
-    void rec(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
-    void ell(qreal prX, qreal prY, qreal newX, qreal newY, QColor Q);
-
-    void shiftmoveadd(qreal newX, qreal newY);
-    void controlresize(qreal newX, qreal newY);
-
-    void fill();
-    QColor getColor(qreal newX, qreal newY);
-
-    bool TypeIsRect(QGraphicsItem* I);
 
 
 
 signals:
+    void Press(QGraphicsSceneMouseEvent *event, SceneClass*sc);
 
 public slots:
 

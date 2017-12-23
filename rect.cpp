@@ -1,15 +1,33 @@
 #include "rect.h"
 
-Rect::Rect(QRectF F, QPen P, QBrush B, qreal Opacity, qreal Angle) : QObject(), QGraphicsRectItem()
+Rect::Rect(QObject *parent) : QObject(), QGraphicsRectItem()
+{
+    Items = new QList<QGraphicsRectItem*>();
+
+
+}
+
+Rect::~Rect()
+{
+
+}
+
+QGraphicsRectItem* Rect::CreateNew(QRectF F, QPen P, QBrush B, qreal Opacity, qreal Angle)
 {
     RECTANGLE = new QGraphicsRectItem(F);
     RECTANGLE->setBrush(B);
     RECTANGLE->setPen(P);
     RECTANGLE->setOpacity(Opacity);
     RECTANGLE->setRotation(Angle);
+
+    //Items->append(RECTANGLE);
+
+    return RECTANGLE;
 }
 
-void Rect::Update(qreal oldX, qreal oldY, qreal newX, qreal newY)
+
+void Rect::Update( QRectF F)
 {
-    this->setRect(std::min(oldX, newX), std::min(oldY, newY), abs(oldX-newX), abs(oldY-newY));
+    if(!Items->isEmpty())Items->last()->setRect(F);
+                //std::min(oldX, newX), std::min(oldY, newY), abs(oldX-newX), abs(oldY-newY));
 }

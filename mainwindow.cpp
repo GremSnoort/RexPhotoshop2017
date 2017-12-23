@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
+    ///GraphicsView
+    myWorkSpace = new GraphicsViewClass();
+    ui->gridLayout->addWidget(myWorkSpace);
+    myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
 
     ///form for correct save
     AskSaveDialog = new AskForSave(this);
@@ -16,10 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
 
 
-    ///GraphicsView
-    myWorkSpace = new GraphicsViewClass();
-    ui->gridLayout->addWidget(myWorkSpace);
-    myWorkSpace->setCursor(QCursor(Qt::CrossCursor));
+
+
+
 
     //ZOOM
     zoomUp = new QAction(this);
@@ -59,8 +62,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_Fill->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png")));
     ui->pushButton_Fill->setIconSize(QSize(40, 40));
 
-    ui->pushButton_Rect->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png")));
-    ui->pushButton_Rect->setIconSize(QSize(50, 50));
 
     ui->pushButton_Circle->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png")));
     ui->pushButton_Circle->setIconSize(QSize(50, 50));
@@ -95,6 +96,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->menuFile->actions().at(4)->setShortcut(tr("Ctrl+X"));
     ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/closefileicon.png")));
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
+
+
+
+
+    t = new RectTool(this);
+    connect(myWorkSpace->scene, SIGNAL(Press(QGraphicsSceneMouseEvent*,SceneClass*)), t, SLOT(Press(QGraphicsSceneMouseEvent*, SceneClass *)));
 }
 
 
@@ -136,7 +143,7 @@ void MainWindow::open()
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        myWorkSpace->scene->CountOfItems+=1;
+
 
     }
 
@@ -148,14 +155,13 @@ void MainWindow::open()
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
         myWorkSpace->scene->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        myWorkSpace->scene->CountOfItems+=1;
+
 
     }
 
 
 
     ui->NameOfFile->setText(fileNameToOpen);
-    myWorkSpace->scene->IsWorkSpace=true;
 
 
 
@@ -203,7 +209,7 @@ void MainWindow::MakeNewFile()
         ui->NameOfFile->setText("New_file");
 
 
-        myWorkSpace->scene->IsWorkSpace=true;
+
 
 
 
@@ -216,7 +222,7 @@ void MainWindow::close()
     myWorkSpace->scene->IsModified=false;
     ui->NameOfFile->clear();
 
-    myWorkSpace->scene->IsWorkSpace=false;
+
 
 
 

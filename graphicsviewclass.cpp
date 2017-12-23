@@ -17,9 +17,9 @@ void GraphicsViewClass::SetColor(QColor q)
 ///NEW
 void GraphicsViewClass::CreateNew()
 {
-    scene = new SceneClass();
+    scene->clear();
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
-    this->setScene(scene);
+    //this->setScene(scene);
 }
 
 
