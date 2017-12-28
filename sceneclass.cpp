@@ -41,7 +41,7 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 }
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    emit Release();
 
 
 }

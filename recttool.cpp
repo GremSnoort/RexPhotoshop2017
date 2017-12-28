@@ -30,6 +30,19 @@ RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
     BrushColor->move(1420, 200);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
+    CDPen = new QColorDialog(parent);
+    CDPen->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+    connect(CDPen, SIGNAL(colorSelected(QColor)), this, SLOT(SetPenColor(QColor)));
+
+    CDBrush = new QColorDialog(parent);
+    CDBrush->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+    connect(CDBrush, SIGNAL(colorSelected(QColor)), this, SLOT(SetBrushColor(QColor)));
+
+    connect(PenColor, SIGNAL(released()), CDPen, SLOT(show()));
+    connect(BrushColor, SIGNAL(released()), CDBrush, SLOT(show()));
+
+
+
     PenColor->hide();
     BrushColor->hide();
 
@@ -52,12 +65,27 @@ void RectTool::SetUP()
     }
 }
 
+void RectTool::SetPenColor(QColor Q)
+{
+    PenCOLOR = Q;
+    PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
+}
+void RectTool::SetBrushColor(QColor Q)
+{
+    BrushCOLOR = Q;
+    BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+}
+
 void RectTool::Press(qreal x, qreal y, SceneClass *sc)
 {
     if(UP)
     {
         QGraphicsRectItem*R = new QGraphicsRectItem(x, y, 10, 10);
-        R->setPen(QPen(PenCOLOR));
+        QPen pen;
+        //pen.setStyle(Qt::DashLine);
+        pen.setWidth(5);
+        pen.setColor(PenCOLOR);
+        R->setPen(pen);
         R->setBrush(QBrush(BrushCOLOR));
         sc->addItem(R);
 
@@ -65,15 +93,20 @@ void RectTool::Press(qreal x, qreal y, SceneClass *sc)
         sc->it->type = 1;
         sc->ItemsList->push_back(sc->it);
 
+        draw = true;
+
    }
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc)
 {
-    if(UP)
+    if(UP&&draw)
     {
-        QTextStream out(stdout);
-        out<<"!!!"<<endl;
 
         sc->ItemsList->last()->R->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
     }
+}
+
+void RectTool::Release()
+{
+    draw = false;
 }

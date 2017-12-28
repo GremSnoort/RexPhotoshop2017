@@ -28,6 +28,18 @@ EllTool::EllTool(QMainWindow *parent) : QMainWindow(parent)
     BrushColor->move(1420, 200);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
+    CDPen = new QColorDialog(parent);
+    CDPen->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+    connect(CDPen, SIGNAL(colorSelected(QColor)), this, SLOT(SetPenColor(QColor)));
+
+    CDBrush = new QColorDialog(parent);
+    CDBrush->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
+    connect(CDBrush, SIGNAL(colorSelected(QColor)), this, SLOT(SetBrushColor(QColor)));
+
+    connect(PenColor, SIGNAL(released()), CDPen, SLOT(show()));
+    connect(BrushColor, SIGNAL(released()), CDBrush, SLOT(show()));
+
+
     PenColor->hide();
     BrushColor->hide();
 }
@@ -49,12 +61,27 @@ void EllTool::SetUP()
     }
 }
 
+void EllTool::SetPenColor(QColor Q)
+{
+    PenCOLOR = Q;
+    PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
+}
+void EllTool::SetBrushColor(QColor Q)
+{
+    BrushCOLOR = Q;
+    BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+}
+
+
 void EllTool::Press(qreal x, qreal y, SceneClass *sc)
 {
     if(UP)
     {
         QGraphicsEllipseItem*E = new QGraphicsEllipseItem(x, y, 10, 10);
-        E->setPen(QPen(PenCOLOR));
+        QPen pen;
+        pen.setWidth(5);
+        pen.setColor(PenCOLOR);
+        E->setPen(pen);
         E->setBrush(QBrush(BrushCOLOR));
         sc->addItem(E);
 
@@ -62,12 +89,19 @@ void EllTool::Press(qreal x, qreal y, SceneClass *sc)
         sc->it->type = 2;
         sc->ItemsList->push_back(sc->it);
 
+        draw = true;
+
    }
 }
 void EllTool::Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc)
 {
-    if(UP)
+    if(UP&&draw)
     {
         sc->ItemsList->last()->E->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
     }
+}
+
+void EllTool::Release()
+{
+    draw = false;
 }

@@ -76,9 +76,9 @@ public:
     QAction* setColor;
     QAction* deleteIt;
 
-    QColorDialog* ColorDialog;
 
-    QColor currentColorOfBrush;
+
+    //QColor currentColorOfBrush;
 
 
     Ui::MainWindow *ui;
@@ -114,7 +114,7 @@ public slots:
     void close();
     void newone();
 
-    void ChangeColor(QColor q);
+   // void ChangeColor(QColor q);
 
 
 

@@ -38,16 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ///COLOR form
-    ColorDialog = new QColorDialog(this);
-    ColorDialog->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
-    currentColorOfBrush = QColor(0, 0, 0);
-    setColor = new QAction(this);
-    setColor->setShortcut(tr("Ctrl+P"));
-    //ui->SetColorButton->addAction(setColor);
+
+   /*
 
     //connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
     connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
-    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));
+    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));*/
 
 
     ///Line for the File Name
@@ -98,10 +94,12 @@ MainWindow::MainWindow(QWidget *parent) :
     rt = new RectTool(this);
     connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), rt, SLOT(Press(qreal,qreal,SceneClass*)));
     connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), rt, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Release()), rt, SLOT(Release()));
 
     et = new EllTool(this);
     connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), et, SLOT(Press(qreal,qreal,SceneClass*)));
     connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), et, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Release()), et, SLOT(Release()));
 
 
 
@@ -109,14 +107,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
+/*
 void MainWindow::ChangeColor(QColor q)
 {
     currentColorOfBrush = q;
     myWorkSpace->SetColor(q);
    // ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
 
-}
+}*/
 
 void MainWindow::open()
 {
@@ -131,7 +129,7 @@ void MainWindow::open()
 
 
     myWorkSpace->CreateNew();
-    myWorkSpace->SetColor(currentColorOfBrush);
+    //myWorkSpace->SetColor(currentColorOfBrush);
 
 
 
@@ -208,7 +206,7 @@ void MainWindow::MakeNewFile()
 
         if(!ui->NameOfFile->text().isEmpty())FileClose(true);
         myWorkSpace->CreateNew();
-        myWorkSpace->SetColor(currentColorOfBrush);
+        //myWorkSpace->SetColor(currentColorOfBrush);
         ui->NameOfFile->setText("New_file");
 
 
