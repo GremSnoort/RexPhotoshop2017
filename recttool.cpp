@@ -2,8 +2,6 @@
 
 RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
 {
-
-    scene = new SceneClass();
     B = new QPushButton(parent);
 
     B->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png")));
@@ -12,15 +10,22 @@ RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
     B->adjustSize();
     B->move(10, 290);
 
-    connect(B, SIGNAL(pressed()), this, SLOT(SetUP()));
-
-
-
+    connect(B, SIGNAL(released()), this, SLOT(SetUP()));
 }
 
 void RectTool::SetUP()
 {
-    if(!UP)UP = true;
+    if(!UP)
+    {
+        B->clearFocus();
+        B->setStyleSheet("background-color: rgb(46, 255, 0);");
+        UP = true;
+    }else
+    {
+        B->clearFocus();
+        B->setStyleSheet("");
+        UP = false;
+    }
 }
 
 void RectTool::Press(qreal x, qreal y, SceneClass *sc)

@@ -1,5 +1,5 @@
-#ifndef RECTTOOL_H
-#define RECTTOOL_H
+#ifndef ELLTOOL_H
+#define ELLTOOL_H
 
 #include <QMainWindow>
 #include <QObject>
@@ -7,20 +7,17 @@
 #include <QPushButton>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
-#include <QGraphicsRectItem>
+#include <QGraphicsEllipseItem>
 #include <QTextStream>
 
 
 #include "sceneclass.h"
 
-class RectTool : public QMainWindow
+class EllTool : public QMainWindow
 {
     Q_OBJECT
-
-
 public:
-    explicit RectTool(QMainWindow *parent = nullptr);
-
+    explicit EllTool(QMainWindow *parent = nullptr);
 
     QPushButton *B;
 
@@ -35,4 +32,4 @@ public slots:
     void Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc);
 };
 
-#endif // RECTTOOL_H
+#endif // ELLTOOL_H

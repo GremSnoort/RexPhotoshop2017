@@ -60,11 +60,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_Zoom->setIconSize(QSize(40, 40));
 
     ui->pushButton_Fill->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png")));
-    ui->pushButton_Fill->setIconSize(QSize(40, 40));
-
-
-    ui->pushButton_Circle->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png")));
-    ui->pushButton_Circle->setIconSize(QSize(50, 50));
+    ui->pushButton_Fill->setIconSize(QSize(40, 40));    
 
     ui->SetColorButton->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png")));
     ui->SetColorButton->setIconSize(QSize(50, 50));
@@ -100,9 +96,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    t = new RectTool(this);    
-    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), t, SLOT(Press(qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), t, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+    rt = new RectTool(this);
+    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), rt, SLOT(Press(qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), rt, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+
+    et = new EllTool(this);
+    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), et, SLOT(Press(qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), et, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+
+
 
 }
 

@@ -10,7 +10,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
     it = new all_items();
 
     ItemsList = new QList<all_items*>();
-    //ItemsList = {};
+
 }
 
 

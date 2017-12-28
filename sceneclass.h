@@ -50,25 +50,15 @@ public:
 
     QList<all_items*> *ItemsList;
 
-
-
     QGraphicsScene* scene;
 
 
     QPointF     previousPoint;
+
     bool IsModified = false;
 
 
     QColor COLOR = QColor(255, 255, 255);
-
-
-    //MODE
-    bool RectMODE = false;
-    bool EllipseMODE = false;
-    bool SelectMODE = false;
-
-
-    //MODE
 
 
 

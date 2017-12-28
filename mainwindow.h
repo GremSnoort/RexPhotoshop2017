@@ -4,6 +4,7 @@
 #define private public
 
 #include "recttool.h"
+#include "elltool.h"
 
 #include "svgopen.h"
 #include "askforsave.h"
@@ -57,7 +58,8 @@ public:
 
 
 
-    RectTool *t;
+    RectTool *rt;
+    EllTool *et;
 
 
     GraphicsViewClass *myWorkSpace;
