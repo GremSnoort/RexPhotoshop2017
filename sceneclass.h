@@ -4,7 +4,7 @@
 #define private public
 
 
-#include "rect.h"
+
 #include <QTransform>
 #include <QAbstractGraphicsShapeItem>
 #include <QStyleOptionGraphicsItem>
@@ -50,7 +50,7 @@ public:
 
     QList<all_items*> *ItemsList;
 
-    Rect *itemsRECT;
+
 
     QGraphicsScene* scene;
 

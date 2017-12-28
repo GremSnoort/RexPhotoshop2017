@@ -5,7 +5,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
     scene = new QGraphicsScene();
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
-    itemsRECT = new Rect();
+
 
     it = new all_items();
 

@@ -30,7 +30,6 @@ SOURCES += \
     sceneclass.cpp \
     svgopen.cpp \
     askforsave.cpp \
-    rect.cpp \
     recttool.cpp
 
 HEADERS += \
@@ -39,7 +38,6 @@ HEADERS += \
     sceneclass.h \
     svgopen.h \
     askforsave.h \
-    rect.h \
     recttool.h
 
 FORMS += \
