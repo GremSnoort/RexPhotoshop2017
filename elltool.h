@@ -19,7 +19,13 @@ class EllTool : public QMainWindow
 public:
     explicit EllTool(QMainWindow *parent = nullptr);
 
+    QColor PenCOLOR = QColor(0, 0, 0);
+    QColor BrushCOLOR = QColor(255, 255, 255);
+
+
     QPushButton *B;
+    QPushButton *PenColor;
+    QPushButton *BrushColor;
 
     bool UP = false;
 

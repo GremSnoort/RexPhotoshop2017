@@ -54,63 +54,6 @@
 font: 75 14pt &quot;Misc Fixed&quot;;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="SetColorButton">
-    <property name="geometry">
-     <rect>
-      <x>1420</x>
-      <y>170</y>
-      <width>60</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="Color" native="true">
-    <property name="geometry">
-     <rect>
-      <x>1410</x>
-      <y>80</y>
-      <width>80</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>80</width>
-      <height>80</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>80</width>
-      <height>80</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_Zoom">
     <property name="geometry">
      <rect>

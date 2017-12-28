@@ -43,9 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     currentColorOfBrush = QColor(0, 0, 0);
     setColor = new QAction(this);
     setColor->setShortcut(tr("Ctrl+P"));
-    ui->SetColorButton->addAction(setColor);
+    //ui->SetColorButton->addAction(setColor);
 
-    connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
+    //connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
     connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
     connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));
 
@@ -62,8 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_Fill->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png")));
     ui->pushButton_Fill->setIconSize(QSize(40, 40));    
 
-    ui->SetColorButton->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png")));
-    ui->SetColorButton->setIconSize(QSize(50, 50));
+
 
 
 
@@ -115,7 +114,7 @@ void MainWindow::ChangeColor(QColor q)
 {
     currentColorOfBrush = q;
     myWorkSpace->SetColor(q);
-    ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
+   // ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
 
 }
 

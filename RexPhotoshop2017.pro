@@ -31,7 +31,8 @@ SOURCES += \
     svgopen.cpp \
     askforsave.cpp \
     recttool.cpp \
-    elltool.cpp
+    elltool.cpp \
+    roundrecttool.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     svgopen.h \
     askforsave.h \
     recttool.h \
-    elltool.h
+    elltool.h \
+    roundrecttool.h
 
 FORMS += \
         mainwindow.ui \

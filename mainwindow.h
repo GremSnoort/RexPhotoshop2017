@@ -3,6 +3,8 @@
 
 #define private public
 
+
+
 #include "recttool.h"
 #include "elltool.h"
 
@@ -55,7 +57,6 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
 
 
     RectTool *rt;

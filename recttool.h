@@ -10,7 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QTextStream>
 
-
+#include<QColor>
 #include "sceneclass.h"
 
 class RectTool : public QMainWindow
@@ -21,8 +21,13 @@ class RectTool : public QMainWindow
 public:
     explicit RectTool(QMainWindow *parent = nullptr);
 
+    QColor PenCOLOR = QColor(0, 0, 0);
+    QColor BrushCOLOR = QColor(255, 255, 255);
+
 
     QPushButton *B;
+    QPushButton *PenColor;
+    QPushButton *BrushColor;
 
     bool UP = false;
 

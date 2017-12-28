@@ -6,6 +6,8 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     this->setScene(scene);
 
+    QPainter *P = new QPainter(this);
+
 }
 
 
