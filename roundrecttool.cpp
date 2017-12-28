@@ -131,7 +131,8 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClas
         setMask(bm);
 
         sc->ItemsList->last()->P->setPixmap(bm);
-        sc->ItemsList->last()->P->setPos(prX, prY);
+        sc->ItemsList->last()->P->setPos(std::min(prX, newX), std::min(prY, newY));
+
 
 
 
