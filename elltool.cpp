@@ -7,7 +7,7 @@ EllTool::EllTool(QMainWindow *parent) : QMainWindow(parent)
     B->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/RoundAppleV2.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
-    B->move(10, 360);
+    B->move(10, 145);
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
@@ -17,7 +17,7 @@ EllTool::EllTool(QMainWindow *parent) : QMainWindow(parent)
     PenColor->setIconSize(QSize(50, 50));
     PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
     PenColor->adjustSize();
-    PenColor->move(1420, 125);
+    PenColor->move(1420, 75);
     PenColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     BrushColor = new QPushButton(parent);
@@ -25,7 +25,7 @@ EllTool::EllTool(QMainWindow *parent) : QMainWindow(parent)
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();
-    BrushColor->move(1420, 200);
+    BrushColor->move(1420, 145);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     CDPen = new QColorDialog(parent);
