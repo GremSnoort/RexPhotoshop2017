@@ -1,6 +1,7 @@
 #ifndef RECTTOOL_H
 #define RECTTOOL_H
 
+
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>

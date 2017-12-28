@@ -95,6 +95,8 @@ void RectTool::Press(qreal x, qreal y, SceneClass *sc)
 
         draw = true;
 
+
+
    }
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc)

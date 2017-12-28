@@ -101,6 +101,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), et, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
     connect(myWorkSpace->scene, SIGNAL(Release()), et, SLOT(Release()));
 
+    rrt = new RoundRectTool(this);
+    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), rrt, SLOT(Press(qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), rrt, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Release()), rrt, SLOT(Release()));
+
 
 
 }

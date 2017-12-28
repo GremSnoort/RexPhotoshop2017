@@ -3,10 +3,10 @@
 GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 {
     scene=new SceneClass();
-    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
-    this->setScene(scene);
 
-    QPainter *P = new QPainter(this);
+    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
+    this->setScene(scene);    
+
 
 }
 

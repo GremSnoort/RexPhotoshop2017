@@ -4,7 +4,7 @@
 #define private public
 
 
-
+#include <QPixmap>
 #include <QTransform>
 #include <QAbstractGraphicsShapeItem>
 #include <QStyleOptionGraphicsItem>
@@ -38,11 +38,13 @@ public:
         int type;
         QGraphicsRectItem*R;
         QGraphicsEllipseItem*E;
+        QGraphicsPixmapItem*P;
         all_items()
         {
             type = 0;
             R = new QGraphicsRectItem();
             E = new QGraphicsEllipseItem();
+            P = new QGraphicsPixmapItem();
         }
     };
 

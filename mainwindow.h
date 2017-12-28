@@ -7,6 +7,7 @@
 
 #include "recttool.h"
 #include "elltool.h"
+#include "roundrecttool.h"
 
 #include "svgopen.h"
 #include "askforsave.h"
@@ -61,6 +62,7 @@ public:
 
     RectTool *rt;
     EllTool *et;
+    RoundRectTool *rrt;
 
 
     GraphicsViewClass *myWorkSpace;

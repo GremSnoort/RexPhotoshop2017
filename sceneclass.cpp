@@ -6,7 +6,6 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
     scene = new QGraphicsScene();
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
 
-
     it = new all_items();
 
     ItemsList = new QList<all_items*>();
