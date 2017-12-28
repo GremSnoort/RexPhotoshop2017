@@ -12,24 +12,39 @@ RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
     B->adjustSize();
     B->move(10, 290);
 
-    connect(B, SIGNAL(toggled(bool)), this, SLOT(SetUP(bool)));
-    //connect(MainWindow::getScene(), SIGNAL(Press(QGraphicsSceneMouseEvent*)), this, SLOT(Press(QGraphicsSceneMouseEvent*)));
+    connect(B, SIGNAL(pressed()), this, SLOT(SetUP()));
+
 
 
 }
 
-void RectTool::SetUP(bool b)
+void RectTool::SetUP()
 {
-    UP = b;
+    if(!UP)UP = true;
 }
 
-void RectTool::Press(QGraphicsSceneMouseEvent *event, SceneClass *sc)
+void RectTool::Press(qreal x, qreal y, SceneClass *sc)
 {
-    QTextStream out(stdout);
-    out<<"!!!"<<endl;
-    this->setScene(sc);
-    sc->addRect(event->scenePos().x(), event->scenePos().y(), 10, 10, QPen(Qt::black), QBrush(QColor(134, 234, 234)));
-    /*scene = MainWindow::getScene();
+    if(UP)
+    {
+        QGraphicsRectItem*R = new QGraphicsRectItem(x, y, 10, 10);
+        R->setPen(QPen(Qt::black));
+        R->setBrush(QBrush(QColor(134, 234, 234)));
+        sc->addItem(R);
 
-    MainWindow::setScene(scene);*/
+        sc->it->R = R;
+        sc->it->type = 1;
+        sc->ItemsList->push_back(sc->it);
+
+   }
+}
+void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc)
+{
+    if(UP)
+    {
+        QTextStream out(stdout);
+        out<<"!!!"<<endl;
+
+        sc->ItemsList->last()->R->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
+    }
 }

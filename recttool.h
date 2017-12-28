@@ -41,8 +41,9 @@ signals:
 
 public slots:
 
-    void SetUP(bool b);
-    void Press(QGraphicsSceneMouseEvent *event, SceneClass *sc);
+    void SetUP();
+    void Press(qreal x, qreal y, SceneClass *sc);
+    void Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc);
 };
 
 #endif // RECTTOOL_H

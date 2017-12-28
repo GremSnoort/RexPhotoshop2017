@@ -35,14 +35,18 @@ public:
 
     struct all_items
     {
+        int type;
         QGraphicsRectItem*R;
         QGraphicsEllipseItem*E;
         all_items()
         {
-            R = new QGraphicsRectItem(QRectF(0, 0, 1, 1));
-            E = new QGraphicsEllipseItem(QRectF(0, 0, 1, 1));
+            type = 0;
+            R = new QGraphicsRectItem();
+            E = new QGraphicsEllipseItem();
         }
     };
+
+    all_items*it;
 
     QList<all_items*> *ItemsList;
 
@@ -72,7 +76,8 @@ public:
 
 
 signals:
-    void Press(QGraphicsSceneMouseEvent *event, SceneClass*sc);
+    void Press(qreal x, qreal y, SceneClass*sc);
+    void Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass*sc);
 
 public slots:
 

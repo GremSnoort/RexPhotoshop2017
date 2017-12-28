@@ -100,8 +100,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    t = new RectTool(this);
-    connect(myWorkSpace->scene, SIGNAL(Press(QGraphicsSceneMouseEvent*,SceneClass*)), t, SLOT(Press(QGraphicsSceneMouseEvent*, SceneClass *)));
+    t = new RectTool(this);    
+    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), t, SLOT(Press(qreal,qreal,SceneClass*)));
+    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), t, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
+
 }
 
 

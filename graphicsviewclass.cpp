@@ -3,6 +3,7 @@
 GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 {
     scene=new SceneClass();
+    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     this->setScene(scene);
 
 }
@@ -18,8 +19,7 @@ void GraphicsViewClass::SetColor(QColor q)
 void GraphicsViewClass::CreateNew()
 {
     scene->clear();
-    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
-    //this->setScene(scene);
+    scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));    
 }
 
 
