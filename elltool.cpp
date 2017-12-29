@@ -53,6 +53,7 @@ void EllTool::Press(qreal x, qreal y)
             E->setPen(pen);
         }else E->setPen(Qt::NoPen);
         E->setBrush(QBrush(WID->BrushCOLOR));
+        E->setOpacity(WID->OPACITY);
         sc->addItem(E);
 
         sc->it->E = E;

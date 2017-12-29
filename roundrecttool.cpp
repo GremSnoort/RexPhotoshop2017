@@ -63,6 +63,7 @@ void RoundRectTool::Press(qreal x, qreal y)
 
         QGraphicsPixmapItem * pixm = new QGraphicsPixmapItem(bm);
         pixm->setPos(x, y);
+        pixm->setOpacity(WID->OPACITY);
         sc->addItem(pixm);
 
         sc->it->P = pixm;
@@ -96,9 +97,10 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 
         setMask(bm);
 
+
         sc->ItemsList->last()->P->setPixmap(bm);
         sc->ItemsList->last()->P->setPos(std::min(prX, newX), std::min(prY, newY));
-
+        sc->ItemsList->last()->P->setOpacity(WID->OPACITY);
 
 
 

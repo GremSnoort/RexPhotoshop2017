@@ -22,12 +22,12 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     PenWidth->setRange(0, 100);
     PenWidth->setEnabled(true);
     PenWidth->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    PenWidth->setValue(50);
-    PenWIDTH=50;
+    PenWidth->setValue(20);
+
 
     connect(PenWidth, SIGNAL(sliderMoved(int)), this, SLOT(SetPenWidth(int)));
 
-    LabelPenWIDTH = new QLabel("50", WID);
+    LabelPenWIDTH = new QLabel("20", WID);
     LabelPenWIDTH->setFixedWidth(60);
     LabelPenWIDTH->setFixedHeight(20);
     LabelPenWIDTH->move(15, 100);
@@ -44,11 +44,31 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     BrushColor->move(13, 150);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    CDPen = new QColorDialog(WID);
+    Opacity = new QSlider(Qt::Horizontal, WID);
+    Opacity->move(2, 220);
+    Opacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+    Opacity->setFixedWidth(85);
+    Opacity->setRange(0, 100);
+    Opacity->setEnabled(true);
+    Opacity->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    Opacity->setValue(100);
+
+
+    connect(Opacity, SIGNAL(sliderMoved(int)), this, SLOT(SetOpacity(int)));
+
+    LabelOpacity = new QLabel("100", WID);
+    LabelOpacity->setFixedWidth(60);
+    LabelOpacity->setFixedHeight(20);
+    LabelOpacity->move(15, 250);
+    LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
+    LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+    LabelOpacity->setAlignment(Qt::AlignCenter);
+
+    CDPen = new QColorDialog(parent);
     CDPen->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
     connect(CDPen, SIGNAL(colorSelected(QColor)), this, SLOT(SetPenColor(QColor)));
 
-    CDBrush = new QColorDialog(WID);
+    CDBrush = new QColorDialog(parent);
     CDBrush->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
     connect(CDBrush, SIGNAL(colorSelected(QColor)), this, SLOT(SetBrushColor(QColor)));
 
@@ -61,6 +81,25 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
 
+}
+
+void CommonWidget::SetOpacity(int o)
+{
+    OPACITY = o*0.01;
+    QTextStream out(stdout);
+    out<<OPACITY;
+    if(o==0)
+    {
+        Opacity->setStyleSheet("color: rgb(0, 0, 0);\n");
+        LabelOpacity->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelOpacity->setText("Invisible");
+    }
+    else
+    {
+        Opacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelOpacity->setText(QString::number(OPACITY));
+    }
 }
 
 void CommonWidget::SetPenWidth(int w)
@@ -91,4 +130,11 @@ void CommonWidget::SetBrushColor(QColor Q)
 {
     BrushCOLOR = Q;
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+}
+
+CommonWidget::~CommonWidget()
+{
+    this->close();
+
+    //this->deleteLater();
 }

@@ -51,6 +51,7 @@ void RectTool::Press(qreal x, qreal y)
             R->setPen(pen);
         }else R->setPen(Qt::NoPen);
         R->setBrush(QBrush(WID->BrushCOLOR));
+        R->setOpacity(WID->OPACITY);
         sc->addItem(R);
 
         sc->it->R = R;
