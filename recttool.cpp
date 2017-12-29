@@ -12,29 +12,55 @@ RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
 
+    WID = new QWidget(parent);
+    WID->move(1405, 77);
+    WID->setFixedSize(90, 900);
 
 
-    PenColor = new QPushButton(parent);
+
+    PenColor = new QPushButton(WID);
     PenColor->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/PEN1.png")));
     PenColor->setIconSize(QSize(50, 50));
     PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
     PenColor->adjustSize();
-    PenColor->move(1420, 75);
+    PenColor->move(13, 0);
     PenColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    BrushColor = new QPushButton(parent);
+
+    PenWidth = new QSlider(Qt::Horizontal, WID);
+    PenWidth->move(2, 70);
+    PenWidth->setStyleSheet("color: rgb(160, 200, 180);\n");
+    PenWidth->setFixedWidth(85);
+    PenWidth->setRange(0, 100);
+    PenWidth->setEnabled(true);
+    PenWidth->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    PenWidth->setValue(50);
+    PenWIDTH=50;
+
+    connect(PenWidth, SIGNAL(sliderMoved(int)), this, SLOT(SetPenWidth(int)));
+
+    LabelPenWIDTH = new QLabel("50", WID);
+    LabelPenWIDTH->setFixedWidth(60);
+    LabelPenWIDTH->setFixedHeight(20);
+    LabelPenWIDTH->move(15, 100);
+    LabelPenWIDTH->setFont(QFont("Misc Fixed", 15, 5, false));
+    LabelPenWIDTH->setStyleSheet("color: rgb(160, 200, 180);\n");
+    LabelPenWIDTH->setAlignment(Qt::AlignCenter);
+
+
+    BrushColor = new QPushButton(WID);
     BrushColor->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png")));
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();
-    BrushColor->move(1420, 145);
+    BrushColor->move(13, 150);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    CDPen = new QColorDialog(parent);
+    CDPen = new QColorDialog(WID);
     CDPen->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
     connect(CDPen, SIGNAL(colorSelected(QColor)), this, SLOT(SetPenColor(QColor)));
 
-    CDBrush = new QColorDialog(parent);
+    CDBrush = new QColorDialog(WID);
     CDBrush->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
     connect(CDBrush, SIGNAL(colorSelected(QColor)), this, SLOT(SetBrushColor(QColor)));
 
@@ -43,8 +69,9 @@ RectTool::RectTool(QMainWindow *parent) : QMainWindow(parent)
 
 
 
-    PenColor->hide();
-    BrushColor->hide();
+
+
+    WID->hide();
 
 }
 
@@ -54,15 +81,34 @@ void RectTool::SetUP()
     {
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
         UP = true;
-        PenColor->show();
-        BrushColor->show();
+        WID->show();
+
     }else
     {
         B->setStyleSheet("");
         UP = false;
-        PenColor->hide();
-        BrushColor->hide();
+        WID->hide();
+
     }
+}
+
+void RectTool::SetPenWidth(int w)
+{
+    PenWIDTH = w;
+
+    if(w==0)
+    {
+        PenWidth->setStyleSheet("color: rgb(0, 0, 0);\n");
+        LabelPenWIDTH->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelPenWIDTH->setText("No Pen");
+    }
+    else
+    {
+        PenWidth->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelPenWIDTH->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelPenWIDTH->setText(QString::number(w));
+    }
+
 }
 
 void RectTool::SetPenColor(QColor Q)
@@ -80,12 +126,15 @@ void RectTool::Press(qreal x, qreal y, SceneClass *sc)
 {
     if(UP)
     {
-        QGraphicsRectItem*R = new QGraphicsRectItem(x, y, 10, 10);
-        QPen pen;
+        QGraphicsRectItem*R = new QGraphicsRectItem(x, y, 1, 1);
+
         //pen.setStyle(Qt::DashLine);
-        pen.setWidth(5);
-        pen.setColor(PenCOLOR);
-        R->setPen(pen);
+        if(PenWIDTH>0){
+            pen.setWidth(PenWIDTH);
+            pen.setCapStyle(Qt::RoundCap);
+            pen.setColor(PenCOLOR);
+            R->setPen(pen);
+        }else R->setPen(Qt::NoPen);
         R->setBrush(QBrush(BrushCOLOR));
         sc->addItem(R);
 

@@ -37,17 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(zoomDown, SIGNAL(triggered(bool)), myWorkSpace, SLOT(zoomDownEvent(bool)));
 
 
-    ///COLOR form
-
-   /*
-
-    //connect(ui->SetColorButton, SIGNAL(released()), ColorDialog, SLOT(show()));
-    connect(setColor, SIGNAL(triggered(bool)), ColorDialog, SLOT(show()));
-    connect(ColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(ChangeColor(QColor)));*/
-
-
     ///Line for the File Name
     ui->NameOfFile->setReadOnly(true);
+    ui->NameOfFile->setText("New_File");
     ui->NameOfFile->setAlignment(Qt::AlignCenter);
 
 
@@ -108,18 +100,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
 }
 
-
-
-/*
-void MainWindow::ChangeColor(QColor q)
-{
-    currentColorOfBrush = q;
-    myWorkSpace->SetColor(q);
-   // ui->Color->setStyleSheet(QString("background: %1").arg(currentColorOfBrush.name()));
-
-}*/
 
 void MainWindow::open()
 {

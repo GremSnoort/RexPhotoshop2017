@@ -1,6 +1,9 @@
 #ifndef ELLTOOL_H
 #define ELLTOOL_H
 
+
+#include <QLabel>
+#include <QSlider>
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -20,15 +23,23 @@ public:
     explicit EllTool(QMainWindow *parent = nullptr);
 
     QColor PenCOLOR = QColor(0, 0, 0);
-    QColor BrushCOLOR = QColor(255, 255, 255);
+    QColor BrushCOLOR = QColor(255, 255, 0);
+    int PenWIDTH = 0;
 
     QColorDialog* CDPen;
     QColorDialog* CDBrush;
+
+    QWidget *WID;
 
 
     QPushButton *B;
     QPushButton *PenColor;
     QPushButton *BrushColor;
+
+    QSlider *PenWidth;
+    QLabel *LabelPenWIDTH;
+
+    QPen pen;
 
     bool UP = false;
     bool draw = false;
@@ -44,6 +55,7 @@ public slots:
 
     void SetPenColor(QColor Q);
     void SetBrushColor(QColor Q);
+    void SetPenWidth(int w);
 };
 
 #endif // ELLTOOL_H
