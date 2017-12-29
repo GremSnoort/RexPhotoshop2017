@@ -32,7 +32,8 @@ SOURCES += \
     askforsave.cpp \
     recttool.cpp \
     elltool.cpp \
-    roundrecttool.cpp
+    roundrecttool.cpp \
+    commonwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     askforsave.h \
     recttool.h \
     elltool.h \
-    roundrecttool.h
+    roundrecttool.h \
+    commonwidget.h
 
 FORMS += \
         mainwindow.ui \

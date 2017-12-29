@@ -4,7 +4,7 @@
 #define private public
 
 
-
+#include "commonwidget.h"
 #include "recttool.h"
 #include "elltool.h"
 #include "roundrecttool.h"
@@ -63,6 +63,7 @@ public:
     RectTool *rt;
     EllTool *et;
     RoundRectTool *rrt;
+    CommonWidget *WID;
 
 
     GraphicsViewClass *myWorkSpace;

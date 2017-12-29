@@ -68,8 +68,8 @@ public:
 
 
 signals:
-    void Press(qreal x, qreal y, SceneClass*sc);
-    void Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass*sc);
+    void Press(qreal x, qreal y);
+    void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
 
 public slots:

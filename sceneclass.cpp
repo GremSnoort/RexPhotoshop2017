@@ -17,7 +17,7 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     previousPoint = event->scenePos();
-    emit Press(event->scenePos().x(), event->scenePos().y(), this);
+    emit Press(event->scenePos().x(), event->scenePos().y());
 
 
 
@@ -31,7 +31,7 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y(), this);
+    emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
 
 
     //dynamic_cast<QGraphicsRectItem*>(this->items().first())->setRect(std::min(oldX, newX), std::min(oldY, newY), abs(oldX-newX), abs(oldY-newY));

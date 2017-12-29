@@ -81,22 +81,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
 
+    WID = new CommonWidget(this);
+
+    rt = new RectTool(this, WID, myWorkSpace->scene);
 
 
-    rt = new RectTool(this);
-    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), rt, SLOT(Press(qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), rt, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Release()), rt, SLOT(Release()));
+    et = new EllTool(this, WID, myWorkSpace->scene);
 
-    et = new EllTool(this);
-    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), et, SLOT(Press(qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), et, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Release()), et, SLOT(Release()));
 
-    rrt = new RoundRectTool(this);
-    connect(myWorkSpace->scene, SIGNAL(Press(qreal,qreal,SceneClass*)), rrt, SLOT(Press(qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Move(qreal,qreal,qreal,qreal,SceneClass*)), rrt, SLOT(Move(qreal,qreal,qreal,qreal,SceneClass*)));
-    connect(myWorkSpace->scene, SIGNAL(Release()), rrt, SLOT(Release()));
+    rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
+
 
 
 

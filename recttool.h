@@ -15,6 +15,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include "sceneclass.h"
+#include "commonwidget.h"
 
 class RectTool : public QMainWindow
 {
@@ -22,25 +23,13 @@ class RectTool : public QMainWindow
 
 
 public:
-    explicit RectTool(QMainWindow *parent = nullptr);
-
-    QColor PenCOLOR = QColor(0, 0, 0);
-    QColor BrushCOLOR = QColor(0, 255, 0);
-    int PenWIDTH = 0;
-
-    QColorDialog* CDPen;
-    QColorDialog* CDBrush;
+    explicit RectTool(QMainWindow *parent = nullptr, CommonWidget *W = nullptr, SceneClass *scene = nullptr);
 
 
-    QWidget *WID;
+    CommonWidget *WID;
+    SceneClass *sc;
 
-
-    QPushButton *B;
-    QPushButton *PenColor;
-    QPushButton *BrushColor;
-
-    QSlider *PenWidth;
-    QLabel *LabelPenWIDTH;
+    QPushButton *B;    
 
 
     QPen pen;
@@ -53,13 +42,10 @@ signals:
 public slots:
 
     void SetUP();
-    void Press(qreal x, qreal y, SceneClass *sc);
-    void Move(qreal newX, qreal newY, qreal prX, qreal prY, SceneClass *sc);
+    void Press(qreal x, qreal y);
+    void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
 
-    void SetPenColor(QColor Q);
-    void SetBrushColor(QColor Q);
-    void SetPenWidth(int w);
 };
 
 #endif // RECTTOOL_H
