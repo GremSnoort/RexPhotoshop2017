@@ -14,10 +14,12 @@
 #include <QTextStream>
 #include <QColorDialog>
 #include <QColor>
+
 #include "sceneclass.h"
+#include "graphicsitemclass.h"
 #include "commonwidget.h"
 
-class RectTool : public QMainWindow
+class RectTool : public QObject
 {
     Q_OBJECT
 
@@ -31,8 +33,8 @@ public:
 
     QPushButton *B;    
 
+    QGraphicsRectItem*R;
 
-    QPen pen;
 
     bool UP = false;
     bool draw = false;

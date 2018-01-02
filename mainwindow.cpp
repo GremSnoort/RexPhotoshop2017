@@ -84,16 +84,8 @@ MainWindow::MainWindow(QWidget *parent) :
     WID = new CommonWidget(this);
 
     rt = new RectTool(this, WID, myWorkSpace->scene);
-
-
     et = new EllTool(this, WID, myWorkSpace->scene);
-
-
     rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
-
-
-
-
 
 }
 
@@ -203,7 +195,7 @@ void MainWindow::close()
 {
     myWorkSpace->scene->clear();
     myWorkSpace->scene->IsModified=false;
-    ui->NameOfFile->clear();
+    ui->NameOfFile->setText("New_File");
 
 
 

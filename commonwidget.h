@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QColorDialog>
 #include <QColor>
+#include <QComboBox>
 
 #include <QTextStream>
 
@@ -34,10 +35,24 @@ public:
 
 
     QPushButton *PenColor;
-    QPushButton *BrushColor;
 
+    QLabel *TitlePenWIdth;
     QSlider *PenWidth;
     QLabel *LabelPenWIDTH;
+
+    QLabel *TitlePenStyle;
+    QComboBox *PenStyleBox;
+
+
+    QLabel *TitleCapStyle;
+    QComboBox *CapStyleBox;
+
+    QLabel *TitleJointStyle;
+    QComboBox *JointStyleBox;
+
+    QPushButton *BrushColor;
+
+
 
     QSlider *Opacity;
     QLabel *LabelOpacity;

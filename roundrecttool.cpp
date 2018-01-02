@@ -24,15 +24,8 @@ RoundRectTool::RoundRectTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
 
 void RoundRectTool::SetUP()
 {
-    if(!UP)
-    {
-        B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        UP = true;
-    }else
-    {
-        B->setStyleSheet("");
-        UP = false;
-    }
+    UP = !UP;
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
 
@@ -53,7 +46,8 @@ void RoundRectTool::Press(qreal x, qreal y)
             pen.setCapStyle(Qt::RoundCap);
             pen.setColor(WID->PenCOLOR);
             p.setPen(pen);
-        }else p.setPen(Qt::NoPen);
+        }else
+            p.setPen(Qt::NoPen);
 
         p.setBrush(QBrush(WID->BrushCOLOR));
 

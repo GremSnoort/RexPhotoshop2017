@@ -15,22 +15,21 @@
 
 #include <QColorDialog>
 #include "sceneclass.h"
+#include "graphicsitemclass.h"
 #include "commonwidget.h"
 
-class EllTool : public QMainWindow
+class EllTool : public QObject
 {
     Q_OBJECT
 public:
-    explicit EllTool(QMainWindow *parent = nullptr, CommonWidget *W = nullptr, SceneClass *scene = nullptr);
+    explicit EllTool(QMainWindow *parent = nullptr, CommonWidget*W = nullptr, SceneClass *scene = nullptr);
 
-    CommonWidget *WID;
+    CommonWidget*WID;
     SceneClass *sc;
-
+    QGraphicsEllipseItem*E;
 
     QPushButton *B;
 
-
-    QPen pen;
 
     bool UP = false;
     bool draw = false;

@@ -1,6 +1,6 @@
 #include "recttool.h"
 
-RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QMainWindow(parent)
+RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {
     B = new QPushButton(parent);
 
@@ -23,16 +23,8 @@ RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QM
 
 void RectTool::SetUP()
 {
-    if(!UP)
-    {
-        B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        UP = true;        
-
-    }else
-    {
-        B->setStyleSheet("");
-        UP = false;        
-    }
+    UP = !UP;
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
 
@@ -41,36 +33,18 @@ void RectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        QGraphicsRectItem*R = new QGraphicsRectItem(x, y, 1, 1);
+        R = new QGraphicsRectItem(x, y, 1, 1);
 
-        //pen.setStyle(Qt::DashLine);
-        if(WID->PenWIDTH>0){
-            pen.setWidth(WID->PenWIDTH);
-            pen.setCapStyle(Qt::RoundCap);
-            pen.setColor(WID->PenCOLOR);
-            R->setPen(pen);
-        }else R->setPen(Qt::NoPen);
-        R->setBrush(QBrush(WID->BrushCOLOR));
-        R->setOpacity(WID->OPACITY);
-        sc->addItem(R);
-
-        sc->it->R = R;
-        sc->it->type = 1;
-        sc->ItemsList->push_back(sc->it);
+        sc->addItem(GraphicsItemClass::CreateNewRect(R, WID));
 
         draw = true;
-
-
 
    }
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
-    {
-
-        sc->ItemsList->last()->R->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
-    }
+        R->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
 }
 
 void RectTool::Release()

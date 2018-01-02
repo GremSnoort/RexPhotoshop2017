@@ -1,6 +1,6 @@
 #include "elltool.h"
 
-EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QMainWindow(parent)
+EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {    
     B = new QPushButton(parent);
 
@@ -26,15 +26,8 @@ EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QMai
 
 void EllTool::SetUP()
 {
-    if(!UP)
-    {
-        B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        UP = true;
-    }else
-    {
-        B->setStyleSheet("");
-        UP = false;
-    }
+    UP = !UP;
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
 
@@ -44,21 +37,9 @@ void EllTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        QGraphicsEllipseItem*E = new QGraphicsEllipseItem(x, y, 1, 1);
+        E = new QGraphicsEllipseItem(x, y, 1, 1);
 
-        if(WID->PenWIDTH>0){
-            pen.setWidth(WID->PenWIDTH);
-            pen.setCapStyle(Qt::RoundCap);
-            pen.setColor(WID->PenCOLOR);
-            E->setPen(pen);
-        }else E->setPen(Qt::NoPen);
-        E->setBrush(QBrush(WID->BrushCOLOR));
-        E->setOpacity(WID->OPACITY);
-        sc->addItem(E);
-
-        sc->it->E = E;
-        sc->it->type = 2;
-        sc->ItemsList->push_back(sc->it);
+        sc->addItem(GraphicsItemClass::CreateNewEll(E, WID));
 
         draw = true;
 
@@ -66,10 +47,9 @@ void EllTool::Press(qreal x, qreal y)
 }
 void EllTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
-    if(UP&&draw)
-    {
-        sc->ItemsList->last()->E->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
-    }
+    if(UP&&draw)    
+        E->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
+
 }
 
 void EllTool::Release()
