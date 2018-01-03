@@ -3,46 +3,59 @@
 
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
-    scene = new QGraphicsScene();
 
-
+    this->setSceneRect(0, 0, WIDTH, HEIGHT);
 
 }
-
-
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    QTextStream out(stdout);
+    out<<event->scenePos().x()<<"  "<< event->scenePos().y()<<endl;
+
     previousPoint = event->scenePos();
-    emit Press(event->scenePos().x(), event->scenePos().y());
+    update = true;
 
-
-
-    //itemsRECT->Items.push_back(dynamic_cast<QGraphicsRectItem*>(this->items().first()));
-
+    UpdateSceneRect(event);
+    emit Press(previousPoint.x(), previousPoint.y());
 }
-
-
-
-
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+
+
     emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
+}
 
+void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)
+{
 
-    //dynamic_cast<QGraphicsRectItem*>(this->items().first())->setRect(std::min(oldX, newX), std::min(oldY, newY), abs(oldX-newX), abs(oldY-newY));
+    if(event->scenePos().x()<X)
+    {
+        WIDTH+=abs(X-event->scenePos().x());
+        X=event->scenePos().x();
+    }
+    if(event->scenePos().y()<Y)
+    {
+        HEIGHT+=abs(Y-event->scenePos().y());
+        Y=event->scenePos().y();
+    }
+    if(abs(X-event->scenePos().x())>WIDTH)WIDTH = abs(X-event->scenePos().x());
+    if(abs(Y-event->scenePos().y())>HEIGHT)HEIGHT = abs(Y-event->scenePos().y());
 
 
 }
+
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(update)
+    {
+        UpdateSceneRect(event);
+        this->setSceneRect(X, Y, WIDTH, HEIGHT);
+    }
+    update = false;
     emit Release();
-
-
 }
-
-
 
 SceneClass::~SceneClass()
 {

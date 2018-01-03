@@ -32,6 +32,9 @@ void RoundRectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
+
+
+
         IT = new QGraphicsPixmapItem(CreatePixmap(1+WID->PenWIDTH*3, 1+WID->PenWIDTH*3, 1.0, 1.0));
         IT->setPos(x, y);
         sc->addItem(IT);

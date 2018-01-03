@@ -34,19 +34,22 @@ public:
 
 
 
-    QGraphicsScene* scene;
-
-
     QPointF     previousPoint;
 
     bool IsModified = false;
 
 
-    QColor COLOR = QColor(255, 255, 255);
+    qreal X = 0;
+    qreal Y = 0;
 
 
+    qreal HEIGHT = 895;
 
+    qreal WIDTH = 1315;
 
+    bool update = false;
+
+    void UpdateSceneRect(QGraphicsSceneMouseEvent *event);
 
 
 signals:

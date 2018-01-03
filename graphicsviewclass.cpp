@@ -3,18 +3,19 @@
 GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 {
     scene=new SceneClass();
-
     this->setScene(scene);
+    this->setSceneRect(0,0, scene->WIDTH, scene->HEIGHT);
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     scene->clear();
 
 
+    connect(scene, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(RectChanges(QRectF)));
+
 }
 
-
-void GraphicsViewClass::SetColor(QColor q)
+void GraphicsViewClass::RectChanges(QRectF R)
 {
-    scene->COLOR=q;
+    this->setSceneRect(R);
 }
 
 
@@ -29,20 +30,16 @@ void GraphicsViewClass::CreateNew()
 
 ///ZOOM
 void GraphicsViewClass::zoomUpEvent(bool)
-{
-    if(CountOfZoom<60){
+{    
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this-> scale(scaleFactor, scaleFactor);
     CountOfZoom++;
-    }
 }
 void GraphicsViewClass::zoomDownEvent(bool)
 {
-    if(CountOfZoom>(-60)){
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     CountOfZoom--;
-    }
 }
 
 

@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QGraphicsSceneMouseEvent>
 #include <QTextStream>
+#include <QCursor>
 
 #include "sceneclass.h"
 
@@ -24,6 +25,7 @@ public:
 
     int CountOfZoom = 0;
     double scaleFactor = 1.07;
+    double sF = 1.07;
 
     void CreateNew();
 
@@ -41,12 +43,7 @@ public slots:
     void zoomUpEvent(bool);
     void zoomDownEvent(bool);
 
-
-
-
-
-    void SetColor(QColor q);
-
+    void RectChanges(QRectF R);
 
 
 };
