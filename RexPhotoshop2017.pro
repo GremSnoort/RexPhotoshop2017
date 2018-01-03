@@ -34,7 +34,7 @@ SOURCES += \
     elltool.cpp \
     roundrecttool.cpp \
     commonwidget.cpp \
-    graphicsitemclass.cpp
+    item.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +46,7 @@ HEADERS += \
     elltool.h \
     roundrecttool.h \
     commonwidget.h \
-    graphicsitemclass.h
+    item.h
 
 FORMS += \
         mainwindow.ui \

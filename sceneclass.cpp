@@ -18,13 +18,13 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     UpdateSceneRect(event);
     emit Press(previousPoint.x(), previousPoint.y());
+
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-
-
     emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
+
 }
 
 void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)

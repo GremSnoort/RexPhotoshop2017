@@ -18,6 +18,7 @@
 #include <QGraphicsPixmapItem>
 #include <QColorDialog>
 #include "sceneclass.h"
+#include "item.h"
 #include "commonwidget.h"
 
 class RoundRectTool : public QMainWindow
@@ -30,14 +31,15 @@ public:
 
     QPushButton *B;
 
-    QGraphicsPixmapItem *IT;
+
+    Item *it;
 
 
     bool UP = false;
     bool draw = false;
 
 
-    QPixmap CreatePixmap(qreal x, qreal y, qreal a, qreal b);
+
 signals:
 
 public slots:
