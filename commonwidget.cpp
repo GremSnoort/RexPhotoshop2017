@@ -4,7 +4,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 {
     WID = new QWidget(parent);
     WID->move(1405, 77);
-    WID->setFixedSize(90, 500);
+    WID->setFixedSize(90, 900);
 
     PenColor = new QPushButton(WID);
     PenColor->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/PEN1.png")));
@@ -209,6 +209,87 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
 
+
+
+    //BRUSH STYLE
+    TitleBrushStyle = new QLabel("BrushStyle:", WID);
+    TitleBrushStyle->setFixedWidth(90);
+    TitleBrushStyle->setFixedHeight(20);
+    TitleBrushStyle->move(0, 470);
+    TitleBrushStyle->setFont(QFont("Misc Fixed", 8, 5, false));
+    TitleBrushStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
+    TitleBrushStyle->setAlignment(Qt::AlignCenter);
+
+    BrushStyleBox = new QComboBox(WID);
+    BrushStyleBox->setFocusPolicy(Qt::NoFocus);
+
+    BrushStyleBox->addItem("Solid");
+    BrushStyleBox->addItem("Dense1");
+    BrushStyleBox->addItem("Dense2");
+    BrushStyleBox->addItem("Dense3");
+    BrushStyleBox->addItem("Dense4");
+    BrushStyleBox->addItem("Dense5");
+    BrushStyleBox->addItem("Dense6");
+    BrushStyleBox->addItem("Dense7");
+    BrushStyleBox->addItem("NoBrush");
+    BrushStyleBox->addItem("Hor");
+    BrushStyleBox->addItem("Ver");
+    BrushStyleBox->addItem("Cross");
+    BrushStyleBox->addItem("BDiag");
+    BrushStyleBox->addItem("FDiag");
+    BrushStyleBox->addItem("DCross");
+
+
+    BrushStyleBox->setFont(QFont("Misc Fixed", 8, 5, false));
+    BrushStyleBox->setStyleSheet("background-color: rgb(35, 38, 49);color: rgb(160, 200, 180);\n");
+
+    BrushStyleBox->setItemData ( 0, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 1, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 2, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 3, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 4, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 5, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 6, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 7, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 8, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 9, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 10, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 11, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 12, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 13, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+    BrushStyleBox->setItemData ( 14, QVariant(QBrush(QColor(35, 38, 49))), Qt::BackgroundRole );
+
+
+
+    BrushStyleBox->setItemData ( 0, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 1, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 2, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 3, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 4, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 5, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 6, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 7, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 8, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 9, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 10, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 11, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 12, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 13, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+    BrushStyleBox->setItemData ( 14, QVariant(QBrush(QColor(160, 200, 180))), Qt::TextColorRole );
+
+
+
+
+    BrushStyleBox->setFixedWidth(90);
+    BrushStyleBox->setFixedHeight(30);
+    BrushStyleBox->move(0, 495);
+
+    connect(BrushStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetBrushStyle(QString)));
+    //~BRUSH STYLE
+
+
+
+
     CDPen = new QColorDialog(parent);
     CDPen->setStyleSheet("background-color: rgb(15, 18, 29);color: rgb(160, 200, 180);\n");
     connect(CDPen, SIGNAL(colorSelected(QColor)), this, SLOT(SetPenColor(QColor)));
@@ -294,6 +375,26 @@ void CommonWidget::SetPenJointStyle(QString s)
     if(s=="Bevel")JointSTYLE = Qt::BevelJoin;
     if(s=="Miter")JointSTYLE = Qt::MiterJoin;
     if(s=="Round")JointSTYLE = Qt::RoundJoin;
+}
+
+void CommonWidget::SetBrushStyle(QString s)
+{
+    if(s=="Solid")BrushSTYLE = Qt::SolidPattern;
+    if(s=="Dense1")BrushSTYLE = Qt::Dense1Pattern;
+    if(s=="Dense2")BrushSTYLE = Qt::Dense2Pattern;
+    if(s=="Dense3")BrushSTYLE = Qt::Dense3Pattern;
+    if(s=="Dense4")BrushSTYLE = Qt::Dense4Pattern;
+    if(s=="Dense5")BrushSTYLE = Qt::Dense5Pattern;
+    if(s=="Dense6")BrushSTYLE = Qt::Dense6Pattern;
+    if(s=="Dense7")BrushSTYLE = Qt::Dense7Pattern;
+    if(s=="NoBrush")BrushSTYLE = Qt::NoBrush;
+    if(s=="Hor")BrushSTYLE = Qt::HorPattern;
+    if(s=="Ver")BrushSTYLE = Qt::VerPattern;
+    if(s=="Cross")BrushSTYLE = Qt::CrossPattern;
+    if(s=="BDiag")BrushSTYLE = Qt::BDiagPattern;
+    if(s=="FDiag")BrushSTYLE = Qt::FDiagPattern;
+    if(s=="DCross")BrushSTYLE = Qt::DiagCrossPattern;
+
 }
 
 CommonWidget::~CommonWidget()

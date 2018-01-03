@@ -21,7 +21,10 @@ QGraphicsItem* GraphicsItemClass::CreateNewRect(QGraphicsRectItem *IT, CommonWid
         IT->setPen(pen);
     }else
         IT->setPen(Qt::NoPen);
-    IT->setBrush(QBrush(WID->BrushCOLOR));
+    QBrush br;
+    br.setColor(WID->BrushCOLOR);
+    br.setStyle(WID->BrushSTYLE);
+    IT->setBrush(br);
     IT->setOpacity(WID->OPACITY);
 
     return IT;
@@ -43,7 +46,10 @@ QGraphicsItem* GraphicsItemClass::CreateNewEll(QGraphicsEllipseItem *IT, CommonW
         IT->setPen(pen);
     }else
         IT->setPen(Qt::NoPen);
-    IT->setBrush(QBrush(WID->BrushCOLOR));
+    QBrush br;
+    br.setColor(WID->BrushCOLOR);
+    br.setStyle(WID->BrushSTYLE);
+    IT->setBrush(br);
     IT->setOpacity(WID->OPACITY);
 
     return IT;

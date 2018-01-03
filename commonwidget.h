@@ -24,6 +24,7 @@ public:
 
     QColor PenCOLOR = QColor(0, 0, 0);
     QColor BrushCOLOR = QColor(0, 255, 0);
+    Qt::BrushStyle BrushSTYLE = Qt::SolidPattern;
     int PenWIDTH = 20;
     Qt::PenStyle PenSTYLE = Qt::SolidLine;
     Qt::PenCapStyle CapSTYLE = Qt::SquareCap;
@@ -62,6 +63,9 @@ public:
     QSlider *Opacity;
     QLabel *LabelOpacity;
 
+    QLabel *TitleBrushStyle;
+    QComboBox *BrushStyleBox;
+
 
 signals:
 
@@ -74,6 +78,7 @@ public slots:
     void SetPenStyle(QString s);
     void SetPenCapStyle(QString s);
     void SetPenJointStyle(QString s);
+    void SetBrushStyle(QString s);
 
 };
 
