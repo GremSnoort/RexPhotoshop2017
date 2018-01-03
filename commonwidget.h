@@ -25,6 +25,11 @@ public:
     QColor PenCOLOR = QColor(0, 0, 0);
     QColor BrushCOLOR = QColor(0, 255, 0);
     int PenWIDTH = 20;
+    Qt::PenStyle PenSTYLE = Qt::SolidLine;
+    Qt::PenCapStyle CapSTYLE = Qt::SquareCap;
+    Qt::PenJoinStyle JointSTYLE = Qt::BevelJoin;
+
+
     qreal OPACITY = 1;
 
     QColorDialog* CDPen;
@@ -53,7 +58,7 @@ public:
     QPushButton *BrushColor;
 
 
-
+    QLabel *TitleOpacity;
     QSlider *Opacity;
     QLabel *LabelOpacity;
 
@@ -66,6 +71,9 @@ public slots:
     void SetBrushColor(QColor Q);
     void SetPenWidth(int w);
     void SetOpacity(int o);
+    void SetPenStyle(QString s);
+    void SetPenCapStyle(QString s);
+    void SetPenJointStyle(QString s);
 
 };
 

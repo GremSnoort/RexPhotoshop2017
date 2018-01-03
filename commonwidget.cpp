@@ -19,7 +19,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitlePenWIdth = new QLabel("Pen Width:", WID);
     TitlePenWIdth->setFixedWidth(80);
     TitlePenWIdth->setFixedHeight(20);
-    TitlePenWIdth->move(5, 80);
+    TitlePenWIdth->move(5, 75);
     TitlePenWIdth->setFont(QFont("Misc Fixed", 8, 5, false));
     TitlePenWIdth->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitlePenWIdth->setAlignment(Qt::AlignCenter);
@@ -27,7 +27,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
     PenWidth = new QSlider(Qt::Horizontal, WID);
-    PenWidth->move(2, 100);
+    PenWidth->move(2, 95);
     PenWidth->setStyleSheet("color: rgb(160, 200, 180);\n");
     PenWidth->setFixedWidth(85);
     PenWidth->setRange(0, 100);
@@ -41,7 +41,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelPenWIDTH = new QLabel("20", WID);
     LabelPenWIDTH->setFixedWidth(60);
     LabelPenWIDTH->setFixedHeight(20);
-    LabelPenWIDTH->move(15, 120);
+    LabelPenWIDTH->move(15, 115);
     LabelPenWIDTH->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelPenWIDTH->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelPenWIDTH->setAlignment(Qt::AlignCenter);
@@ -52,7 +52,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitlePenStyle = new QLabel("PenStyle:", WID);
     TitlePenStyle->setFixedWidth(80);
     TitlePenStyle->setFixedHeight(20);
-    TitlePenStyle->move(5, 145);
+    TitlePenStyle->move(5, 140);
     TitlePenStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitlePenStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitlePenStyle->setAlignment(Qt::AlignCenter);
@@ -88,7 +88,9 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     PenStyleBox->setFixedWidth(90);
     PenStyleBox->setFixedHeight(30);
-    PenStyleBox->move(0, 170);
+    PenStyleBox->move(0, 165);
+
+    connect(PenStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetPenStyle(QString)));
     //~PEN STYLE
 
 
@@ -96,7 +98,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitleCapStyle = new QLabel("CapStyle:", WID);
     TitleCapStyle->setFixedWidth(80);
     TitleCapStyle->setFixedHeight(20);
-    TitleCapStyle->move(5, 205);
+    TitleCapStyle->move(5, 200);
     TitleCapStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleCapStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleCapStyle->setAlignment(Qt::AlignCenter);
@@ -125,14 +127,16 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     CapStyleBox->setFixedWidth(90);
     CapStyleBox->setFixedHeight(30);
-    CapStyleBox->move(0, 230);
+    CapStyleBox->move(0, 225);
+
+    connect(CapStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetPenCapStyle(QString)));
     //~CAP STYLE
 
     //JOINT STYLE
     TitleJointStyle = new QLabel("JointStyle:", WID);
     TitleJointStyle->setFixedWidth(90);
     TitleJointStyle->setFixedHeight(20);
-    TitleJointStyle->move(0, 265);
+    TitleJointStyle->move(0, 260);
     TitleJointStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleJointStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleJointStyle->setAlignment(Qt::AlignCenter);
@@ -161,8 +165,9 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     JointStyleBox->setFixedWidth(90);
     JointStyleBox->setFixedHeight(30);
-    JointStyleBox->move(0, 290);
+    JointStyleBox->move(0, 285);
 
+    connect(JointStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetPenJointStyle(QString)));
     //~JOINT STYLE
 
 
@@ -171,11 +176,21 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();
-    BrushColor->move(13, 300);
+    BrushColor->move(13, 330);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
+
+    TitleOpacity = new QLabel("Opacity:", WID);
+    TitleOpacity->setFixedWidth(90);
+    TitleOpacity->setFixedHeight(20);
+    TitleOpacity->move(0, 405);
+    TitleOpacity->setFont(QFont("Misc Fixed", 8, 5, false));
+    TitleOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+    TitleOpacity->setAlignment(Qt::AlignCenter);
+
+
     Opacity = new QSlider(Qt::Horizontal, WID);
-    Opacity->move(2, 370);
+    Opacity->move(2, 425);
     Opacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     Opacity->setFixedWidth(85);
     Opacity->setRange(0, 100);
@@ -189,7 +204,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelOpacity = new QLabel("100", WID);
     LabelOpacity->setFixedWidth(60);
     LabelOpacity->setFixedHeight(20);
-    LabelOpacity->move(15, 400);
+    LabelOpacity->move(15, 445);
     LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
@@ -204,11 +219,6 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     connect(PenColor, SIGNAL(released()), CDPen, SLOT(show()));
     connect(BrushColor, SIGNAL(released()), CDBrush, SLOT(show()));
-
-
-
-
-
 
 
 }
@@ -260,6 +270,30 @@ void CommonWidget::SetBrushColor(QColor Q)
 {
     BrushCOLOR = Q;
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+}
+
+void CommonWidget::SetPenStyle(QString s)
+{
+    if(s=="Solid")PenSTYLE = Qt::SolidLine;
+    if(s=="Dash")PenSTYLE = Qt::DashLine;
+    if(s=="Dot")PenSTYLE = Qt::DotLine;
+    if(s=="DashDot")PenSTYLE = Qt::DashDotLine;
+    if(s=="DashDotDot")PenSTYLE = Qt::DashDotDotLine;
+    if(s=="CustomDash")PenSTYLE = Qt::CustomDashLine;
+}
+
+void CommonWidget::SetPenCapStyle(QString s)
+{
+    if(s=="Square")CapSTYLE = Qt::SquareCap;
+    if(s=="Flat")CapSTYLE = Qt::FlatCap;
+    if(s=="Round")CapSTYLE = Qt::RoundCap;
+}
+
+void CommonWidget::SetPenJointStyle(QString s)
+{
+    if(s=="Bevel")JointSTYLE = Qt::BevelJoin;
+    if(s=="Miter")JointSTYLE = Qt::MiterJoin;
+    if(s=="Round")JointSTYLE = Qt::RoundJoin;
 }
 
 CommonWidget::~CommonWidget()

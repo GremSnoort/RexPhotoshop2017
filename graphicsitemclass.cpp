@@ -7,12 +7,14 @@ GraphicsItemClass::GraphicsItemClass()
 }
 
 QGraphicsItem* GraphicsItemClass::CreateNewRect(QGraphicsRectItem *IT, CommonWidget *WID)
-{
-    //pen.setStyle(Qt::DashLine);
+{    
     if(WID->PenWIDTH>0){
         QPen pen;
         pen.setWidth(WID->PenWIDTH);
         pen.setColor(WID->PenCOLOR);
+        pen.setStyle(WID->PenSTYLE);
+        pen.setCapStyle(WID->CapSTYLE);
+        pen.setJoinStyle(WID->JointSTYLE);
 
         pen.setCapStyle(Qt::RoundCap);
 
@@ -32,6 +34,9 @@ QGraphicsItem* GraphicsItemClass::CreateNewEll(QGraphicsEllipseItem *IT, CommonW
 
         pen.setWidth(WID->PenWIDTH);
         pen.setColor(WID->PenCOLOR);
+        pen.setStyle(WID->PenSTYLE);
+        pen.setCapStyle(WID->CapSTYLE);
+        pen.setJoinStyle(WID->JointSTYLE);
 
         pen.setCapStyle(Qt::RoundCap);
 
