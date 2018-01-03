@@ -11,7 +11,6 @@ RoundRectTool::RoundRectTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
-
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release()), this, SLOT(Release()));
@@ -19,7 +18,6 @@ RoundRectTool::RoundRectTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
 
     WID = W;
     sc = scene;
-
 }
 
 void RoundRectTool::SetUP()
@@ -32,13 +30,12 @@ void RoundRectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-
         it = new Item(0, WID);
-
+        it->SetParameters();
+        it->T = 3;
         it->a = 1;
         it->b = 1;
         it->setPos(x, y);
-
         sc->addItem(it);
 
         draw = true;
@@ -51,7 +48,6 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
     {
         it->a = abs(prX-newX);
         it->b = abs(prY-newY);
-        it->update(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
         it->setPos(std::min(prX, newX), std::min(prY, newY));
     }
 }

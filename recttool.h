@@ -15,8 +15,9 @@
 #include <QColorDialog>
 #include <QColor>
 
+#include "item.h"
 #include "sceneclass.h"
-//#include "graphicsitemclass.h"
+
 #include "commonwidget.h"
 
 class RectTool : public QObject
@@ -33,7 +34,8 @@ public:
 
     QPushButton *B;    
 
-    QGraphicsRectItem*R;
+
+    Item *it;
 
 
     bool UP = false;

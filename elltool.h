@@ -14,8 +14,10 @@
 #include <QTextStream>
 
 #include <QColorDialog>
+
+#include "item.h"
 #include "sceneclass.h"
-//#include "graphicsitemclass.h"
+
 #include "commonwidget.h"
 
 class EllTool : public QObject
@@ -26,7 +28,8 @@ public:
 
     CommonWidget*WID;
     SceneClass *sc;
-    QGraphicsEllipseItem*E;
+
+    Item *it;
 
     QPushButton *B;
 

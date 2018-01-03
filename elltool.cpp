@@ -11,17 +11,12 @@ EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObj
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
-
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release()), this, SLOT(Release()));
 
-
     WID = W;
     sc = scene;
-
-
-
 }
 
 void EllTool::SetUP()
@@ -30,29 +25,29 @@ void EllTool::SetUP()
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
-
-
-
 void EllTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        E = new QGraphicsEllipseItem(x, y, 1, 1);
-        if(WID->PenWIDTH>0)E->setPen(WID->ReturnPen());
-        else E->setPen(Qt::NoPen);
-        E->setBrush(WID->ReturnBrush());
-        E->setOpacity(WID->OPACITY);
+        it = new Item(0, WID);
+        it->SetParameters();
+        it->T = 2;
+        it->x = x;
+        it->y = y;
+        sc->addItem(it);
 
-        sc->addItem(E);
         draw = true;
-
    }
 }
 void EllTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
-    if(UP&&draw)    
-        E->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
-
+    if(UP&&draw)
+    {
+        it->x = std::min(prX, newX);
+        it->y = std::min(prY, newY);
+        it->dx = abs(prX-newX);
+        it->dy = abs(prY-newY);
+    }
 }
 
 void EllTool::Release()

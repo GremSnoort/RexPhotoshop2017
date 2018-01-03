@@ -11,14 +11,12 @@ RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QO
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
-
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release()), this, SLOT(Release()));
 
     WID = W;
     sc = scene;
-
 }
 
 void RectTool::SetUP()
@@ -31,21 +29,25 @@ void RectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        R = new QGraphicsRectItem(x, y, 1, 1);
-        if(WID->PenWIDTH>0)R->setPen(WID->ReturnPen());
-        else R->setPen(Qt::NoPen);
-        R->setBrush(WID->ReturnBrush());
-        R->setOpacity(WID->OPACITY);
-        sc->addItem(R);
+        it = new Item(0, WID);
+        it->SetParameters();
+        it->T = 1;
+        it->x = x;
+        it->y = y;
+        sc->addItem(it);
 
         draw = true;
-
    }
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
-        R->setRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
+    {
+        it->x = std::min(prX, newX);
+        it->y = std::min(prY, newY);
+        it->dx = abs(prX-newX);
+        it->dy = abs(prY-newY);
+    }
 }
 
 void RectTool::Release()
