@@ -30,7 +30,7 @@ public:
 
     QPushButton *B;
 
-
+    QPixmap *bm;
     QPen pen;
 
     bool UP = false;

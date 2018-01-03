@@ -44,10 +44,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ///BUTTONS STYLE
-    ui->pushButton_Zoom->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/file1339191946.png")));
+    ui->pushButton_Zoom->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/file1339191946.png")));
     ui->pushButton_Zoom->setIconSize(QSize(40, 40));
 
-    ui->pushButton_Fill->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/w256h2561348757719Paint.png")));
+    ui->pushButton_Fill->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/w256h2561348757719Paint.png")));
     ui->pushButton_Fill->setIconSize(QSize(40, 40));    
 
 
@@ -57,27 +57,27 @@ MainWindow::MainWindow(QWidget *parent) :
     ///MENU BAR -> MENU FILE
     //NEW
     ui->menuFile->actions().at(0)->setShortcut(tr("Ctrl+N"));
-    ui->menuFile->actions().at(0)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/newfileicon.png")));
+    ui->menuFile->actions().at(0)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/newfileicon.png")));
     connect(ui->menuFile->actions().at(0), SIGNAL(triggered(bool)), this, SLOT(FileNew(bool)));
 
     //OPEN
     ui->menuFile->actions().at(1)->setShortcut(tr("Ctrl+O"));
-    ui->menuFile->actions().at(1)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/open-file-icon.png")));
+    ui->menuFile->actions().at(1)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/open-file-icon.png")));
     connect(ui->menuFile->actions().at(1), SIGNAL(triggered(bool)), this, SLOT(FileOpen(bool)));
 
     //SAVE
     ui->menuFile->actions().at(2)->setShortcut(tr("Ctrl+S"));
-    ui->menuFile->actions().at(2)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Saveicon.png")));
+    ui->menuFile->actions().at(2)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Saveicon.png")));
     connect(ui->menuFile->actions().at(2), SIGNAL(triggered(bool)), this, SLOT(FileSave(bool)));
 
     //SAVE AS
     ui->menuFile->actions().at(3)->setShortcut(tr("Ctrl+Shift+S"));
-    ui->menuFile->actions().at(3)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Save-as-icon.png")));
+    ui->menuFile->actions().at(3)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Save-as-icon.png")));
     connect(ui->menuFile->actions().at(3), SIGNAL(triggered(bool)), this, SLOT(FileSaveAs(bool)));
 
     //CLOSE
     ui->menuFile->actions().at(4)->setShortcut(tr("Ctrl+X"));
-    ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/closefileicon.png")));
+    ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/closefileicon.png")));
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
 

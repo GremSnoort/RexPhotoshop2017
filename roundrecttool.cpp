@@ -4,7 +4,7 @@ RoundRectTool::RoundRectTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
 {
     B = new QPushButton(parent);
 
-    B->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/rounded-rectangle.png")));
+    B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/rounded-rectangle.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
     B->move(10, 215);
@@ -34,13 +34,13 @@ void RoundRectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        QPixmap bm(1+WID->PenWIDTH*3, 1+WID->PenWIDTH*3);
-        bm.fill(Qt::transparent);
+        bm = new QPixmap(1+WID->PenWIDTH*3, 1+WID->PenWIDTH*3);
+        bm->fill(Qt::transparent);
 
 
-        QPainter p(&bm);
+        QPainter p(bm);
 
-        //pen.setStyle(Qt::DashLine);
+
         if(WID->PenWIDTH>0){
             pen.setWidth(WID->PenWIDTH);
             pen.setCapStyle(Qt::RoundCap);
@@ -53,16 +53,14 @@ void RoundRectTool::Press(qreal x, qreal y)
 
         p.drawRoundRect(WID->PenWIDTH, WID->PenWIDTH, 1, 1, 25, 25);
 
-        setMask(bm);
+        setMask(*bm);
 
-        QGraphicsPixmapItem * pixm = new QGraphicsPixmapItem(bm);
+        QGraphicsPixmapItem *pixm = new QGraphicsPixmapItem(*bm);
         pixm->setPos(x, y);
         pixm->setOpacity(WID->OPACITY);
         sc->addItem(pixm);
 
-        sc->it->P = pixm;
-        sc->it->type = 3;
-        sc->ItemsList->push_back(sc->it);
+
 
         draw = true;
 
@@ -74,10 +72,12 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
     if(UP&&draw)
     {
 
-        QPixmap bm(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3);
-        bm.fill(Qt::transparent);
+        //dynamic_cast<QGraphicsPixmapItem*>(sc->items().first())->pixmap() = QPixmap(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3);
+        bm = new QPixmap(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3);
+        bm->fill(Qt::transparent);
+        //dynamic_cast<QGraphicsPixmapItem*>(sc->items().first())->pixmap().fill(Qt::transparent);
 
-        QPainter p(&bm);
+        QPainter p(bm);
         if(WID->PenWIDTH>0){
             pen.setWidth(WID->PenWIDTH);
             pen.setCapStyle(Qt::RoundCap);
@@ -89,13 +89,13 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
         p.drawRoundRect(WID->PenWIDTH, WID->PenWIDTH,  abs(prX-newX), abs(prY-newY), 25, 25);
 
 
-        setMask(bm);
+        setMask(*bm);
 
-
-        sc->ItemsList->last()->P->setPixmap(bm);
-        sc->ItemsList->last()->P->setPos(std::min(prX, newX), std::min(prY, newY));
-        sc->ItemsList->last()->P->setOpacity(WID->OPACITY);
-
+        //sc->items().removeFirst();
+        /*QGraphicsPixmapItem * pixm = new QGraphicsPixmapItem(*bm);
+        pixm->setPos(std::min(prX, newX), std::min(prY, newY));
+        pixm->setOpacity(WID->OPACITY);
+        sc->items().first() = pixm;*/
 
 
     }

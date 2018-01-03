@@ -4,7 +4,7 @@ RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QO
 {
     B = new QPushButton(parent);
 
-    B->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/SquareAppleV2.png")));
+    B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/SquareAppleV2.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
     B->move(10, 75);

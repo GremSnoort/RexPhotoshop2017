@@ -6,8 +6,11 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     WID->move(1405, 77);
     WID->setFixedSize(90, 900);
 
+    QTextStream out(stdout);
+    out<<QCoreApplication::applicationDirPath()<<endl;
+
     PenColor = new QPushButton(WID);
-    PenColor->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/PEN1.png")));
+    PenColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/PEN1.png")));
     PenColor->setIconSize(QSize(50, 50));
     PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
     PenColor->adjustSize();
@@ -172,7 +175,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
     BrushColor = new QPushButton(WID);
-    BrushColor->setIcon(QIcon(QPixmap("/home/kor/Desktop/Qt_Proj/RexPhotoshop2017/Colorpalette256.png")));
+    BrushColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Colorpalette256.png")));
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();

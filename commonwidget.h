@@ -12,6 +12,7 @@
 #include <QComboBox>
 #include <QPen>
 #include <QBrush>
+#include <QCoreApplication>
 
 #include <QTextStream>
 

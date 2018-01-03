@@ -33,24 +33,6 @@ public:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 
-    struct all_items
-    {
-        int type;
-        QGraphicsRectItem*R;
-        QGraphicsEllipseItem*E;
-        QGraphicsPixmapItem*P;
-        all_items()
-        {
-            type = 0;
-            R = new QGraphicsRectItem();
-            E = new QGraphicsEllipseItem();
-            P = new QGraphicsPixmapItem();
-        }
-    };
-
-    all_items*it;
-
-    QList<all_items*> *ItemsList;
 
     QGraphicsScene* scene;
 
