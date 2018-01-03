@@ -53,7 +53,8 @@ QPixmap RoundRectTool::CreatePixmap(qreal x, qreal y, qreal a, qreal b)
     QPixmap bm(x, y);
     bm.fill(Qt::transparent);
     QPainter p(&bm);
-    if(WID->PenWIDTH!=0)p.setPen(WID->ReturnPen());
+    if(WID->PenWIDTH>0)p.setPen(WID->ReturnPen());
+    else p.setPen(Qt::NoPen);
     p.setBrush(WID->ReturnBrush());
     p.setOpacity(WID->OPACITY);
 

@@ -32,7 +32,8 @@ void RectTool::Press(qreal x, qreal y)
     if(UP)
     {
         R = new QGraphicsRectItem(x, y, 1, 1);
-        if(WID->PenWIDTH!=0)R->setPen(WID->ReturnPen());
+        if(WID->PenWIDTH>0)R->setPen(WID->ReturnPen());
+        else R->setPen(Qt::NoPen);
         R->setBrush(WID->ReturnBrush());
         R->setOpacity(WID->OPACITY);
         sc->addItem(R);

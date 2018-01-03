@@ -38,7 +38,8 @@ void EllTool::Press(qreal x, qreal y)
     if(UP)
     {
         E = new QGraphicsEllipseItem(x, y, 1, 1);
-        if(WID->PenWIDTH!=0)E->setPen(WID->ReturnPen());
+        if(WID->PenWIDTH>0)E->setPen(WID->ReturnPen());
+        else E->setPen(Qt::NoPen);
         E->setBrush(WID->ReturnBrush());
         E->setOpacity(WID->OPACITY);
 

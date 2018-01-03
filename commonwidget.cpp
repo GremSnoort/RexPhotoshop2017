@@ -31,7 +31,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     PenWidth = new QSlider(Qt::Horizontal, WID);
     PenWidth->move(2, 95);
-    PenWidth->setStyleSheet("color: rgb(160, 200, 180);\n");
+    PenWidth->setStyleSheet("color: rgb(255, 255, 255);\n");
     PenWidth->setFixedWidth(85);
     PenWidth->setRange(0, 100);
     PenWidth->setEnabled(true);
@@ -194,7 +194,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     Opacity = new QSlider(Qt::Horizontal, WID);
     Opacity->move(2, 425);
-    Opacity->setStyleSheet("color: rgb(160, 200, 180);\n");
+    Opacity->setStyleSheet("color: rgb(255, 255, 255);\n");
     Opacity->setFixedWidth(85);
     Opacity->setRange(0, 100);
     Opacity->setEnabled(true);
@@ -204,10 +204,10 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     connect(Opacity, SIGNAL(sliderMoved(int)), this, SLOT(SetOpacity(int)));
 
-    LabelOpacity = new QLabel("100", WID);
-    LabelOpacity->setFixedWidth(60);
+    LabelOpacity = new QLabel("100%", WID);
+    LabelOpacity->setFixedWidth(90);
     LabelOpacity->setFixedHeight(20);
-    LabelOpacity->move(15, 445);
+    LabelOpacity->move(0, 445);
     LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
@@ -314,15 +314,19 @@ void CommonWidget::SetOpacity(int o)
     out<<OPACITY;
     if(o==0)
     {
-        Opacity->setStyleSheet("color: rgb(0, 0, 0);\n");
         LabelOpacity->setStyleSheet("color: rgb(255, 0, 0);");
         LabelOpacity->setText("Invisible");
+
+        TitleBrushStyle->hide();
+        BrushStyleBox->hide();
     }
     else
     {
-        Opacity->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
-        LabelOpacity->setText(QString::number(OPACITY));
+        LabelOpacity->setText(QString::number(o)+"%");
+
+        TitleBrushStyle->show();
+        BrushStyleBox->show();
     }
 }
 
@@ -331,16 +335,28 @@ void CommonWidget::SetPenWidth(int w)
     PenWIDTH = w;
 
     if(w==0)
-    {
-        PenWidth->setStyleSheet("color: rgb(0, 0, 0);\n");
+    {        
         LabelPenWIDTH->setStyleSheet("color: rgb(255, 0, 0);");
         LabelPenWIDTH->setText("No Pen");
+
+        TitlePenStyle->hide();
+        PenStyleBox->hide();
+        TitleCapStyle->hide();
+        CapStyleBox->hide();
+        TitleJointStyle->hide();
+        JointStyleBox->hide();
     }
     else
     {
-        PenWidth->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelPenWIDTH->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelPenWIDTH->setText(QString::number(w));
+
+        TitlePenStyle->show();
+        PenStyleBox->show();
+        TitleCapStyle->show();
+        CapStyleBox->show();
+        TitleJointStyle->show();
+        JointStyleBox->show();
     }
 
 }
