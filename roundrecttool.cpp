@@ -28,77 +28,39 @@ void RoundRectTool::SetUP()
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
-
-
 void RoundRectTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        bm = new QPixmap(1+WID->PenWIDTH*3, 1+WID->PenWIDTH*3);
-        bm->fill(Qt::transparent);
-
-
-        QPainter p(bm);
-
-
-        if(WID->PenWIDTH>0){
-            pen.setWidth(WID->PenWIDTH);
-            pen.setCapStyle(Qt::RoundCap);
-            pen.setColor(WID->PenCOLOR);
-            p.setPen(pen);
-        }else
-            p.setPen(Qt::NoPen);
-
-        p.setBrush(QBrush(WID->BrushCOLOR));
-
-        p.drawRoundRect(WID->PenWIDTH, WID->PenWIDTH, 1, 1, 25, 25);
-
-        setMask(*bm);
-
-        QGraphicsPixmapItem *pixm = new QGraphicsPixmapItem(*bm);
-        pixm->setPos(x, y);
-        pixm->setOpacity(WID->OPACITY);
-        sc->addItem(pixm);
-
-
-
+        IT = new QGraphicsPixmapItem(CreatePixmap(1+WID->PenWIDTH*3, 1+WID->PenWIDTH*3, 1.0, 1.0));
+        IT->setPos(x, y);
+        sc->addItem(IT);
         draw = true;
-
-
    }
 }
+
 void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-
-        //dynamic_cast<QGraphicsPixmapItem*>(sc->items().first())->pixmap() = QPixmap(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3);
-        bm = new QPixmap(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3);
-        bm->fill(Qt::transparent);
-        //dynamic_cast<QGraphicsPixmapItem*>(sc->items().first())->pixmap().fill(Qt::transparent);
-
-        QPainter p(bm);
-        if(WID->PenWIDTH>0){
-            pen.setWidth(WID->PenWIDTH);
-            pen.setCapStyle(Qt::RoundCap);
-            pen.setColor(WID->PenCOLOR);
-            p.setPen(pen);
-        }else p.setPen(Qt::NoPen);
-        p.setBrush(QBrush(WID->BrushCOLOR));
-
-        p.drawRoundRect(WID->PenWIDTH, WID->PenWIDTH,  abs(prX-newX), abs(prY-newY), 25, 25);
-
-
-        setMask(*bm);
-
-        //sc->items().removeFirst();
-        /*QGraphicsPixmapItem * pixm = new QGraphicsPixmapItem(*bm);
-        pixm->setPos(std::min(prX, newX), std::min(prY, newY));
-        pixm->setOpacity(WID->OPACITY);
-        sc->items().first() = pixm;*/
-
-
+        IT->setPixmap(CreatePixmap(abs(prX-newX)+WID->PenWIDTH*3, abs(prY-newY)+WID->PenWIDTH*3, abs(prX-newX), abs(prY-newY)));
+        IT->setPos(std::min(prX, newX), std::min(prY, newY));
     }
+}
+
+QPixmap RoundRectTool::CreatePixmap(qreal x, qreal y, qreal a, qreal b)
+{
+    QPixmap bm(x, y);
+    bm.fill(Qt::transparent);
+    QPainter p(&bm);
+    if(WID->PenWIDTH!=0)p.setPen(WID->ReturnPen());
+    p.setBrush(WID->ReturnBrush());
+    p.setOpacity(WID->OPACITY);
+
+    p.drawRoundRect(WID->PenWIDTH, WID->PenWIDTH,  a, b, 25, 25);
+
+    setMask(bm);
+    return bm;
 }
 
 void RoundRectTool::Release()

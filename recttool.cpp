@@ -27,8 +27,6 @@ void RectTool::SetUP()
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
 }
 
-
-
 void RectTool::Press(qreal x, qreal y)
 {
     if(UP)

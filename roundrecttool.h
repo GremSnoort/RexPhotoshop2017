@@ -30,13 +30,14 @@ public:
 
     QPushButton *B;
 
-    QPixmap *bm;
-    QPen pen;
+    QGraphicsPixmapItem *IT;
+
 
     bool UP = false;
     bool draw = false;
 
 
+    QPixmap CreatePixmap(qreal x, qreal y, qreal a, qreal b);
 signals:
 
 public slots:
