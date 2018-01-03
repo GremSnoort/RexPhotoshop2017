@@ -22,6 +22,8 @@ public:
     QBrush brush;
     qreal OPACITY;
     qreal PenWIDTH;
+    int RoundX;
+    int RoundY;
 
 
 

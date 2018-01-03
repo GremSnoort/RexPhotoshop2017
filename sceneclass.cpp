@@ -3,28 +3,20 @@
 
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
-
     this->setSceneRect(0, 0, WIDTH, HEIGHT);
-
 }
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QTextStream out(stdout);
-    out<<event->scenePos().x()<<"  "<< event->scenePos().y()<<endl;
-
     previousPoint = event->scenePos();
     update = true;
 
-    UpdateSceneRect(event);
     emit Press(previousPoint.x(), previousPoint.y());
-
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
-
 }
 
 void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)

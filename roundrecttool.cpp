@@ -24,6 +24,10 @@ void RoundRectTool::SetUP()
 {
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)
+        WID->RoundWIDGET->show();
+    else
+        WID->RoundWIDGET->hide();
 }
 
 void RoundRectTool::Press(qreal x, qreal y)

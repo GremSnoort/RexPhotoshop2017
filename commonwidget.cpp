@@ -6,10 +6,18 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     WID->move(1405, 77);
     WID->setFixedSize(90, 900);
 
+    PenWIDGET = new QWidget(WID);
+    PenWIDGET->move(0, 0);
+    PenWIDGET->setFixedSize(90, 320);
+
+    RoundWIDGET = new QWidget(WID);
+    RoundWIDGET->move(0, 320);
+    RoundWIDGET->setFixedSize(90, 130);
+
     QTextStream out(stdout);
     out<<QCoreApplication::applicationDirPath()<<endl;
 
-    PenColor = new QPushButton(WID);
+    PenColor = new QPushButton(PenWIDGET);
     PenColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/PEN1.png")));
     PenColor->setIconSize(QSize(50, 50));
     PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
@@ -19,7 +27,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
     //PEN WIDTH
-    TitlePenWIdth = new QLabel("Pen Width:", WID);
+    TitlePenWIdth = new QLabel("Pen Width:", PenWIDGET);
     TitlePenWIdth->setFixedWidth(80);
     TitlePenWIdth->setFixedHeight(20);
     TitlePenWIdth->move(5, 75);
@@ -29,7 +37,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
 
-    PenWidth = new QSlider(Qt::Horizontal, WID);
+    PenWidth = new QSlider(Qt::Horizontal, PenWIDGET);
     PenWidth->move(2, 95);
     PenWidth->setStyleSheet("color: rgb(255, 255, 255);\n");
     PenWidth->setFixedWidth(85);
@@ -41,7 +49,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     connect(PenWidth, SIGNAL(sliderMoved(int)), this, SLOT(SetPenWidth(int)));
 
-    LabelPenWIDTH = new QLabel("20", WID);
+    LabelPenWIDTH = new QLabel("20", PenWIDGET);
     LabelPenWIDTH->setFixedWidth(60);
     LabelPenWIDTH->setFixedHeight(20);
     LabelPenWIDTH->move(15, 115);
@@ -52,7 +60,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
     //PEN STYLE
-    TitlePenStyle = new QLabel("PenStyle:", WID);
+    TitlePenStyle = new QLabel("PenStyle:", PenWIDGET);
     TitlePenStyle->setFixedWidth(80);
     TitlePenStyle->setFixedHeight(20);
     TitlePenStyle->move(5, 140);
@@ -60,7 +68,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitlePenStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitlePenStyle->setAlignment(Qt::AlignCenter);
 
-    PenStyleBox = new QComboBox(WID);
+    PenStyleBox = new QComboBox(PenWIDGET);
     PenStyleBox->setFocusPolicy(Qt::NoFocus);
 
     PenStyleBox->addItem("Solid");
@@ -98,7 +106,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 
     //CAP STYLE
-    TitleCapStyle = new QLabel("CapStyle:", WID);
+    TitleCapStyle = new QLabel("CapStyle:", PenWIDGET);
     TitleCapStyle->setFixedWidth(80);
     TitleCapStyle->setFixedHeight(20);
     TitleCapStyle->move(5, 200);
@@ -106,7 +114,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitleCapStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleCapStyle->setAlignment(Qt::AlignCenter);
 
-    CapStyleBox = new QComboBox(WID);
+    CapStyleBox = new QComboBox(PenWIDGET);
     CapStyleBox->setFocusPolicy(Qt::NoFocus);
 
     CapStyleBox->addItem("Square");
@@ -136,7 +144,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     //~CAP STYLE
 
     //JOINT STYLE
-    TitleJointStyle = new QLabel("JointStyle:", WID);
+    TitleJointStyle = new QLabel("JointStyle:", PenWIDGET);
     TitleJointStyle->setFixedWidth(90);
     TitleJointStyle->setFixedHeight(20);
     TitleJointStyle->move(0, 260);
@@ -144,7 +152,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitleJointStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleJointStyle->setAlignment(Qt::AlignCenter);
 
-    JointStyleBox = new QComboBox(WID);
+    JointStyleBox = new QComboBox(PenWIDGET);
     JointStyleBox->setFocusPolicy(Qt::NoFocus);
 
     JointStyleBox->addItem("Bevel");
@@ -174,26 +182,93 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     //~JOINT STYLE
 
 
+    //ROUND CORNERS
+    TitleRoundCornersX = new QLabel("Round_X:", RoundWIDGET);
+    TitleRoundCornersX->setFixedWidth(90);
+    TitleRoundCornersX->setFixedHeight(20);
+    TitleRoundCornersX->move(0, 0);
+    TitleRoundCornersX->setFont(QFont("Misc Fixed", 8, 5, false));
+    TitleRoundCornersX->setStyleSheet("color: rgb(160, 200, 180);\n");
+    TitleRoundCornersX->setAlignment(Qt::AlignCenter);
+
+
+    RoundCornersX = new QSlider(Qt::Horizontal, RoundWIDGET);
+    RoundCornersX->move(2, 20);
+    RoundCornersX->setStyleSheet("color: rgb(255, 255, 255);\n");
+    RoundCornersX->setFixedWidth(85);
+    RoundCornersX->setRange(0, 100);
+    RoundCornersX->setEnabled(true);
+    RoundCornersX->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    RoundCornersX->setValue(25);
+
+
+    connect(RoundCornersX, SIGNAL(sliderMoved(int)), this, SLOT(SetRoundCornersX(int)));
+
+    LabelRoundCornersX = new QLabel("25%", RoundWIDGET);
+    LabelRoundCornersX->setFixedWidth(90);
+    LabelRoundCornersX->setFixedHeight(20);
+    LabelRoundCornersX->move(0, 40);
+    LabelRoundCornersX->setFont(QFont("Misc Fixed", 15, 5, false));
+    LabelRoundCornersX->setStyleSheet("color: rgb(160, 200, 180);\n");
+    LabelRoundCornersX->setAlignment(Qt::AlignCenter);
+
+    ///_______________________________________________________________________________________
+
+
+    TitleRoundCornersY = new QLabel("Round_Y:", RoundWIDGET);
+    TitleRoundCornersY->setFixedWidth(90);
+    TitleRoundCornersY->setFixedHeight(20);
+    TitleRoundCornersY->move(0, 65);
+    TitleRoundCornersY->setFont(QFont("Misc Fixed", 8, 5, false));
+    TitleRoundCornersY->setStyleSheet("color: rgb(160, 200, 180);\n");
+    TitleRoundCornersY->setAlignment(Qt::AlignCenter);
+
+
+    RoundCornersY = new QSlider(Qt::Horizontal, RoundWIDGET);
+    RoundCornersY->move(2, 85);
+    RoundCornersY->setStyleSheet("color: rgb(255, 255, 255);\n");
+    RoundCornersY->setFixedWidth(85);
+    RoundCornersY->setRange(0, 100);
+    RoundCornersY->setEnabled(true);
+    RoundCornersY->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    RoundCornersY->setValue(25);
+
+
+    connect(RoundCornersY, SIGNAL(sliderMoved(int)), this, SLOT(SetRoundCornersY(int)));
+
+    LabelRoundCornersY = new QLabel("25%", RoundWIDGET);
+    LabelRoundCornersY->setFixedWidth(90);
+    LabelRoundCornersY->setFixedHeight(20);
+    LabelRoundCornersY->move(0, 105);
+    LabelRoundCornersY->setFont(QFont("Misc Fixed", 15, 5, false));
+    LabelRoundCornersY->setStyleSheet("color: rgb(160, 200, 180);\n");
+    LabelRoundCornersY->setAlignment(Qt::AlignCenter);
+
+
+    RoundWIDGET->hide();
+    //~ROUND CORNERS
+
+
     BrushColor = new QPushButton(WID);
     BrushColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Colorpalette256.png")));
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();
-    BrushColor->move(13, 330);
+    BrushColor->move(13, 450);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
 
     TitleOpacity = new QLabel("Opacity:", WID);
     TitleOpacity->setFixedWidth(90);
     TitleOpacity->setFixedHeight(20);
-    TitleOpacity->move(0, 405);
+    TitleOpacity->move(0, 525);
     TitleOpacity->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleOpacity->setAlignment(Qt::AlignCenter);
 
 
     Opacity = new QSlider(Qt::Horizontal, WID);
-    Opacity->move(2, 425);
+    Opacity->move(2, 545);
     Opacity->setStyleSheet("color: rgb(255, 255, 255);\n");
     Opacity->setFixedWidth(85);
     Opacity->setRange(0, 100);
@@ -207,7 +282,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelOpacity = new QLabel("100%", WID);
     LabelOpacity->setFixedWidth(90);
     LabelOpacity->setFixedHeight(20);
-    LabelOpacity->move(0, 445);
+    LabelOpacity->move(0, 565);
     LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
@@ -218,7 +293,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitleBrushStyle = new QLabel("BrushStyle:", WID);
     TitleBrushStyle->setFixedWidth(90);
     TitleBrushStyle->setFixedHeight(20);
-    TitleBrushStyle->move(0, 470);
+    TitleBrushStyle->move(0, 590);
     TitleBrushStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleBrushStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleBrushStyle->setAlignment(Qt::AlignCenter);
@@ -285,7 +360,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     BrushStyleBox->setFixedWidth(90);
     BrushStyleBox->setFixedHeight(30);
-    BrushStyleBox->move(0, 495);
+    BrushStyleBox->move(0, 615);
 
     connect(BrushStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetBrushStyle(QString)));
     //~BRUSH STYLE
@@ -327,6 +402,46 @@ void CommonWidget::SetOpacity(int o)
 
         TitleBrushStyle->show();
         BrushStyleBox->show();
+    }
+}
+
+void CommonWidget::SetRoundCornersX(int r)
+{
+    ROUNDCornersX = r;
+    if(r==0)
+    {
+        LabelRoundCornersX->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelRoundCornersX->setText("Rectangle");
+    }
+    else if(r==100)
+    {
+        LabelRoundCornersX->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelRoundCornersX->setText("Ellipse");
+    }
+    else
+    {
+        LabelRoundCornersX->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelRoundCornersX->setText(QString::number(r)+"%");
+    }
+}
+
+void CommonWidget::SetRoundCornersY(int r)
+{
+    ROUNDCornersY = r;
+    if(r==0)
+    {
+        LabelRoundCornersY->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelRoundCornersY->setText("Rectangle");
+    }
+    else if(r==100)
+    {
+        LabelRoundCornersY->setStyleSheet("color: rgb(255, 0, 0);");
+        LabelRoundCornersY->setText("Ellipse");
+    }
+    else
+    {
+        LabelRoundCornersY->setStyleSheet("color: rgb(160, 200, 180);\n");
+        LabelRoundCornersY->setText(QString::number(r)+"%");
     }
 }
 

@@ -35,12 +35,16 @@ public:
 
 
     qreal OPACITY = 1;
+    int ROUNDCornersX = 25;
+    int ROUNDCornersY = 25;
 
     QColorDialog* CDPen;
     QColorDialog* CDBrush;
 
 
     QWidget *WID;
+
+    QWidget *PenWIDGET;//pen
 
 
     QPushButton *PenColor;
@@ -58,6 +62,17 @@ public:
 
     QLabel *TitleJointStyle;
     QComboBox *JointStyleBox;
+
+
+    QWidget *RoundWIDGET;//round
+
+
+    QLabel *TitleRoundCornersX;
+    QSlider *RoundCornersX;
+    QLabel *LabelRoundCornersX;
+    QLabel *TitleRoundCornersY;
+    QSlider *RoundCornersY;
+    QLabel *LabelRoundCornersY;
 
     QPushButton *BrushColor;
 
@@ -85,6 +100,8 @@ public slots:
     void SetPenCapStyle(QString s);
     void SetPenJointStyle(QString s);
     void SetBrushStyle(QString s);
+    void SetRoundCornersX(int r);
+    void SetRoundCornersY(int r);
 
 };
 
