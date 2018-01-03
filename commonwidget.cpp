@@ -397,9 +397,28 @@ void CommonWidget::SetBrushStyle(QString s)
 
 }
 
+QPen CommonWidget::ReturnPen()
+{
+    QPen pen;
+    pen.setWidth(PenWIDTH);
+    pen.setColor(PenCOLOR);
+    pen.setStyle(PenSTYLE);
+    pen.setCapStyle(CapSTYLE);
+    pen.setJoinStyle(JointSTYLE);
+
+    return pen;
+}
+
+QBrush CommonWidget::ReturnBrush()
+{
+    QBrush br;
+    br.setColor(BrushCOLOR);
+    br.setStyle(BrushSTYLE);
+
+    return br;
+}
+
 CommonWidget::~CommonWidget()
 {
-    this->close();
-
-    //this->deleteLater();
+    this->close();    
 }

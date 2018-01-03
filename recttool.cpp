@@ -34,8 +34,10 @@ void RectTool::Press(qreal x, qreal y)
     if(UP)
     {
         R = new QGraphicsRectItem(x, y, 1, 1);
-
-        sc->addItem(GraphicsItemClass::CreateNewRect(R, WID));
+        if(WID->PenWIDTH!=0)R->setPen(WID->ReturnPen());
+        R->setBrush(WID->ReturnBrush());
+        R->setOpacity(WID->OPACITY);
+        sc->addItem(R);
 
         draw = true;
 

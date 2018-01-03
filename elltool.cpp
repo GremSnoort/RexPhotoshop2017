@@ -38,9 +38,11 @@ void EllTool::Press(qreal x, qreal y)
     if(UP)
     {
         E = new QGraphicsEllipseItem(x, y, 1, 1);
+        if(WID->PenWIDTH!=0)E->setPen(WID->ReturnPen());
+        E->setBrush(WID->ReturnBrush());
+        E->setOpacity(WID->OPACITY);
 
-        sc->addItem(GraphicsItemClass::CreateNewEll(E, WID));
-
+        sc->addItem(E);
         draw = true;
 
    }

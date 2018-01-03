@@ -16,7 +16,7 @@ QGraphicsItem* GraphicsItemClass::CreateNewRect(QGraphicsRectItem *IT, CommonWid
         pen.setCapStyle(WID->CapSTYLE);
         pen.setJoinStyle(WID->JointSTYLE);
 
-        pen.setCapStyle(Qt::RoundCap);
+
 
         IT->setPen(pen);
     }else
@@ -41,7 +41,7 @@ QGraphicsItem* GraphicsItemClass::CreateNewEll(QGraphicsEllipseItem *IT, CommonW
         pen.setCapStyle(WID->CapSTYLE);
         pen.setJoinStyle(WID->JointSTYLE);
 
-        pen.setCapStyle(Qt::RoundCap);
+
 
         IT->setPen(pen);
     }else

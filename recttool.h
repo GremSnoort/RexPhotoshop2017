@@ -16,7 +16,7 @@
 #include <QColor>
 
 #include "sceneclass.h"
-#include "graphicsitemclass.h"
+//#include "graphicsitemclass.h"
 #include "commonwidget.h"
 
 class RectTool : public QObject

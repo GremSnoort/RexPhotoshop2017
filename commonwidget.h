@@ -10,6 +10,8 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QComboBox>
+#include <QPen>
+#include <QBrush>
 
 #include <QTextStream>
 
@@ -65,6 +67,9 @@ public:
 
     QLabel *TitleBrushStyle;
     QComboBox *BrushStyleBox;
+
+    QPen ReturnPen();
+    QBrush ReturnBrush();
 
 
 signals:
