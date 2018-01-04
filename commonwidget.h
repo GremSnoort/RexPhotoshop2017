@@ -37,7 +37,7 @@ public:
     qreal OPACITY = 1;
     int ROUNDCornersX = 25;
     int ROUNDCornersY = 25;
-    int ANGLE=25;
+    int ANGLE = 30;
 
     QColorDialog* CDPen;
     QColorDialog* CDBrush;
@@ -75,6 +75,12 @@ public:
     QSlider *RoundCornersY;
     QLabel *LabelRoundCornersY;
 
+
+    QLabel *TitleAngle;
+    QSlider *Angle;
+    QLabel *LabelAngle;
+
+
     QPushButton *BrushColor;
 
 
@@ -103,7 +109,7 @@ public slots:
     void SetBrushStyle(QString s);
     void SetRoundCornersX(int r);
     void SetRoundCornersY(int r);
-
+    void SetAngle(int a);
 };
 
 #endif // COMMONWIDGET_H

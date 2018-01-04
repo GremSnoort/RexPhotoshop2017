@@ -249,26 +249,59 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     //~ROUND CORNERS
 
 
+    //ANGLE
+    TitleAngle = new QLabel("Rotate:", WID);
+    TitleAngle->setFixedWidth(90);
+    TitleAngle->setFixedHeight(20);
+    TitleAngle->move(0, 450);
+    TitleAngle->setFont(QFont("Misc Fixed", 8, 5, false));
+    TitleAngle->setStyleSheet("color: rgb(160, 200, 180);\n");
+    TitleAngle->setAlignment(Qt::AlignCenter);
+
+
+    Angle = new QSlider(Qt::Horizontal, WID);
+    Angle->move(2, 470);
+    Angle->setStyleSheet("color: rgb(255, 255, 255);\n");
+    Angle->setFixedWidth(85);
+    Angle->setRange(0, 45);
+    Angle->setEnabled(true);
+    Angle->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    Angle->setValue(30);
+
+
+    connect(Angle, SIGNAL(sliderMoved(int)), this, SLOT(SetAngle(int)));
+
+    LabelAngle = new QLabel("30°", WID);
+    LabelAngle->setFixedWidth(90);
+    LabelAngle->setFixedHeight(20);
+    LabelAngle->move(0, 490);
+    LabelAngle->setFont(QFont("Misc Fixed", 15, 5, false));
+    LabelAngle->setStyleSheet("color: rgb(160, 200, 180);\n");
+    LabelAngle->setAlignment(Qt::AlignCenter);
+
+    //~ANGLE
+
+
     BrushColor = new QPushButton(WID);
     BrushColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Colorpalette256.png")));
     BrushColor->setIconSize(QSize(50, 50));
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
     BrushColor->adjustSize();
-    BrushColor->move(13, 450);
+    BrushColor->move(13, 550);
     BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
 
     TitleOpacity = new QLabel("Opacity:", WID);
     TitleOpacity->setFixedWidth(90);
     TitleOpacity->setFixedHeight(20);
-    TitleOpacity->move(0, 525);
+    TitleOpacity->move(0, 625);
     TitleOpacity->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleOpacity->setAlignment(Qt::AlignCenter);
 
 
     Opacity = new QSlider(Qt::Horizontal, WID);
-    Opacity->move(2, 545);
+    Opacity->move(2, 645);
     Opacity->setStyleSheet("color: rgb(255, 255, 255);\n");
     Opacity->setFixedWidth(85);
     Opacity->setRange(0, 100);
@@ -282,7 +315,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelOpacity = new QLabel("100%", WID);
     LabelOpacity->setFixedWidth(90);
     LabelOpacity->setFixedHeight(20);
-    LabelOpacity->move(0, 565);
+    LabelOpacity->move(0, 665);
     LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
@@ -293,7 +326,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     TitleBrushStyle = new QLabel("BrushStyle:", WID);
     TitleBrushStyle->setFixedWidth(90);
     TitleBrushStyle->setFixedHeight(20);
-    TitleBrushStyle->move(0, 590);
+    TitleBrushStyle->move(0, 690);
     TitleBrushStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleBrushStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleBrushStyle->setAlignment(Qt::AlignCenter);
@@ -360,7 +393,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     BrushStyleBox->setFixedWidth(90);
     BrushStyleBox->setFixedHeight(30);
-    BrushStyleBox->move(0, 615);
+    BrushStyleBox->move(0, 715);
 
     connect(BrushStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetBrushStyle(QString)));
     //~BRUSH STYLE
@@ -384,9 +417,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 void CommonWidget::SetOpacity(int o)
 {
-    OPACITY = o*0.01;
-    QTextStream out(stdout);
-    out<<OPACITY;
+    OPACITY = o*0.01;   
     if(o==0)
     {
         LabelOpacity->setStyleSheet("color: rgb(255, 0, 0);");
@@ -443,6 +474,12 @@ void CommonWidget::SetRoundCornersY(int r)
         LabelRoundCornersY->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelRoundCornersY->setText(QString::number(r)+"%");
     }
+}
+
+void CommonWidget::SetAngle(int a)
+{
+    ANGLE = a;
+    LabelAngle->setText(QString::number(a)+"°");
 }
 
 void CommonWidget::SetPenWidth(int w)
