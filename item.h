@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QBrush>
+#include <QtMath>
 
 #include "commonwidget.h"
 
@@ -24,6 +25,7 @@ public:
     qreal PenWIDTH;
     int RoundX;
     int RoundY;
+    int ANGLE;
 
 
 
@@ -45,7 +47,7 @@ public:
     QRectF boundingRect() const;
 
     void SetParameters();
-
+    void SetYX(qreal xx, qreal yy);
 
 };
 

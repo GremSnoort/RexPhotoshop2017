@@ -32,8 +32,7 @@ void RectTool::Press(qreal x, qreal y)
         it = new Item(0, WID);
         it->SetParameters();
         it->T = 1;
-        it->x = x;
-        it->y = y;
+        it->SetYX(x, y);
         sc->addItem(it);
 
         draw = true;
@@ -43,10 +42,9 @@ void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-        it->x = std::min(prX, newX);
-        it->y = std::min(prY, newY);
-        it->dx = abs(prX-newX);
-        it->dy = abs(prY-newY);
+        it->SetYX(prX, prY);
+        it->dx = newX-prX;
+        it->dy = newY-prY;
     }
 }
 

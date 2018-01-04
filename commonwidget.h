@@ -37,6 +37,7 @@ public:
     qreal OPACITY = 1;
     int ROUNDCornersX = 25;
     int ROUNDCornersY = 25;
+    int ANGLE=25;
 
     QColorDialog* CDPen;
     QColorDialog* CDBrush;

@@ -21,7 +21,6 @@ void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)
 {
-
     if(event->scenePos().x()<X)
     {
         WIDTH+=abs(X-event->scenePos().x());
@@ -34,8 +33,6 @@ void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)
     }
     if(abs(X-event->scenePos().x())>WIDTH)WIDTH = abs(X-event->scenePos().x());
     if(abs(Y-event->scenePos().y())>HEIGHT)HEIGHT = abs(Y-event->scenePos().y());
-
-
 }
 
 void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

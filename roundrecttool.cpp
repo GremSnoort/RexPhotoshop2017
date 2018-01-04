@@ -50,9 +50,9 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-        it->a = abs(prX-newX);
-        it->b = abs(prY-newY);
-        it->setPos(std::min(prX, newX), std::min(prY, newY));
+        it->a = newX-prX;
+        it->b = newY-prY;
+        it->setPos(prX, prY);
     }
 }
 
