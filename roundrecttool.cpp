@@ -43,6 +43,8 @@ void RoundRectTool::Press(qreal x, qreal y)
         //it->setPos(x, y);
         sc->addItem(it);
 
+        sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
+
         draw = true;
    }
 }
