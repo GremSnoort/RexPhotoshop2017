@@ -39,7 +39,8 @@ void RoundRectTool::Press(qreal x, qreal y)
         it->T = 3;
         it->a = 1;
         it->b = 1;
-        it->setPos(x, y);
+        it->SetYX(x, y);
+        //it->setPos(x, y);
         sc->addItem(it);
 
         draw = true;
@@ -50,9 +51,10 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-        it->a = newX-prX;
-        it->b = newY-prY;
-        it->setPos(prX, prY);
+        //it->setPos(std::min(prX,newX), std::min(prY, newY));
+        it->SetYX(std::min(prX,newX), std::min(prY, newY));
+        it->a = abs(newX-prX);
+        it->b = abs(newY-prY);
     }
 }
 

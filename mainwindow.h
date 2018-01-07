@@ -8,6 +8,7 @@
 #include "recttool.h"
 #include "elltool.h"
 #include "roundrecttool.h"
+#include "selectiontool.h"
 
 #include "svgopen.h"
 #include "askforsave.h"
@@ -63,6 +64,7 @@ public:
     RectTool *rt;
     EllTool *et;
     RoundRectTool *rrt;
+    SelectionTool *st;
     CommonWidget *WID;
 
 

@@ -14,6 +14,10 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     RoundWIDGET->move(0, 320);
     RoundWIDGET->setFixedSize(90, 130);
 
+    BrushWIDGET = new QWidget(WID);
+    BrushWIDGET->move(0, 585);
+    BrushWIDGET->setFixedSize(90, 300);
+
     QTextStream out(stdout);
     out<<QCoreApplication::applicationDirPath()<<endl;
 
@@ -266,12 +270,12 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     Angle->setRange(0, 45);
     Angle->setEnabled(true);
     Angle->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    Angle->setValue(30);
+    Angle->setValue(0);
 
 
     connect(Angle, SIGNAL(sliderMoved(int)), this, SLOT(SetAngle(int)));
 
-    LabelAngle = new QLabel("30°", WID);
+    LabelAngle = new QLabel("0°", WID);
     LabelAngle->setFixedWidth(90);
     LabelAngle->setFixedHeight(20);
     LabelAngle->move(0, 490);
@@ -282,26 +286,18 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     //~ANGLE
 
 
-    BrushColor = new QPushButton(WID);
-    BrushColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Colorpalette256.png")));
-    BrushColor->setIconSize(QSize(50, 50));
-    BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
-    BrushColor->adjustSize();
-    BrushColor->move(13, 550);
-    BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-
 
     TitleOpacity = new QLabel("Opacity:", WID);
     TitleOpacity->setFixedWidth(90);
     TitleOpacity->setFixedHeight(20);
-    TitleOpacity->move(0, 625);
+    TitleOpacity->move(0, 515);
     TitleOpacity->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleOpacity->setAlignment(Qt::AlignCenter);
 
 
     Opacity = new QSlider(Qt::Horizontal, WID);
-    Opacity->move(2, 645);
+    Opacity->move(2, 535);
     Opacity->setStyleSheet("color: rgb(255, 255, 255);\n");
     Opacity->setFixedWidth(85);
     Opacity->setRange(0, 100);
@@ -315,23 +311,38 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
     LabelOpacity = new QLabel("100%", WID);
     LabelOpacity->setFixedWidth(90);
     LabelOpacity->setFixedHeight(20);
-    LabelOpacity->move(0, 665);
+    LabelOpacity->move(0, 555);
     LabelOpacity->setFont(QFont("Misc Fixed", 15, 5, false));
     LabelOpacity->setStyleSheet("color: rgb(160, 200, 180);\n");
     LabelOpacity->setAlignment(Qt::AlignCenter);
 
 
 
+
+
+    BrushColor = new QPushButton(BrushWIDGET);
+    BrushColor->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Colorpalette256.png")));
+    BrushColor->setIconSize(QSize(50, 50));
+    BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+    BrushColor->adjustSize();
+    BrushColor->move(13, 0);
+    BrushColor->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+
+
+
+
+
+
     //BRUSH STYLE
-    TitleBrushStyle = new QLabel("BrushStyle:", WID);
+    TitleBrushStyle = new QLabel("BrushStyle:", BrushWIDGET);
     TitleBrushStyle->setFixedWidth(90);
     TitleBrushStyle->setFixedHeight(20);
-    TitleBrushStyle->move(0, 690);
+    TitleBrushStyle->move(0, 75);
     TitleBrushStyle->setFont(QFont("Misc Fixed", 8, 5, false));
     TitleBrushStyle->setStyleSheet("color: rgb(160, 200, 180);\n");
     TitleBrushStyle->setAlignment(Qt::AlignCenter);
 
-    BrushStyleBox = new QComboBox(WID);
+    BrushStyleBox = new QComboBox(BrushWIDGET);
     BrushStyleBox->setFocusPolicy(Qt::NoFocus);
 
     BrushStyleBox->addItem("Solid");
@@ -393,7 +404,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     BrushStyleBox->setFixedWidth(90);
     BrushStyleBox->setFixedHeight(30);
-    BrushStyleBox->move(0, 715);
+    BrushStyleBox->move(0, 100);
 
     connect(BrushStyleBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SetBrushStyle(QString)));
     //~BRUSH STYLE
@@ -411,6 +422,8 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
     connect(PenColor, SIGNAL(released()), CDPen, SLOT(show()));
     connect(BrushColor, SIGNAL(released()), CDBrush, SLOT(show()));
+
+
 
 
 }

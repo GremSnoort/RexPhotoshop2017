@@ -4,6 +4,7 @@ Item::Item(QObject *parent, CommonWidget *W)
     : QObject(parent), QGraphicsItem()
 {
     WID = W;
+    //this->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
 }
 Item::~Item()
 {
@@ -44,10 +45,23 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setOpacity(OPACITY);
     painter->rotate(ANGLE);
 
-    if(T==3)painter->drawRoundRect(PenWIDTH, PenWIDTH,  a, b, RoundX, RoundY);
+    if(T==3)painter->drawRoundRect(x, y, a, b, RoundX, RoundY);
     else if(T==1)painter->drawRect(x, y, dx, dy);
     else if(T==2)painter->drawEllipse(x, y, dx, dy);
-
+    else if(T==4)
+    {
+        /*QPen p;
+        p.setWidth(selectWIDTH);
+        p.setColor(Qt::black);
+        p.setStyle(Qt::DashLine);
+        p.setCapStyle(Qt::FlatCap);
+        p.setJoinStyle(Qt::MiterJoin);
+        painter->setPen(p);
+        painter->setBrush(Qt::NoBrush);
+        painter->setOpacity(1);
+        painter->rotate(-ANGLE);
+        painter->drawRect(x, y, dx, dy);*/
+    }
 
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -55,5 +69,6 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 QRectF Item::boundingRect() const
 {
-    return QRectF(0,0,100,100);
+    if(T==3)return QRectF(x, y, a, b);
+    else return QRectF(x, y, dx, dy);
 }

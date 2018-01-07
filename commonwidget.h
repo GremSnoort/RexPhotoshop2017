@@ -34,10 +34,13 @@ public:
     Qt::PenJoinStyle JointSTYLE = Qt::BevelJoin;
 
 
+
+
+
     qreal OPACITY = 1;
     int ROUNDCornersX = 25;
     int ROUNDCornersY = 25;
-    int ANGLE = 30;
+    int ANGLE = 0;
 
     QColorDialog* CDPen;
     QColorDialog* CDBrush;
@@ -80,13 +83,17 @@ public:
     QSlider *Angle;
     QLabel *LabelAngle;
 
+    QLabel *TitleOpacity;
+    QSlider *Opacity;
+    QLabel *LabelOpacity;
+
+
+    QWidget *BrushWIDGET;
 
     QPushButton *BrushColor;
 
 
-    QLabel *TitleOpacity;
-    QSlider *Opacity;
-    QLabel *LabelOpacity;
+
 
     QLabel *TitleBrushStyle;
     QComboBox *BrushStyleBox;

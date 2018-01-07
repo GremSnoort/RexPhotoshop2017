@@ -35,6 +35,9 @@ void RectTool::Press(qreal x, qreal y)
         it->SetYX(x, y);
         sc->addItem(it);
 
+        sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
+
+
         draw = true;
    }
 }
@@ -44,11 +47,13 @@ void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
     {
         it->SetYX(prX, prY);
         it->dx = newX-prX;
-        it->dy = newY-prY;
+        it->dy = newY-prY;        
     }
 }
 
 void RectTool::Release()
 {
+
     draw = false;
+
 }

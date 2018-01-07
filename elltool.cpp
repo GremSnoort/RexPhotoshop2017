@@ -29,11 +29,13 @@ void EllTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        it = new Item(0, WID);
+        it = new Item(0, WID);        
         it->SetParameters();
         it->T = 2;
         it->SetYX(x, y);
         sc->addItem(it);
+
+        sc->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable, true);
 
         draw = true;
    }

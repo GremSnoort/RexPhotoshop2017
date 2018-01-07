@@ -27,6 +27,8 @@ public:
     int RoundY;
     int ANGLE;
 
+    int selectWIDTH = 5;
+
 
 
 
