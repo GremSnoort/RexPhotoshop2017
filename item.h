@@ -22,13 +22,10 @@ public:
     QPen pen;
     QBrush brush;
     qreal OPACITY;
-    qreal PenWIDTH;
+    int PenWIDTH;
     int RoundX;
     int RoundY;
     int ANGLE;
-
-    int selectWIDTH = 5;
-
 
 
 
@@ -45,7 +42,9 @@ public:
     qreal dx = 1;
     qreal dy = 1;
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = nullptr, QWidget *widget = nullptr);
     QRectF boundingRect() const;
 
     void SetParameters();

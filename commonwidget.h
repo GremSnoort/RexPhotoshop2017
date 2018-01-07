@@ -103,6 +103,7 @@ public:
 
 
 signals:
+    void Changed();
 
 public slots:
 

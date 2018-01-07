@@ -11,6 +11,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
 #include <QTextStream>
+#include <QRubberBand>
 
 #include <QColorDialog>
 
@@ -23,14 +24,15 @@ class SelectionTool : public QObject
 {
     Q_OBJECT
 public:
-    explicit SelectionTool(QMainWindow *parent = nullptr, CommonWidget*W = nullptr, SceneClass *scene = nullptr);
+    explicit SelectionTool(QMainWindow *parent = nullptr, CommonWidget*W = nullptr, SceneClass *scene = nullptr, QWidget*wW = nullptr);
+
 
     CommonWidget*WID;
     SceneClass *sc;
 
     Item *it;
 
-
+    QRubberBand *RB;
 
     QPushButton *B;
 
@@ -46,6 +48,8 @@ public slots:
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
+
+    void RepaintAll();
 };
 
 #endif // SELECTIONTOOL_H

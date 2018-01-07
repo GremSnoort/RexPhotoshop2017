@@ -3,8 +3,7 @@
 Item::Item(QObject *parent, CommonWidget *W)
     : QObject(parent), QGraphicsItem()
 {
-    WID = W;
-    //this->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
+    WID = W;    
 }
 Item::~Item()
 {
@@ -33,12 +32,17 @@ void Item::SetYX(qreal xx, qreal yy)
 void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-    /*if(WID->PenWIDTH>0)painter->setPen(WID->ReturnPen());
-    else painter->setPen(Qt::NoPen);
-    painter->setBrush(WID->ReturnBrush());
-    painter->setOpacity(WID->OPACITY);
+     /*   if(WID->PenWIDTH>0)painter->setPen(WID->ReturnPen());
+        else painter->setPen(Qt::NoPen);
+        painter->setBrush(WID->ReturnBrush());
+        painter->setOpacity(WID->OPACITY);
+        painter->rotate(WID->ANGLE);
 
-    if(T==3)painter->drawRoundRect(WID->PenWIDTH, WID->PenWIDTH,  a, b, 25, 25);*/
+        if(T==3)painter->drawRoundRect(x, y, a, b, WID->ROUNDCornersX, WID->ROUNDCornersY);
+        else if(T==1)painter->drawRect(x, y, dx, dy);
+        else if(T==2)painter->drawEllipse(x, y, dx, dy);*/
+
+
     if(PenWIDTH>0)painter->setPen(pen);
     else painter->setPen(Qt::NoPen);
     painter->setBrush(brush);
@@ -48,20 +52,7 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(T==3)painter->drawRoundRect(x, y, a, b, RoundX, RoundY);
     else if(T==1)painter->drawRect(x, y, dx, dy);
     else if(T==2)painter->drawEllipse(x, y, dx, dy);
-    else if(T==4)
-    {
-        /*QPen p;
-        p.setWidth(selectWIDTH);
-        p.setColor(Qt::black);
-        p.setStyle(Qt::DashLine);
-        p.setCapStyle(Qt::FlatCap);
-        p.setJoinStyle(Qt::MiterJoin);
-        painter->setPen(p);
-        painter->setBrush(Qt::NoBrush);
-        painter->setOpacity(1);
-        painter->rotate(-ANGLE);
-        painter->drawRect(x, y, dx, dy);*/
-    }
+
 
     Q_UNUSED(option);
     Q_UNUSED(widget);

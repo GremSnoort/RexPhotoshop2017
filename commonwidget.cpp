@@ -430,7 +430,7 @@ CommonWidget::CommonWidget(QMainWindow *parent) : QMainWindow(parent)
 
 void CommonWidget::SetOpacity(int o)
 {
-    OPACITY = o*0.01;   
+    OPACITY = o*0.01;
     if(o==0)
     {
         LabelOpacity->setStyleSheet("color: rgb(255, 0, 0);");
@@ -447,6 +447,8 @@ void CommonWidget::SetOpacity(int o)
         TitleBrushStyle->show();
         BrushStyleBox->show();
     }
+
+    emit Changed();
 }
 
 void CommonWidget::SetRoundCornersX(int r)
@@ -467,6 +469,7 @@ void CommonWidget::SetRoundCornersX(int r)
         LabelRoundCornersX->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelRoundCornersX->setText(QString::number(r)+"%");
     }
+    emit Changed();
 }
 
 void CommonWidget::SetRoundCornersY(int r)
@@ -487,12 +490,16 @@ void CommonWidget::SetRoundCornersY(int r)
         LabelRoundCornersY->setStyleSheet("color: rgb(160, 200, 180);\n");
         LabelRoundCornersY->setText(QString::number(r)+"%");
     }
+
+    emit Changed();
 }
 
 void CommonWidget::SetAngle(int a)
 {
     ANGLE = a;
     LabelAngle->setText(QString::number(a)+"°");
+
+    emit Changed();
 }
 
 void CommonWidget::SetPenWidth(int w)
@@ -524,17 +531,23 @@ void CommonWidget::SetPenWidth(int w)
         JointStyleBox->show();
     }
 
+    emit Changed();
+
 }
 
 void CommonWidget::SetPenColor(QColor Q)
 {
     PenCOLOR = Q;
     PenColor->setStyleSheet(QString("background-color: %1").arg(PenCOLOR.name()));
+
+    emit Changed();
 }
 void CommonWidget::SetBrushColor(QColor Q)
 {
     BrushCOLOR = Q;
     BrushColor->setStyleSheet(QString("background-color: %1").arg(BrushCOLOR.name()));
+
+    emit Changed();
 }
 
 void CommonWidget::SetPenStyle(QString s)
@@ -545,6 +558,8 @@ void CommonWidget::SetPenStyle(QString s)
     if(s=="DashDot")PenSTYLE = Qt::DashDotLine;
     if(s=="DashDotDot")PenSTYLE = Qt::DashDotDotLine;
     if(s=="CustomDash")PenSTYLE = Qt::CustomDashLine;
+
+    emit Changed();
 }
 
 void CommonWidget::SetPenCapStyle(QString s)
@@ -552,6 +567,8 @@ void CommonWidget::SetPenCapStyle(QString s)
     if(s=="Square")CapSTYLE = Qt::SquareCap;
     if(s=="Flat")CapSTYLE = Qt::FlatCap;
     if(s=="Round")CapSTYLE = Qt::RoundCap;
+
+    emit Changed();
 }
 
 void CommonWidget::SetPenJointStyle(QString s)
@@ -559,6 +576,8 @@ void CommonWidget::SetPenJointStyle(QString s)
     if(s=="Bevel")JointSTYLE = Qt::BevelJoin;
     if(s=="Miter")JointSTYLE = Qt::MiterJoin;
     if(s=="Round")JointSTYLE = Qt::RoundJoin;
+
+    emit Changed();
 }
 
 void CommonWidget::SetBrushStyle(QString s)
@@ -578,6 +597,8 @@ void CommonWidget::SetBrushStyle(QString s)
     if(s=="BDiag")BrushSTYLE = Qt::BDiagPattern;
     if(s=="FDiag")BrushSTYLE = Qt::FDiagPattern;
     if(s=="DCross")BrushSTYLE = Qt::DiagCrossPattern;
+
+    emit Changed();
 
 }
 
