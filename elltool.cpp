@@ -44,6 +44,7 @@ void EllTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
+        it->SetParameters();
         it->SetYX(prX, prY);
         it->dx = newX-prX;
         it->dy = newY-prY;

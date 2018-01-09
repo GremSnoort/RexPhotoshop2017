@@ -13,6 +13,7 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
+
     connect(scene, SIGNAL(Release()), this, SLOT(Release()));
 
     WID = W;
@@ -46,11 +47,12 @@ void SelectionTool::Press(qreal x, qreal y)
         RB->setGeometry(QRect(x, y, 1, 1));
         RB->show();
 
+        draw = true;
    }
 }
 void SelectionTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
-    if(UP)
+    if(UP&&draw)
     {
         QPainterPath P(QPoint(prX, prY));
         P.setFillRule(Qt::WindingFill);
@@ -58,20 +60,24 @@ void SelectionTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
         sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
 
         RB->setGeometry(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
-
     }
 }
 
+
 void SelectionTool::Release()
 {
-
+    draw = false;
 }
 
 void SelectionTool::RepaintAll()
 {
     for(int i=0; i<sc->selectedItems().size(); i++)
     {
+        qreal xx = sc->selectedItems().at(i)->scenePos().x();
+        qreal yy = sc->selectedItems().at(i)->scenePos().y();
         dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
+        //dynamic_cast<Item*>(sc->selectedItems().at(i))->SetYX(xx, yy);
+
     }
    /* foreach (Item*it, dynamic_cast<QList<Item*>>(sc->selectedItems())) {
         it->SetParameters();

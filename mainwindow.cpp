@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     et = new EllTool(this, WID, myWorkSpace->scene);
     rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
     st = new SelectionTool(this, WID, myWorkSpace->scene, ui->gridLayoutWidget);
+    connect(WID, SIGNAL(Changed()), myWorkSpace, SLOT(update()));
 
 
 }

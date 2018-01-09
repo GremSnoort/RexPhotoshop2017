@@ -38,6 +38,7 @@ public:
 
 
     bool UP = false;
+    bool draw = false;
 
 
 signals:
@@ -47,6 +48,7 @@ public slots:
     void SetUP();
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
+
     void Release();
 
     void RepaintAll();

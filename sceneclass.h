@@ -36,6 +36,7 @@ public:
 
     QPointF     previousPoint;
 
+
     bool IsModified = false;
 
 
@@ -55,6 +56,7 @@ public:
 signals:
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
+
     void Release();
 
 public slots:
