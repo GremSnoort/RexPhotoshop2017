@@ -11,7 +11,6 @@
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
 #include <QTextStream>
-#include <QRubberBand>
 
 #include <QColorDialog>
 
@@ -30,16 +29,13 @@ public:
     CommonWidget*WID;
     SceneClass *sc;
 
-    Item *it;
-
-    QRubberBand *RB;
+    Item *it;    
 
     QPushButton *B;
 
-
     bool UP = false;
     bool draw = false;
-
+    bool del = false;
 
 signals:
 

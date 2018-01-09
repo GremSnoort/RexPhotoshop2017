@@ -19,34 +19,40 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     WID = W;
     sc = scene;
 
-    connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
-
-
-    RB = new QRubberBand(QRubberBand::Rectangle, wW);
-    RB->setStyleSheet("color: rgb(160, 200, 180);");
-
+    connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));    
 }
 
 void SelectionTool::SetUP()
 {
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(!UP)RB->hide();
+    if(!UP)
+    {
+        sc->clearSelection();
+        sc->removeItem(sc->items().first());
+    }
 }
 
 void SelectionTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
+        if(del)sc->removeItem(sc->items().first());
         QPainterPath P(QPoint(x, y));
 
         P.setFillRule(Qt::WindingFill);
         P.addRect(x, y, 1, 1);
         sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
 
-        RB->setGeometry(QRect(x, y, 1, 1));
-        RB->show();
+        it = new Item(0, WID);
+        it->T = 4;
+        it->x = x;
+        it->y = y;
+        it->dx = 1;
+        it->dy = 1;
+        sc->addItem(it);
 
+        del = true;
         draw = true;
    }
 }
@@ -59,7 +65,10 @@ void SelectionTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
         P.addRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
         sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
 
-        RB->setGeometry(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
+        it->x = prX;
+        it->y = prY;
+        it->dx = newX-prX;
+        it->dy = newY-prY;
     }
 }
 
@@ -73,13 +82,17 @@ void SelectionTool::RepaintAll()
 {
     for(int i=0; i<sc->selectedItems().size(); i++)
     {
-        qreal xx = sc->selectedItems().at(i)->scenePos().x();
-        qreal yy = sc->selectedItems().at(i)->scenePos().y();
-        dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
-        //dynamic_cast<Item*>(sc->selectedItems().at(i))->SetYX(xx, yy);
+        qreal xx = sc->selectedItems().at(i)->sceneBoundingRect().topLeft().x();
+        qreal yy = sc->selectedItems().at(i)->sceneBoundingRect().topLeft().y();
 
-    }
-   /* foreach (Item*it, dynamic_cast<QList<Item*>>(sc->selectedItems())) {
-        it->SetParameters();
-    }*/
+        QTextStream out(stdout);
+
+        out<<xx<<"  "<<yy<<endl;
+
+        dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
+        out<<xx<<" after "<<yy<<endl;
+
+        //sc->selectedItems().at(i)->setPos(xx, yy);
+
+    }   
 }

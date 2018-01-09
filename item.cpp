@@ -19,32 +19,16 @@ void Item::SetParameters()
     RoundX = WID->ROUNDCornersX;
     RoundY = WID->ROUNDCornersY;
     ANGLE = WID->ANGLE;
-
-
 }
 
 void Item::SetYX(qreal xx, qreal yy)
 {
     x = yy*sin(ANGLE*M_PI/180) + xx*cos(ANGLE*M_PI/180);
-    y = yy*cos(ANGLE*M_PI/180) - xx*sin(ANGLE*M_PI/180);
-    //x = xx;
-    //y = yy;
+    y = yy*cos(ANGLE*M_PI/180) - xx*sin(ANGLE*M_PI/180);    
 }
 
 void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
-     /*   if(WID->PenWIDTH>0)painter->setPen(WID->ReturnPen());
-        else painter->setPen(Qt::NoPen);
-        painter->setBrush(WID->ReturnBrush());
-        painter->setOpacity(WID->OPACITY);
-        painter->rotate(WID->ANGLE);
-
-        if(T==3)painter->drawRoundRect(x, y, a, b, WID->ROUNDCornersX, WID->ROUNDCornersY);
-        else if(T==1)painter->drawRect(x, y, dx, dy);
-        else if(T==2)painter->drawEllipse(x, y, dx, dy);*/
-
-
     if(PenWIDTH>0)painter->setPen(pen);
     else painter->setPen(Qt::NoPen);
     painter->setBrush(brush);
@@ -54,7 +38,18 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(T==3)painter->drawRoundRect(x, y, dx, dy, RoundX, RoundY);
     else if(T==1)painter->drawRect(x, y, dx, dy);
     else if(T==2)painter->drawEllipse(x, y, dx, dy);
+    else if(T==4)
+    {
+        painter->setOpacity(1);
+        painter->rotate(-ANGLE);
+        painter->setPen(Qt::DashLine);
+        painter->setBrush(QBrush(QColor(255, 255, 255, 127))); // semitransparent white
 
+        QPainterPath path;
+        path.addRect(x, y, dx, dy);
+
+        painter->drawPath(path);
+    }
 
     Q_UNUSED(option);
     Q_UNUSED(widget);
