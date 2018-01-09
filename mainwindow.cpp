@@ -197,6 +197,8 @@ void MainWindow::MakeNewFile()
 void MainWindow::close()
 {
     myWorkSpace->scene->clear();
+    myWorkSpace->scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
+    myWorkSpace->scene->setSceneRect(0, 0, 1315, 895);
     myWorkSpace->scene->IsModified=false;
     ui->NameOfFile->setText("New_File");
 

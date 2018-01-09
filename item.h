@@ -25,7 +25,7 @@ public:
     int PenWIDTH;
     int RoundX;
     int RoundY;
-    int ANGLE;
+    int ANGLE = 0;
 
 
 

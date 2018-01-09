@@ -37,10 +37,9 @@ void RoundRectTool::Press(qreal x, qreal y)
         it = new Item(0, WID);
         it->SetParameters();
         it->T = 3;
-        it->dx = 1;
-        it->dy = 1;
+        it->dx = 10;
+        it->dy = 10;
         it->SetYX(x, y);
-        //it->setPos(x, y);
         sc->addItem(it);
 
         sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
@@ -53,13 +52,16 @@ void RoundRectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-        //it->setPos(std::min(prX,newX), std::min(prY, newY));
         it->SetParameters();
-        it->SetYX(std::min(prX,newX), std::min(prY, newY));
-        //it->x = std::min(prX,newX);
-        //it->y = std::min(prY, newY);
         it->dx = abs(newX-prX);
-        it->dy = abs(newY-prY);
+        it->dy = abs(newY-prY);        
+
+        qreal B = (it->ANGLE*M_PI/360)+atan(it->dy/it->dx);
+        qreal Z = 2*sqrt(it->dy*it->dy+it->dx*it->dx)*sin(it->ANGLE*M_PI/360);
+        if(newX-prX<0 && newY-prY<0)it->SetYX(std::min(prX,newX)+Z*sin(B), std::min(prY, newY)-Z*cos(B));
+        else if(newX-prX<0 && newY-prY>0)it->SetYX(std::min(prX,newX)+it->dx-it->dx*cos(it->ANGLE*M_PI/180), std::min(prY, newY)-it->dx*sin(it->ANGLE*M_PI/180));
+        else if(newX-prX>0 && newY-prY<0)it->SetYX(std::min(prX,newX)+it->dy*sin(it->ANGLE*M_PI/180), std::min(prY, newY)+it->dy-it->dy*cos(it->ANGLE*M_PI/180));
+        else it->SetYX(std::min(prX,newX), std::min(prY, newY));
     }
 }
 

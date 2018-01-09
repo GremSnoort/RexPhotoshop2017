@@ -12,6 +12,7 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
     connect(scene, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(RectChanges(QRectF)));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(update()));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(update()));
+    connect(scene, SIGNAL(Release()), this, SLOT(update()));
 
 }
 
@@ -27,7 +28,6 @@ void GraphicsViewClass::CreateNew()
     scene->clear();
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));    
 }
-
 
 
 ///ZOOM
