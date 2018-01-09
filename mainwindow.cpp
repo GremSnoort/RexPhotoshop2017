@@ -20,10 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(AskSaveDialog, SIGNAL(SaveAs(bool)), this, SLOT(FileSaveAs(bool)));
 
 
-
-
-
-
     //ZOOM
     zoomUp = new QAction(this);
     zoomUp->setShortcut(tr("Ctrl+Up"));
@@ -88,6 +84,13 @@ MainWindow::MainWindow(QWidget *parent) :
     rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
     st = new SelectionTool(this, WID, myWorkSpace->scene, ui->gridLayoutWidget);
     connect(WID, SIGNAL(Changed()), myWorkSpace, SLOT(update()));
+
+
+    //SELECTION
+    clearSelection = new QAction(this);
+    clearSelection->setShortcut(tr("Ctrl+D"));
+    myWorkSpace->addAction(clearSelection);
+    connect(clearSelection, SIGNAL(triggered(bool)), st, SLOT(ClearSelection()));
 
 
 }

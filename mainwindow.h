@@ -80,6 +80,7 @@ public:
     QAction* closeFile;
     QAction* setColor;
     QAction* deleteIt;
+    QAction* clearSelection;
 
 
 

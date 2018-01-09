@@ -2,6 +2,9 @@
 
 SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene, QWidget *wW) : QObject(parent)
 {
+    WID = W;
+    sc = scene;
+
     B = new QPushButton(parent);
 
     B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Selection.png")));
@@ -13,24 +16,26 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
-
     connect(scene, SIGNAL(Release()), this, SLOT(Release()));
+    connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
+    connect(scene, SIGNAL(Release()), this, SLOT(RepaintAll()));
+}
 
-    WID = W;
-    sc = scene;
-
-    connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));    
+void SelectionTool::ClearSelection()
+{
+    sc->clearSelection();
+    if(del)
+    {
+        sc->removeItem(sc->items().first());
+        del = false;
+    }
 }
 
 void SelectionTool::SetUP()
 {
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(!UP)
-    {
-        sc->clearSelection();
-        sc->removeItem(sc->items().first());
-    }
+    if(!UP)ClearSelection();
 }
 
 void SelectionTool::Press(qreal x, qreal y)
