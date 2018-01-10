@@ -8,14 +8,13 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
     scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     scene->clear();
 
-
     connect(scene, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(RectChanges(QRectF)));
     connect(scene, SIGNAL(changed(QList<QRectF>)), this, SLOT(update()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(update()));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(update()));
     connect(scene, SIGNAL(Release(qreal,qreal)), this, SLOT(update()));
 
-
+    this->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 }
 
 void GraphicsViewClass::RectChanges(QRectF R)

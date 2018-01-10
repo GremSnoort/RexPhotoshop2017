@@ -223,6 +223,12 @@ void MainWindow::MakeNewFile()
 
 void MainWindow::close()
 {
+    rt->TurnOnOff(false);
+    rrt->TurnOnOff(false);
+    et->TurnOnOff(false);
+    st->TurnOnOff(false);
+    plt->TurnOnOff(false);
+
     myWorkSpace->scene->clear();
     myWorkSpace->scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     myWorkSpace->scene->setSceneRect(0, 0, 1315, 895);

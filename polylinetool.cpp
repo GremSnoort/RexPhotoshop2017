@@ -10,7 +10,7 @@ PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *sce
     B->move(10, 285);
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    connect(B, SIGNAL(released()), this, SLOT(SetUP()));
+    //connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release(qreal, qreal)));
@@ -42,18 +42,19 @@ void PolyLineTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-
         it = new Item(0, WID);
         it->SetParameters();
         it->T = 4;
         it->points.clear();
         it->points<<QPoint(x, y);
         sc->addItem(it);
-        sc->items().first()->setFlag(QGraphicsLineItem::ItemIsSelectable, true);
 
+        sc->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        //sc->items().first()->setSelected(true);
+
+        sc->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
         draw = true;
-
    }
 }
 void PolyLineTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
@@ -70,9 +71,10 @@ void PolyLineTool::Release(qreal newX, qreal newY)
 {
     if(UP)
     {
-        it->points<<QPoint(newX, newY);
+        it->points<<QPoint(newX, newY);        
         del = false;
         draw = false;
+        //sc->removeItem(sc->items().first());
     }
 }
 

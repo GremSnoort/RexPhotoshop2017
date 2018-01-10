@@ -28,16 +28,10 @@ public:
     int RoundY;
     int ANGLE = 0;
 
-    QVector<QPoint> points =  QVector<QPoint>();
+    QPolygonF points = QPolygonF();
 
 
     CommonWidget *WID;
-
-
-
-    //needs for round rect in paint
-    qreal a;
-    qreal b;
 
     qreal x;
     qreal y;

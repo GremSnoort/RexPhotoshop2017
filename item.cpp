@@ -53,6 +53,8 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
     else if(T==4)
     {
+        painter->rotate(-ANGLE);
+        painter->setBrush(Qt::NoBrush);
         painter->drawPolyline(points);
     }
 

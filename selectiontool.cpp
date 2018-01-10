@@ -75,9 +75,8 @@ void SelectionTool::Press(qreal x, qreal y)
         if(del)sc->removeItem(sc->items().first());
         QPainterPath P(QPoint(x, y));
 
-        P.setFillRule(Qt::WindingFill);
         P.addRect(x, y, 1, 1);
-        sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
+        sc->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());
 
         it = new Item(0, WID);
         it->T = 0;
@@ -96,9 +95,9 @@ void SelectionTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
     if(UP&&draw)
     {
         QPainterPath P(QPoint(prX, prY));
-        P.setFillRule(Qt::WindingFill);
+
         P.addRect(std::min(prX, newX), std::min(prY, newY), abs(prX-newX), abs(prY-newY));
-        sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
+        sc->setSelectionArea(P, Qt::IntersectsItemShape, QTransform());
 
         it->x = prX;
         it->y = prY;
