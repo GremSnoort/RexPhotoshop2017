@@ -11,6 +11,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
 #include <QTextStream>
+#include <QAction>
 
 #include <QColorDialog>
 
@@ -29,7 +30,11 @@ public:
     CommonWidget*WID;
     SceneClass *sc;
 
-    Item *it;    
+    Item *it;
+
+    QAction* clearSelection;
+    QAction* removeItems;
+
 
     QPushButton *B;
 
@@ -47,6 +52,7 @@ public slots:
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
     void ClearSelection();
+    void RemoveSelectedItems();
 
     void RepaintAll();
 

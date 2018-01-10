@@ -19,6 +19,25 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
     connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(RepaintAll()));
+
+    clearSelection = new QAction(parent);
+    clearSelection->setShortcut(tr("Ctrl+D"));
+    parent->addAction(clearSelection);
+    connect(clearSelection, SIGNAL(triggered(bool)), this, SLOT(ClearSelection()));
+
+    removeItems = new QAction(parent);
+    removeItems->setShortcut(tr("X"));
+    parent->addAction(removeItems);
+    connect(removeItems, SIGNAL(triggered(bool)), this, SLOT(RemoveSelectedItems()));
+}
+
+void SelectionTool::RemoveSelectedItems()
+{
+    while(sc->selectedItems().size()>0)
+    {
+        sc->removeItem(sc->selectedItems().first());
+    }
+    ClearSelection();
 }
 
 void SelectionTool::ClearSelection()

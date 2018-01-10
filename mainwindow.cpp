@@ -87,13 +87,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(WID, SIGNAL(Changed()), myWorkSpace, SLOT(update()));
 
-
-
     //SELECTION
-    clearSelection = new QAction(this);
-    clearSelection->setShortcut(tr("Ctrl+D"));
-    myWorkSpace->addAction(clearSelection);
-    connect(clearSelection, SIGNAL(triggered(bool)), st, SLOT(ClearSelection()));
+
 
     connect(rt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
     connect(rt, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
