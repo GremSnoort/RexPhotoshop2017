@@ -54,7 +54,6 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     else if(T==4)
     {
         painter->drawPolyline(points);
-
     }
 
     Q_UNUSED(option);

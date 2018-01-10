@@ -51,6 +51,7 @@ void PolyLineTool::Press(qreal x, qreal y)
         sc->addItem(it);
         sc->items().first()->setFlag(QGraphicsLineItem::ItemIsSelectable, true);
 
+
         draw = true;
 
    }

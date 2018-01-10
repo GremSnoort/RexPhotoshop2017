@@ -115,22 +115,20 @@ void SelectionTool::Release()
 
 void SelectionTool::RepaintAll()
 {
+
     for(int i=0; i<sc->selectedItems().size(); i++)
-    {
-        qreal xx = sc->selectedItems().at(i)->sceneBoundingRect().topLeft().x();
-        qreal yy = sc->selectedItems().at(i)->sceneBoundingRect().topLeft().y();
+    {        
+        qreal xx = dynamic_cast<Item*>(sc->selectedItems().at(i))->x;
+        qreal yy = dynamic_cast<Item*>(sc->selectedItems().at(i))->y;
 
         QTextStream out(stdout);
-
-        out<<xx<<"  "<<yy<<endl;
+        out<<sc->selectedItems().size()<<"    "<<xx<<"  "<<yy<<endl;
 
         dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
-
+        dynamic_cast<Item*>(sc->selectedItems().at(i))->points<<QPoint(xx, yy);
+        //dynamic_cast<Item*>(sc->selectedItems().at(i))->SetYX(xx, yy);
 
         out<<xx<<" after "<<yy<<endl;
-
-        //sc->selectedItems().at(i)->setPos(xx, yy);
-
     }   
 
 
