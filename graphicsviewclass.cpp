@@ -10,9 +10,11 @@ GraphicsViewClass::GraphicsViewClass(QWidget *parent) : QGraphicsView(parent)
 
 
     connect(scene, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(RectChanges(QRectF)));
+    connect(scene, SIGNAL(changed(QList<QRectF>)), this, SLOT(update()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(update()));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(update()));
     connect(scene, SIGNAL(Release(qreal,qreal)), this, SLOT(update()));
+
 
 }
 

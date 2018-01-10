@@ -23,6 +23,7 @@ void RectTool::SetUP()
 {
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)emit TurnOffAllOthers(1);
 }
 
 void RectTool::Press(qreal x, qreal y)

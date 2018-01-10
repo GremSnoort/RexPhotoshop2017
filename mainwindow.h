@@ -122,6 +122,8 @@ public slots:
     void close();
     void newone();
 
+    void SwitchTools(int N);
+
    // void ChangeColor(QColor q);
 
 

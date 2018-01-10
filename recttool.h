@@ -42,6 +42,7 @@ public:
     bool draw = false;
 
 signals:
+    void TurnOffAllOthers(int N);
 
 public slots:
 

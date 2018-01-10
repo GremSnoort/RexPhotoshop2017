@@ -27,37 +27,26 @@ void PolyLineTool::SetUP()
     if(!UP)
         WID->BrushWIDGET->show();
     else
+    {
         WID->BrushWIDGET->hide();
+        if(UP)emit TurnOffAllOthers(4);
+    }
 }
 
 void PolyLineTool::Press(qreal x, qreal y)
 {
     if(UP)
     {
-        if(!draw)
-        {
-            it = new Item(0, WID);
-            it->SetParameters();
-            it->T = 4;
-            it->points.clear();
-            countOfPoints = 1;
-            it->points<<QPoint(x, y);           
-            sc->addItem(it);
-            sc->items().first()->setFlag(QGraphicsLineItem::ItemIsSelectable, true);
 
-            draw = true;
+        it = new Item(0, WID);
+        it->SetParameters();
+        it->T = 4;
+        it->points.clear();
+        it->points<<QPoint(x, y);
+        sc->addItem(it);
+        sc->items().first()->setFlag(QGraphicsLineItem::ItemIsSelectable, true);
 
-        }else
-        {
-            it->points<<QPoint(x, y);
-            ++countOfPoints;
-
-        }
-
-        if(QApplication::keyboardModifiers()!=Qt::ControlModifier)
-        {
-            draw = false;
-        }
+        draw = true;
 
    }
 }
@@ -65,8 +54,9 @@ void PolyLineTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
     if(UP&&draw)
     {
-        if(it->points.size()>countOfPoints)it->points.removeLast();
+        if(del)it->points.removeLast();
         it->points<<QPoint(newX, newY);
+        del = true;
     }
 }
 
@@ -75,7 +65,8 @@ void PolyLineTool::Release(qreal newX, qreal newY)
     if(UP)
     {
         it->points<<QPoint(newX, newY);
-        ++countOfPoints;
+        del = false;
+        draw = false;
     }
 }
 

@@ -25,7 +25,10 @@ void RoundRectTool::SetUP()
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
     if(UP)
+    {
         WID->RoundWIDGET->show();
+        emit TurnOffAllOthers(3);
+    }
     else
         WID->RoundWIDGET->hide();
 }

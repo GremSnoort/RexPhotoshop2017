@@ -38,6 +38,7 @@ public:
     bool del = false;
 
 signals:
+    void TurnOffAllOthers(int N);
 
 public slots:
 

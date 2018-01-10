@@ -15,6 +15,7 @@ EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObj
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
 
+
     WID = W;
     sc = scene;
 }
@@ -23,6 +24,7 @@ void EllTool::SetUP()
 {
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)emit TurnOffAllOthers(2);
 }
 
 void EllTool::Press(qreal x, qreal y)

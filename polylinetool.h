@@ -34,14 +34,15 @@ public:
 
 
     Item *it;
-    int countOfPoints = 0;
+    bool del = false;
 
 
     bool UP = false;
     bool draw = false;
 
 
-signals:    
+signals:
+    void TurnOffAllOthers(int N);
 
 public slots:
 

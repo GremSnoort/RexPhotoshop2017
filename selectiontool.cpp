@@ -36,6 +36,7 @@ void SelectionTool::SetUP()
     UP = !UP;
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
     if(!UP)ClearSelection();
+    if(UP)emit TurnOffAllOthers(0);
 }
 
 void SelectionTool::Press(qreal x, qreal y)
@@ -95,9 +96,13 @@ void SelectionTool::RepaintAll()
         out<<xx<<"  "<<yy<<endl;
 
         dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
+
+
         out<<xx<<" after "<<yy<<endl;
 
         //sc->selectedItems().at(i)->setPos(xx, yy);
 
     }   
+
+
 }

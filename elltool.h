@@ -39,6 +39,8 @@ public:
 
 signals:
 
+    void TurnOffAllOthers(int N);
+
 public slots:
 
     void SetUP();
