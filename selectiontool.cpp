@@ -1,6 +1,6 @@
 #include "selectiontool.h"
 
-SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene, QWidget *wW) : QObject(parent)
+SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {
     WID = W;
     sc = scene;
@@ -10,15 +10,15 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/Selection.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
-    B->move(10, 285);
+    B->move(10, 355);
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
-    connect(scene, SIGNAL(Release()), this, SLOT(Release()));
+    connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
     connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
-    connect(scene, SIGNAL(Release()), this, SLOT(RepaintAll()));
+    connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(RepaintAll()));
 }
 
 void SelectionTool::ClearSelection()
@@ -50,7 +50,7 @@ void SelectionTool::Press(qreal x, qreal y)
         sc->setSelectionArea(P, Qt::IntersectsItemBoundingRect, QTransform());
 
         it = new Item(0, WID);
-        it->T = 4;
+        it->T = 0;
         it->x = x;
         it->y = y;
         it->dx = 1;

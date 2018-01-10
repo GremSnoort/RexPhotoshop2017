@@ -8,6 +8,7 @@
 #include "recttool.h"
 #include "elltool.h"
 #include "roundrecttool.h"
+#include "polylinetool.h"
 #include "selectiontool.h"
 
 #include "svgopen.h"
@@ -65,6 +66,7 @@ public:
     EllTool *et;
     RoundRectTool *rrt;
     SelectionTool *st;
+    PolyLineTool *plt;
     CommonWidget *WID;
 
 

@@ -7,6 +7,7 @@
 #include <QPen>
 #include <QBrush>
 #include <QtMath>
+#include <QPoint>
 
 #include "commonwidget.h"
 
@@ -27,6 +28,7 @@ public:
     int RoundY;
     int ANGLE = 0;
 
+    QVector<QPoint> points =  QVector<QPoint>();
 
 
     CommonWidget *WID;

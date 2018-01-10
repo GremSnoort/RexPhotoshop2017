@@ -82,8 +82,11 @@ MainWindow::MainWindow(QWidget *parent) :
     rt = new RectTool(this, WID, myWorkSpace->scene);
     et = new EllTool(this, WID, myWorkSpace->scene);
     rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
-    st = new SelectionTool(this, WID, myWorkSpace->scene, ui->gridLayoutWidget);
+    st = new SelectionTool(this, WID, myWorkSpace->scene);
+    plt = new PolyLineTool(this, WID, myWorkSpace->scene);
+
     connect(WID, SIGNAL(Changed()), myWorkSpace, SLOT(update()));
+
 
 
     //SELECTION

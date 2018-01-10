@@ -38,17 +38,22 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(T==3)painter->drawRoundRect(x, y, dx, dy, RoundX, RoundY);
     else if(T==1)painter->drawRect(x, y, dx, dy);
     else if(T==2)painter->drawEllipse(x, y, dx, dy);
-    else if(T==4)
+    else if(T==0)
     {
         painter->setOpacity(1);
         painter->rotate(-ANGLE);
         painter->setPen(Qt::DashLine);
-        painter->setBrush(QBrush(QColor(255, 255, 255, 127))); // semitransparent white
+        painter->setBrush(QBrush(QColor(255, 255, 255, 0))); // semitransparent white
 
         QPainterPath path;
         path.addRect(x, y, dx, dy);
 
         painter->drawPath(path);
+        update(path.boundingRect());
+    }
+    else if(T==4)
+    {
+        painter->drawPolyline(points);
     }
 
     Q_UNUSED(option);

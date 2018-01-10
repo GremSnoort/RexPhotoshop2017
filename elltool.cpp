@@ -13,7 +13,7 @@ EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObj
     connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
-    connect(scene, SIGNAL(Release()), this, SLOT(Release()));
+    connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
 
     WID = W;
     sc = scene;
