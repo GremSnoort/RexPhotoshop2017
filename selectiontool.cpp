@@ -31,12 +31,22 @@ void SelectionTool::ClearSelection()
     }
 }
 
+void SelectionTool::TurnOnOff(bool state)
+{
+    UP = state;
+
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)
+    {
+        emit TurnOffAllOthers(false);
+        WID->RoundWIDGET->show();
+    }else
+        ClearSelection();
+}
+
 void SelectionTool::SetUP()
 {
-    UP = !UP;
-    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(!UP)ClearSelection();
-    if(UP)emit TurnOffAllOthers(0);
+    UP ? TurnOnOff(false) : TurnOnOff(true);
 }
 
 void SelectionTool::Press(qreal x, qreal y)

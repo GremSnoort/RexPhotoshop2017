@@ -20,11 +20,17 @@ EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObj
     sc = scene;
 }
 
+void EllTool::TurnOnOff(bool state)
+{
+    UP = state;
+
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)emit TurnOffAllOthers(false);
+}
+
 void EllTool::SetUP()
 {
-    UP = !UP;
-    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(UP)emit TurnOffAllOthers(2);
+    UP ? TurnOnOff(false) : TurnOnOff(true);
 }
 
 void EllTool::Press(qreal x, qreal y)

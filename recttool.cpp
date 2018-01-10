@@ -19,11 +19,17 @@ RectTool::RectTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QO
     sc = scene;
 }
 
+void RectTool::TurnOnOff(bool state)
+{
+    UP = state;
+
+    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
+    if(UP)emit TurnOffAllOthers(false);
+}
+
 void RectTool::SetUP()
 {
-    UP = !UP;
-    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(UP)emit TurnOffAllOthers(1);
+    UP ? TurnOnOff(false) : TurnOnOff(true);
 }
 
 void RectTool::Press(qreal x, qreal y)

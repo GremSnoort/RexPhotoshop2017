@@ -38,7 +38,7 @@ public:
     bool del = false;
 
 signals:
-    void TurnOffAllOthers(int N);
+    void TurnOffAllOthers(bool state);
 
 public slots:
 
@@ -49,6 +49,8 @@ public slots:
     void ClearSelection();
 
     void RepaintAll();
+
+    void TurnOnOff(bool state);
 };
 
 #endif // SELECTIONTOOL_H

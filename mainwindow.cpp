@@ -95,72 +95,34 @@ MainWindow::MainWindow(QWidget *parent) :
     myWorkSpace->addAction(clearSelection);
     connect(clearSelection, SIGNAL(triggered(bool)), st, SLOT(ClearSelection()));
 
+    connect(rt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
+    connect(rt, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
+    connect(rt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
+    connect(rt, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
 
-    connect(rt, SIGNAL(TurnOffAllOthers(int)), this, SLOT(SwitchTools(int)));
-    connect(et, SIGNAL(TurnOffAllOthers(int)), this, SLOT(SwitchTools(int)));
-    connect(rrt, SIGNAL(TurnOffAllOthers(int)), this, SLOT(SwitchTools(int)));
-    connect(st, SIGNAL(TurnOffAllOthers(int)), this, SLOT(SwitchTools(int)));
-    connect(plt, SIGNAL(TurnOffAllOthers(int)), this, SLOT(SwitchTools(int)));
+    connect(et, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
+    connect(et, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
+    connect(et, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
+    connect(et, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
 
-}
+    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
+    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
+    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
+    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
 
-void MainWindow::SwitchTools(int N)
-{
-    if(N==0)
-    {
-        rt->UP = false;
-        et->UP = false;
-        rrt->UP = false;
-        plt->UP = false;
-        rt->B->setStyleSheet("");
-        et->B->setStyleSheet("");
-        rrt->B->setStyleSheet("");
-        plt->B->setStyleSheet("");
-    }
-    if(N==1)
-    {
-        st->UP = false;
-        et->UP = false;
-        rrt->UP = false;
-        plt->UP = false;
-        st->B->setStyleSheet("");
-        et->B->setStyleSheet("");
-        rrt->B->setStyleSheet("");
-        plt->B->setStyleSheet("");
-    }
-    if(N==2)
-    {
-        rt->UP = false;
-        st->UP = false;
-        rrt->UP = false;
-        plt->UP = false;
-        rt->B->setStyleSheet("");
-        st->B->setStyleSheet("");
-        rrt->B->setStyleSheet("");
-        plt->B->setStyleSheet("");
-    }
-    if(N==3)
-    {
-        rt->UP = false;
-        et->UP = false;
-        st->UP = false;
-        plt->UP = false;
-        rt->B->setStyleSheet("");
-        et->B->setStyleSheet("");
-        st->B->setStyleSheet("");
-        plt->B->setStyleSheet("");
-    }
-    if(N==4)
-    {
-        rt->UP = false;
-        et->UP = false;
-        rrt->UP = false;
-        st->UP = false;
-        rt->B->setStyleSheet("");
-        et->B->setStyleSheet("");
-        rrt->B->setStyleSheet("");
-        st->B->setStyleSheet("");
-    }
+    connect(st, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
+    connect(st, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
+    connect(st, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
+    connect(st, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
+
+    connect(plt, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
+    connect(plt, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
+    connect(plt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
+    connect(plt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
+
+
+
+
 }
 
 void MainWindow::open()

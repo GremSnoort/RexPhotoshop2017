@@ -42,7 +42,7 @@ public:
 
 
 signals:
-    void TurnOffAllOthers(int N);
+    void TurnOffAllOthers(bool state);
 
 public slots:
 
@@ -50,6 +50,8 @@ public slots:
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release(qreal newX, qreal newY);
+
+    void TurnOnOff(bool state);
 };
 
 #endif // POLYLINETOOL_H

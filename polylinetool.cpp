@@ -20,17 +20,22 @@ PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *sce
     sc = scene;
 }
 
-void PolyLineTool::SetUP()
+void PolyLineTool::TurnOnOff(bool state)
 {
-    UP = !UP;
+    UP = state;
+
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(!UP)
-        WID->BrushWIDGET->show();
-    else
+    if(UP)
     {
         WID->BrushWIDGET->hide();
-        if(UP)emit TurnOffAllOthers(4);
-    }
+        emit TurnOffAllOthers(false);
+    }else
+        WID->BrushWIDGET->show();
+}
+
+void PolyLineTool::SetUP()
+{
+    UP ? TurnOnOff(false) : TurnOnOff(true);
 }
 
 void PolyLineTool::Press(qreal x, qreal y)

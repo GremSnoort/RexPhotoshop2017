@@ -39,7 +39,7 @@ public:
 
 signals:
 
-    void TurnOffAllOthers(int N);
+    void TurnOffAllOthers(bool state);
 
 public slots:
 
@@ -47,6 +47,8 @@ public slots:
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
+
+    void TurnOnOff(bool state);
 };
 
 #endif // ELLTOOL_H

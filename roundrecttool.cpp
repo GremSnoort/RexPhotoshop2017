@@ -20,17 +20,22 @@ RoundRectTool::RoundRectTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     sc = scene;
 }
 
-void RoundRectTool::SetUP()
+void RoundRectTool::TurnOnOff(bool state)
 {
-    UP = !UP;
+    UP = state;
+
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
     if(UP)
     {
         WID->RoundWIDGET->show();
-        emit TurnOffAllOthers(3);
-    }
-    else
+        emit TurnOffAllOthers(false);
+    }else
         WID->RoundWIDGET->hide();
+}
+
+void RoundRectTool::SetUP()
+{
+    UP ? TurnOnOff(false) : TurnOnOff(true);
 }
 
 void RoundRectTool::Press(qreal x, qreal y)
