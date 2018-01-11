@@ -45,12 +45,10 @@ void PolyLineTool::Press(qreal x, qreal y)
         it = new Item(0, WID);
         it->SetParameters();
         it->T = 4;
-        it->points.clear();
         it->points<<QPoint(x, y);
         sc->addItem(it);
 
         sc->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        //sc->items().first()->setSelected(true);
 
         sc->items().first()->setFlag(QGraphicsItem::ItemIsMovable, true);
 
@@ -74,7 +72,6 @@ void PolyLineTool::Release(qreal newX, qreal newY)
         it->points<<QPoint(newX, newY);        
         del = false;
         draw = false;
-        //sc->removeItem(sc->items().first());
     }
 }
 

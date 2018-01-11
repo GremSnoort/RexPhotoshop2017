@@ -52,8 +52,7 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         update(path.boundingRect());
     }
     else if(T==4)
-    {        
-        //painter->drawRect(x, y, 100, 100);
+    {                
         painter->drawPolyline(points);
     }
 

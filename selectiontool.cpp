@@ -124,8 +124,7 @@ void SelectionTool::RepaintAll()
         out<<sc->selectedItems().size()<<"    "<<xx<<"  "<<yy<<endl;
 
         dynamic_cast<Item*>(sc->selectedItems().at(i))->SetParameters();
-        dynamic_cast<Item*>(sc->selectedItems().at(i))->points<<QPoint(xx, yy);
-        //dynamic_cast<Item*>(sc->selectedItems().at(i))->SetYX(xx, yy);
+
 
         out<<xx<<" after "<<yy<<endl;
     }   
