@@ -10,7 +10,7 @@ PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *sce
     B->move(10, 285);
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
-    //connect(B, SIGNAL(released()), this, SLOT(SetUP()));
+    connect(B, SIGNAL(released()), this, SLOT(SetUP()));
     connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release(qreal, qreal)));

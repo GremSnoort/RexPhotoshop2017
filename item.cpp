@@ -52,9 +52,8 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         update(path.boundingRect());
     }
     else if(T==4)
-    {
-        painter->rotate(-ANGLE);
-        painter->setBrush(Qt::NoBrush);
+    {        
+        //painter->drawRect(x, y, 100, 100);
         painter->drawPolyline(points);
     }
 
@@ -64,5 +63,6 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 QRectF Item::boundingRect() const
 {
-    return QRectF(x, y, dx, dy);
+    if(T==4)return points.boundingRect();
+        else return QRectF(x, y, dx, dy);
 }
