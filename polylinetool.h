@@ -39,6 +39,7 @@ public:
 
     bool UP = false;
     bool draw = false;
+    bool drawFirst = true;
 
 
 signals:

@@ -18,7 +18,7 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
     connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
     connect(WID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
-    connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(RepaintAll()));
+    //connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(RepaintAll()));
 
     clearSelection = new QAction(parent);
     clearSelection->setShortcut(tr("Ctrl+D"));
