@@ -1,4 +1,4 @@
-#include "selectiontool.h"
+﻿#include "selectiontool.h"
 
 SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {

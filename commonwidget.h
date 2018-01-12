@@ -33,10 +33,6 @@ public:
     Qt::PenCapStyle CapSTYLE = Qt::SquareCap;
     Qt::PenJoinStyle JointSTYLE = Qt::BevelJoin;
 
-
-
-
-
     qreal OPACITY = 1;
     int ROUNDCornersX = 25;
     int ROUNDCornersY = 25;
@@ -91,9 +87,6 @@ public:
     QWidget *BrushWIDGET;
 
     QPushButton *BrushColor;
-
-
-
 
     QLabel *TitleBrushStyle;
     QComboBox *BrushStyleBox;

@@ -1,5 +1,12 @@
 #include "polylinetool.h"
 
+class PolyLineToolRegistrator: public ToolRegistrator {
+public:
+    Tool* makeTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) { return new PolyLineTool(parent, W, scene) }
+}
+
+static ToorRegistrator pr(new PolyLineToolRegistrator);
+
 PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {
     B = new QPushButton(parent);
@@ -37,7 +44,7 @@ void PolyLineTool::TurnOnOff(bool state)
 
 void PolyLineTool::SetUP()
 {
-    UP ? TurnOnOff(false) : TurnOnOff(true);
+    TurnOnOff(!UP);
 }
 
 void PolyLineTool::Press(qreal x, qreal y)

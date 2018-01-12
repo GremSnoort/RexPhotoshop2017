@@ -36,7 +36,8 @@ SOURCES += \
     commonwidget.cpp \
     item.cpp \
     selectiontool.cpp \
-    polylinetool.cpp
+    polylinetool.cpp \
+    tool.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS += \
     commonwidget.h \
     item.h \
     selectiontool.h \
-    polylinetool.h
+    polylinetool.h \
+    tool.h
 
 FORMS += \
         mainwindow.ui \

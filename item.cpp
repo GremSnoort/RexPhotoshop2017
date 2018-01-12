@@ -1,5 +1,17 @@
 #include "item.h"
 
+
+class Tool {
+public:
+};
+
+class ToolRegistrator {
+public:
+    static QList<ToolRegistrator*> registry;
+    ToolRegistrator(Tool *) {}
+    virtual Tool *makeTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) =0;
+};
+
 Item::Item(QObject *parent, CommonWidget *W)
     : QObject(parent), QGraphicsItem()
 {
