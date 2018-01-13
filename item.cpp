@@ -1,6 +1,6 @@
 #include "item.h"
 
-
+/*
 class Tool {
 public:
 };
@@ -10,7 +10,7 @@ public:
     static QList<ToolRegistrator*> registry;
     ToolRegistrator(Tool *) {}
     virtual Tool *makeTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) =0;
-};
+};*/
 
 Item::Item(QObject *parent, CommonWidget *W)
     : QObject(parent), QGraphicsItem()
@@ -55,7 +55,7 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         painter->setOpacity(1);
         painter->rotate(-ANGLE);
         painter->setPen(Qt::DashLine);
-        painter->setBrush(QBrush(QColor(255, 255, 255, 0))); // semitransparent white
+        painter->setBrush(QBrush(QColor(255, 255, 255, 0)));
 
         QPainterPath path;
         path.addRect(x, y, dx, dy);

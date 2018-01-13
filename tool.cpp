@@ -2,7 +2,7 @@
 
 Tool::Tool(QObject *parent) : QObject(parent)
 {
-    B = new QPushButton(parent);
+    /*B = new QPushButton(parent);
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
@@ -14,7 +14,7 @@ Tool::Tool(QObject *parent) : QObject(parent)
 
 
     WID = W;
-    sc = scene;
+    sc = scene;*/
 }
 
 

@@ -1,11 +1,11 @@
 #include "polylinetool.h"
-
+/*
 class PolyLineToolRegistrator: public ToolRegistrator {
 public:
     Tool* makeTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) { return new PolyLineTool(parent, W, scene) }
 }
 
-static ToorRegistrator pr(new PolyLineToolRegistrator);
+static ToorRegistrator pr(new PolyLineToolRegistrator);*/
 
 PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
 {

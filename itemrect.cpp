@@ -1,0 +1,35 @@
+#include "itemrect.h"
+
+ItemRect::ItemRect(BrushWidget *BW) : ItemBaseClass()
+{
+    BWID = BW;
+}
+void ItemRect::SetParameters()
+{
+    brush = BWID->ReturnBrush();
+}
+
+void ItemRect::SetYX(qreal xx, qreal yy)
+{
+    x = yy*sin(ANGLE*M_PI/180) + xx*cos(ANGLE*M_PI/180);
+    y = yy*cos(ANGLE*M_PI/180) - xx*sin(ANGLE*M_PI/180);
+}
+
+void ItemRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    if(PenWIDTH>0)painter->setPen(pen);
+    else painter->setPen(Qt::NoPen);
+    painter->setBrush(brush);
+    painter->setOpacity(OPACITY);
+    painter->rotate(ANGLE);
+
+    painter->drawRect(x, y, dx, dy);
+
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+}
+
+QRectF ItemRect::boundingRect() const
+{
+    return QRectF(x, y, dx, dy);
+}

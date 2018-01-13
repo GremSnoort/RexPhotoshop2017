@@ -599,7 +599,6 @@ void CommonWidget::SetBrushStyle(QString s)
     if(s=="DCross")BrushSTYLE = Qt::DiagCrossPattern;
 
     emit Changed();
-
 }
 
 QPen CommonWidget::ReturnPen()

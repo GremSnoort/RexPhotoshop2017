@@ -37,7 +37,12 @@ SOURCES += \
     item.cpp \
     selectiontool.cpp \
     polylinetool.cpp \
-    tool.cpp
+    tool.cpp \
+    itembaseclass.cpp \
+    itemrect.cpp \
+    penwidget.cpp \
+    brushwidget.cpp \
+    roundcornerswidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +57,12 @@ HEADERS += \
     item.h \
     selectiontool.h \
     polylinetool.h \
-    tool.h
+    tool.h \
+    itembaseclass.h \
+    itemrect.h \
+    penwidget.h \
+    brushwidget.h \
+    roundcornerswidget.h
 
 FORMS += \
         mainwindow.ui \

@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "roundcornerswidget.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -116,7 +118,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(plt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
 
 
-
+RoundCornersWidget *PW = new RoundCornersWidget(this, 0);
 
 }
 
