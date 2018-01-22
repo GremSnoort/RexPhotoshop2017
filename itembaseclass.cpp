@@ -1,12 +1,13 @@
 #include "itembaseclass.h"
 
-ItemBaseClass::ItemBaseClass(QObject *parent)
+ItemBaseClass::ItemBaseClass(QObject *parent, PenWidget *PW)
     : QObject(parent), QGraphicsItem()
 {
-
+    PWID = PW;
+    connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
 }
 
-void ItemBaseClass::SetCommonParameters(PenWidget *PWID)
+void ItemBaseClass::SetCommonParameters()
 {
     pen = PWID->ReturnPen();
     PenWIDTH = PWID->PenWIDTH;

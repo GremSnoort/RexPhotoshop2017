@@ -14,20 +14,23 @@ class ItemBaseClass : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit ItemBaseClass(QObject *parent = 0);
+    explicit ItemBaseClass(QObject *parent = 0, PenWidget *PW);
     ~ItemBaseClass();
+
+    PenWidget *PWID;
 
     QPen pen;
     int PenWIDTH;
     qreal OPACITY;
     int ANGLE = 0;
 
-    void SetCommonParameters(PenWidget*PWID);
-
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = nullptr, QWidget *widget = nullptr){}
     virtual QRectF boundingRect() const {return QRectF();}
     virtual void SetParameters() {}
     virtual void SetYX(qreal xx, qreal yy){}
+
+public slots:
+    void SetCommonParameters();
 
 };
 #endif // ITEMBASECLASS_H

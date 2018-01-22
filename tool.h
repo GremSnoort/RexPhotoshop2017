@@ -1,9 +1,23 @@
 #ifndef TOOL_H
 #define TOOL_H
 
+#include <QLabel>
+#include <QPen>
+#include <QSlider>
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
+#include <QPushButton>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsItem>
+#include <QGraphicsRectItem>
+#include <QTextStream>
+#include <QColorDialog>
+#include <QColor>
+
+#include "item.h"
+#include "sceneclass.h"
+#include "commonwidget.h"
 
 class Tool : public QObject
 {
@@ -11,9 +25,18 @@ class Tool : public QObject
 public:
     explicit Tool(QObject *parent = nullptr);
 
+    QPushButton *B;
+
+    virtual void Press(qreal x, qreal y){}
+    virtual void Move(qreal newX, qreal newY, qreal prX, qreal prY){}
+    virtual void Release(){}
+
 signals:
 
+
 public slots:
+
+
 };
 
 #endif // TOOL_H
