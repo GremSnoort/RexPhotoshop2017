@@ -14,7 +14,7 @@ class ItemBaseClass : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit ItemBaseClass(QObject *parent = 0, PenWidget *PW);
+    explicit ItemBaseClass(QObject *parent = 0, PenWidget *PW = 0);
     ~ItemBaseClass();
 
     PenWidget *PWID;

@@ -11,8 +11,8 @@ void ItemRect::SetParameters()
 
 void ItemRect::SetYX(qreal xx, qreal yy)
 {
-    x = yy*sin(ANGLE*M_PI/180) + xx*cos(ANGLE*M_PI/180);
-    y = yy*cos(ANGLE*M_PI/180) - xx*sin(ANGLE*M_PI/180);
+    x = xx;
+    y = yy;
 }
 
 void ItemRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

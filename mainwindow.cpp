@@ -79,46 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
 
-    WID = new CommonWidget(this);
-
-    rt = new RectTool(this, WID, myWorkSpace->scene);
-    et = new EllTool(this, WID, myWorkSpace->scene);
-    rrt = new RoundRectTool(this, WID, myWorkSpace->scene);
-    st = new SelectionTool(this, WID, myWorkSpace->scene);
-    plt = new PolyLineTool(this, WID, myWorkSpace->scene);
-
-    connect(WID, SIGNAL(Changed()), myWorkSpace, SLOT(update()));
-
-    //SELECTION
 
 
-    connect(rt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
-    connect(rt, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
-    connect(rt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
-    connect(rt, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
-
-    connect(et, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
-    connect(et, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
-    connect(et, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
-    connect(et, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
-
-    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
-    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
-    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
-    connect(rrt, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
-
-    connect(st, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
-    connect(st, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
-    connect(st, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
-    connect(st, SIGNAL(TurnOffAllOthers(bool)), plt, SLOT(TurnOnOff(bool)));
-
-    connect(plt, SIGNAL(TurnOffAllOthers(bool)), rt, SLOT(TurnOnOff(bool)));
-    connect(plt, SIGNAL(TurnOffAllOthers(bool)), rrt, SLOT(TurnOnOff(bool)));
-    connect(plt, SIGNAL(TurnOffAllOthers(bool)), et, SLOT(TurnOnOff(bool)));
-    connect(plt, SIGNAL(TurnOffAllOthers(bool)), st, SLOT(TurnOnOff(bool)));
-
-
-RoundCornersWidget *PW = new RoundCornersWidget(this, 0);
 
 }
 
@@ -225,11 +187,7 @@ void MainWindow::MakeNewFile()
 
 void MainWindow::close()
 {
-    rt->TurnOnOff(false);
-    rrt->TurnOnOff(false);
-    et->TurnOnOff(false);
-    st->TurnOnOff(false);
-    plt->TurnOnOff(false);
+
 
     myWorkSpace->scene->clear();
     myWorkSpace->scene->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
