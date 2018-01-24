@@ -24,9 +24,8 @@ class Tool : public QObject
 {
     Q_OBJECT
 public:
-    explicit Tool(QMainWindow *parent = nullptr);
+    explicit Tool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
 
-    QPushButton *B;
 
     PenWidget *PenWID;
     BrushWidget *BrWID;

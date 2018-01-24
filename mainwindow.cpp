@@ -78,9 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/closefileicon.png")));
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
-
-
-
+ToolRegistrator::registry.append(RectTool::RTReg.makeTool(this, myWorkSpace->scene, 75));
 
 }
 
@@ -285,5 +283,5 @@ myWorkSpace->scene->clearSelection();
 MainWindow::~MainWindow()
 {
     delete ui;
-    WID->deleteLater();
+    //WID->deleteLater();
 }

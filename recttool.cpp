@@ -1,11 +1,20 @@
 #include "recttool.h"
 
-RectTool::RectTool(SceneClass *scene) : Tool()
+RectToolRegistrator RectTool::RTReg = RectToolRegistrator();
+
+RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool()
 {    
+    B = new QPushButton(parent);
+
+    B->setIconSize(QSize(50, 50));
+    B->adjustSize();
+    B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/SquareAppleV2.png")));    
-    B->move(10, 75);
+    B->move(10, y);
 
     sc = scene;
+
+
 }
 
 void RectTool::Press(qreal x, qreal y)
@@ -29,3 +38,9 @@ void RectTool::Release()
 {
 
 }
+
+Tool *RectToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)
+{
+    return new RectTool(parent, scene, y);
+}
+

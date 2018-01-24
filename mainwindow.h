@@ -4,6 +4,8 @@
 #define private public
 
 
+#include "toolregistrator.h"
+
 #include "commonwidget.h"
 #include "recttool.h"
 #include "elltool.h"
@@ -39,7 +41,11 @@
 #include <QStyle>
 #include <QDesktopWidget>
 #include "graphicsviewclass.h"
+
 namespace Ui {
+
+
+
 class MainWindow;
 
 }
@@ -60,6 +66,7 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 
     RectTool *rt;
@@ -84,8 +91,6 @@ public:
     QAction* deleteIt;
 
 
-    //QColor currentColorOfBrush;
-
 
     Ui::MainWindow *ui;
 
@@ -94,9 +99,6 @@ public:
 
 
     AskForSave *AskSaveDialog;
-
-    //GraphicsViewClass* myWorkSpace;
-
 
 
 

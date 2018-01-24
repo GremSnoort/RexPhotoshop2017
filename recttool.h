@@ -3,6 +3,15 @@
 
 #include "tool.h"
 #include "itemrect.h"
+#include "toolregistrator.h"
+
+class RectToolRegistrator: public ToolRegistrator
+{
+
+public:
+    explicit RectToolRegistrator(){}
+    Tool* makeTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+};
 
 class RectTool : public Tool
 {
@@ -10,7 +19,11 @@ class RectTool : public Tool
 
 
 public:
-    explicit RectTool(SceneClass *scene = nullptr);
+    explicit RectTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+
+    static RectToolRegistrator RTReg;
+
+    QPushButton *B;
 
     SceneClass *sc;
 
@@ -26,5 +39,8 @@ public slots:
     void Release();   
 
 };
+
+//
+
 
 #endif // RECTTOOL_H
