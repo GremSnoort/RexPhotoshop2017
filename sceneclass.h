@@ -37,7 +37,7 @@ public:
 
 
 
-    static Tool ActiveTOOL;
+    Tool *ActiveTOOL;
 
 
     QPointF     previousPoint;
@@ -66,7 +66,7 @@ signals:
     void Release(qreal newX, qreal newY);
 
 public slots:
-
+    //void ChangeTool()
 
 };
 

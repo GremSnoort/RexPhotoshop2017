@@ -1,8 +1,10 @@
 #include <algorithm>
 #include "sceneclass.h"
 
+
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
+    ActiveTOOL = new Tool(nullptr);
     this->setSceneRect(0, 0, WIDTH, HEIGHT);
 }
 
@@ -12,12 +14,16 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     update = true;
     UpdateSceneRect(event);
-    emit Press(previousPoint.x(), previousPoint.y());    
+    emit Press(previousPoint.x(), previousPoint.y());
+
+    ActiveTOOL->Press(previousPoint.x(), previousPoint.y());
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     emit Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
+
+    ActiveTOOL->Move(event->scenePos().x(), event->scenePos().y(), previousPoint.x(), previousPoint.y());
 }
 
 void SceneClass::UpdateSceneRect(QGraphicsSceneMouseEvent *event)

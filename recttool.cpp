@@ -14,16 +14,21 @@ RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
     B->move(10, y);
 
     sc = scene;
+
+    connect(B, SIGNAL(released()), this, SLOT(EmitSignal()));
 }
 
 void RectTool::Press(qreal x, qreal y)
 {    
-        it = new ItemRect(BrWID);
+        it = new ItemRect(BrWID, PenWID);
         it->SetParameters();
         it->SetYX(x, y);
         sc->addItem(it);
 
+
         sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
+
+
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
@@ -36,6 +41,12 @@ void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 void RectTool::Release()
 {
 
+}
+
+void RectTool::EmitSignal()
+{
+    sc->ActiveTOOL = this;
+    emit ToolSignal(ToolRegistrator::registry.indexOf(this));
 }
 
 Tool *RectToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)

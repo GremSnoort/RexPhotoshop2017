@@ -1,9 +1,10 @@
 #include "itembaseclass.h"
 
-ItemBaseClass::ItemBaseClass(QObject *parent, PenWidget *PW)
-    : QObject(parent), QGraphicsItem()
+ItemBaseClass::ItemBaseClass(PenWidget *PW)
+    : QObject(), QGraphicsItem()
 {
     PWID = PW;
+    SetCommonParameters();
     connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
 }
 

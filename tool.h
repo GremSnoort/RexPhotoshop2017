@@ -39,10 +39,10 @@ public:
     virtual void Release(){}
 
 signals:
-
+    void ToolSignal(int i);
 
 public slots:
-
+    virtual void EmitSignal(){}
 
 };
 

@@ -11,7 +11,7 @@ class ItemRect : public ItemBaseClass
 {
     Q_OBJECT
 public:
-    explicit ItemRect(BrushWidget *BW = nullptr);
+    explicit ItemRect(BrushWidget *BW = nullptr, PenWidget *PW = nullptr);
 
     BrushWidget *BWID;
 
