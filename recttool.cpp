@@ -2,19 +2,18 @@
 
 RectToolRegistrator RectTool::RTReg = RectToolRegistrator();
 
-RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool()
+RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
 {    
-    B = new QPushButton(parent);
+    //Tool(parent);
 
+    B = new QPushButton(parent);
+    B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/SquareAppleV2.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
     B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/SquareAppleV2.png")));    
     B->move(10, y);
 
     sc = scene;
-
-
 }
 
 void RectTool::Press(qreal x, qreal y)

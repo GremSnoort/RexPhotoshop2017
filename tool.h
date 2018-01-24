@@ -15,16 +15,19 @@
 #include <QColorDialog>
 #include <QColor>
 
-#include "sceneclass.h"
+
 #include "penwidget.h"
 #include "brushwidget.h"
 #include "roundcornerswidget.h"
+
 
 class Tool : public QObject
 {
     Q_OBJECT
 public:
-    explicit Tool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+    explicit Tool(QMainWindow *parent = nullptr);
+
+
 
 
     PenWidget *PenWID;

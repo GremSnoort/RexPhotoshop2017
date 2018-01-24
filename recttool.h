@@ -1,10 +1,11 @@
 #ifndef RECTTOOL_H
 #define RECTTOOL_H
 
-#include "tool.h"
+
+
 #include "itemrect.h"
 #include "toolregistrator.h"
-
+#include "tool.h"
 class RectToolRegistrator: public ToolRegistrator
 {
 

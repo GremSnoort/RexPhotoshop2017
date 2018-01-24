@@ -21,6 +21,9 @@
 #include <QTextStream>
 #include <QPixmap>
 
+//#include "toolregistrator.h"
+#include "tool.h"
+
 class SceneClass : public QGraphicsScene
 {
     Q_OBJECT
@@ -32,6 +35,9 @@ public:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
+
+
+    static Tool ActiveTOOL;
 
 
     QPointF     previousPoint;

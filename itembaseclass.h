@@ -10,6 +10,8 @@
 
 #include "penwidget.h"
 
+
+
 class ItemBaseClass : public QObject, public QGraphicsItem
 {
     Q_OBJECT

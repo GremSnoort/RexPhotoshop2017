@@ -7,6 +7,9 @@
 #include <QList>
 #include "tool.h"
 
+#include "sceneclass.h"
+
+
 class ToolRegistrator
 {
 public:
