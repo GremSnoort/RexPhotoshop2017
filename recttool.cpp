@@ -3,9 +3,7 @@
 RectToolRegistrator RectTool::RTReg = RectToolRegistrator();
 
 RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
-{    
-    //Tool(parent);
-
+{
     B = new QPushButton(parent);
     B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/SquareAppleV2.png")));
     B->setIconSize(QSize(50, 50));
@@ -15,7 +13,7 @@ RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
 
     sc = scene;
 
-    connect(B, SIGNAL(released()), this, SLOT(EmitSignal()));
+    connect(B, SIGNAL(released()), this, SLOT(ONvsOFF()));
 }
 
 void RectTool::Press(qreal x, qreal y)
@@ -27,7 +25,6 @@ void RectTool::Press(qreal x, qreal y)
 
 
         sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
-
 
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
@@ -43,10 +40,24 @@ void RectTool::Release()
 
 }
 
-void RectTool::EmitSignal()
+void RectTool::ONvsOFF()
 {
-    sc->ActiveTOOL = this;
-    emit ToolSignal(ToolRegistrator::registry.indexOf(this));
+    if(sc->ActiveTOOL != this)
+    {
+        sc->ActiveTOOL = this;
+        B->setStyleSheet("background-color: rgb(46, 255, 0);");
+        RcWID->hide();
+        //if(PenWID->isHidden())PenWID->show();
+        //if(BrWID->isHidden())BrWID->show();
+    }
+    else
+    {
+        sc->ActiveTOOL = new Tool(nullptr);
+        B->setStyleSheet("");
+        //RcWID->hide();
+        //PenWID->hide();
+        BrWID->hide();
+    }
 }
 
 Tool *RectToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)

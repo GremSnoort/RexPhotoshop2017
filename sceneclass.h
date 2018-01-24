@@ -60,10 +60,10 @@ public:
 
 
 signals:
-    void Press(qreal x, qreal y);
-    void Move(qreal newX, qreal newY, qreal prX, qreal prY);
+    void Press();
+    void Move();
 
-    void Release(qreal newX, qreal newY);
+    void Release();
 
 public slots:
     //void ChangeTool()

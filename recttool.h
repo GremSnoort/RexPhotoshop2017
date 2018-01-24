@@ -39,7 +39,7 @@ public slots:
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
 
-    void EmitSignal();
+    void ONvsOFF();
 
 };
 

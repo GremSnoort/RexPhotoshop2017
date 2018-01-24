@@ -5,7 +5,7 @@ ItemBaseClass::ItemBaseClass(PenWidget *PW)
 {
     PWID = PW;
     SetCommonParameters();
-    connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
+    //connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
 }
 
 void ItemBaseClass::SetCommonParameters()

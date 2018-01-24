@@ -25,10 +25,6 @@ void ItemRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->rotate(ANGLE);
 
     painter->drawRect(x, y, dx, dy);
-    //painter->drawRect(0, 0, 300, 300);
-
-    QTextStream out(stdout);
-    out<<"!!!!"<<endl;
 
     Q_UNUSED(option);
     Q_UNUSED(widget);

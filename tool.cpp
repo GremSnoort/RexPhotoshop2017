@@ -2,9 +2,11 @@
 
 Tool::Tool(QMainWindow *parent) : QObject()
 {
-    PenWID = new PenWidget(parent, 0);
-    BrWID = new BrushWidget(parent, 585);
-    RcWID = new RoundCornersWidget(parent, 320);
+    PenWID = new PenWidget(parent, 75);
+    BrWID = new BrushWidget(parent, 655);
+    RcWID = new RoundCornersWidget(parent, 525);
+
+
 }
 
 
