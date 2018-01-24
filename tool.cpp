@@ -6,7 +6,9 @@ Tool::Tool(QMainWindow *parent) : QObject()
     BrWID = new BrushWidget(parent, 655);
     RcWID = new RoundCornersWidget(parent, 525);
 
-
+    PenWID->PenWIDGET->hide();
+    BrWID->BrushWIDGET->hide();
+    RcWID->RoundWIDGET->hide();
 }
 
 

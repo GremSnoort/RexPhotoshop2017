@@ -46,17 +46,17 @@ void RectTool::ONvsOFF()
     {
         sc->ActiveTOOL = this;
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        RcWID->hide();
-        //if(PenWID->isHidden())PenWID->show();
-        //if(BrWID->isHidden())BrWID->show();
+        PenWID->PenWIDGET->show();
+        BrWID->BrushWIDGET->show();
+        RcWID->RoundWIDGET->hide();
     }
     else
     {
         sc->ActiveTOOL = new Tool(nullptr);
         B->setStyleSheet("");
-        //RcWID->hide();
-        //PenWID->hide();
-        BrWID->hide();
+        PenWID->PenWIDGET->hide();
+        BrWID->BrushWIDGET->hide();
+        RcWID->RoundWIDGET->hide();
     }
 }
 
