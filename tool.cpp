@@ -9,8 +9,7 @@ Tool::Tool(QMainWindow *parent) : QObject()
     PenWID->PenWIDGET->hide();
     BrWID->BrushWIDGET->hide();
     RcWID->RoundWIDGET->hide();
+
+    B = new QPushButton(parent);
+    B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 }
-
-
-
-

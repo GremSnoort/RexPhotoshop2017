@@ -1,54 +1,39 @@
 #ifndef ELLTOOL_H
 #define ELLTOOL_H
 
+#include "itemell.h"
+#include "tool.h"
+#include "toolregistrator.h"
 
-#include <QLabel>
-#include <QSlider>
-#include <QMainWindow>
-#include <QObject>
-#include <QWidget>
-#include <QPushButton>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsItem>
-#include <QGraphicsEllipseItem>
-#include <QTextStream>
+class EllToolRegistrator: public ToolRegistrator
+{
 
-#include <QColorDialog>
+public:
+    explicit EllToolRegistrator(){}
+    Tool* makeTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+};
 
-#include "item.h"
-#include "sceneclass.h"
-
-#include "commonwidget.h"
-
-class EllTool : public QObject
+class EllTool : public Tool
 {
     Q_OBJECT
+
 public:
-    explicit EllTool(QMainWindow *parent = nullptr, CommonWidget*W = nullptr, SceneClass *scene = nullptr);
+    explicit EllTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
 
-    CommonWidget*WID;
+    static EllToolRegistrator ETReg;
+
     SceneClass *sc;
-
-    Item *it;
-
-    QPushButton *B;
-
-
-    bool UP = false;
-    bool draw = false;
+    ItemEll *it;
 
 signals:
 
-    void TurnOffAllOthers(bool state);
-
 public slots:
 
-    void SetUP();
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
+    void ONvsOFF();
 
-    void TurnOnOff(bool state);
 };
 
 #endif // ELLTOOL_H

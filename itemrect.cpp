@@ -1,19 +1,8 @@
 #include "itemrect.h"
 
-ItemRect::ItemRect(BrushWidget *BW, PenWidget *PW) : ItemBaseClass(PW)
+ItemRect::ItemRect(PenWidget *PW, BrushWidget *BW, RoundCornersWidget *RW) : ItemBaseClass(PW, BW, RW)
 {
-    BWID = BW;
-}
-void ItemRect::SetParameters()
-{
-    ItemBaseClass::SetParameters();
-    brush = BWID->ReturnBrush();
-}
 
-void ItemRect::SetYX(qreal xx, qreal yy)
-{
-    x = xx;
-    y = yy;
 }
 
 void ItemRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

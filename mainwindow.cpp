@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "roundcornerswidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -79,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
     ToolRegistrator::registry.append(RectTool::RTReg.makeTool(this, myWorkSpace->scene, 75));
+    ToolRegistrator::registry.append(EllTool::ETReg.makeTool(this, myWorkSpace->scene, 145));
 
 }
 

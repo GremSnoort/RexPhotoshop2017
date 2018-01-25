@@ -1,7 +1,6 @@
 #include <algorithm>
 #include "sceneclass.h"
 
-
 SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 {
     ActiveTOOL = new Tool(nullptr);
@@ -14,9 +13,9 @@ void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     update = true;
     UpdateSceneRect(event);
-    emit Press();
 
     ActiveTOOL->Press(previousPoint.x(), previousPoint.y());
+    emit Press();
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)

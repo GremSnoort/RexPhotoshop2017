@@ -15,11 +15,7 @@
 #include <QColorDialog>
 #include <QColor>
 
-
-#include "penwidget.h"
-#include "brushwidget.h"
-#include "roundcornerswidget.h"
-
+#include "itembaseclass.h"
 
 class Tool : public QObject
 {
@@ -27,21 +23,21 @@ class Tool : public QObject
 public:
     explicit Tool(QMainWindow *parent = nullptr);
 
-
-
+    QPushButton *B;
 
     PenWidget *PenWID;
     BrushWidget *BrWID;
     RoundCornersWidget *RcWID;
 
-    virtual void Press(qreal x, qreal y){}
-    virtual void Move(qreal newX, qreal newY, qreal prX, qreal prY){}
-    virtual void Release(){}
+
 
 signals:
 
 
 public slots:
+    virtual void Press(qreal x, qreal y){}
+    virtual void Move(qreal newX, qreal newY, qreal prX, qreal prY){}
+    virtual void Release(){}
     virtual void ONvsOFF(){}
 
 };

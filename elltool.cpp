@@ -1,65 +1,64 @@
 #include "elltool.h"
 
-EllTool::EllTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
-{    
-    B = new QPushButton(parent);
 
+EllToolRegistrator EllTool::ETReg = EllToolRegistrator();
+
+EllTool::EllTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
+{
     B->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/RoundAppleV2.png")));
     B->setIconSize(QSize(50, 50));
     B->adjustSize();
-    B->move(10, 145);
-    B->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    B->move(10, y);
 
-    connect(B, SIGNAL(released()), this, SLOT(SetUP()));
-    connect(scene, SIGNAL(Press(qreal,qreal)), this, SLOT(Press(qreal,qreal)));
-    connect(scene, SIGNAL(Move(qreal,qreal,qreal,qreal)), this, SLOT(Move(qreal,qreal,qreal,qreal)));
-    connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release()));
-
-
-    WID = W;
     sc = scene;
-}
 
-void EllTool::TurnOnOff(bool state)
-{
-    UP = state;
-
-    B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
-    if(UP)emit TurnOffAllOthers(false);
-}
-
-void EllTool::SetUP()
-{
-    UP ? TurnOnOff(false) : TurnOnOff(true);
+    connect(B, SIGNAL(released()), this, SLOT(ONvsOFF()));
 }
 
 void EllTool::Press(qreal x, qreal y)
 {
-    if(UP)
-    {
-        it = new Item(0, WID);        
+        it = new ItemEll(PenWID, BrWID, RcWID);
         it->SetParameters();
-        it->T = 2;
         it->SetYX(x, y);
         sc->addItem(it);
 
-        sc->items().first()->setFlag(QGraphicsEllipseItem::ItemIsSelectable, true);
-
-        draw = true;
-   }
+        sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
 }
+
 void EllTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
 {
-    if(UP&&draw)
-    {
         it->SetParameters();
         it->SetYX(prX, prY);
         it->dx = newX-prX;
         it->dy = newY-prY;
-    }
 }
 
 void EllTool::Release()
 {
-    draw = false;
+
+}
+
+void EllTool::ONvsOFF()
+{
+    if(sc->ActiveTOOL != this)
+    {
+        sc->ActiveTOOL = this;
+        B->setStyleSheet("background-color: rgb(46, 255, 0);");
+        PenWID->PenWIDGET->show();
+        BrWID->BrushWIDGET->show();
+        RcWID->RoundWIDGET->hide();
+    }
+    else
+    {
+        sc->ActiveTOOL = new Tool(nullptr);
+        B->setStyleSheet("");
+        PenWID->PenWIDGET->hide();
+        BrWID->BrushWIDGET->hide();
+        RcWID->RoundWIDGET->hide();
+    }
+}
+
+Tool *EllToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)
+{
+    return new EllTool(parent, scene, y);
 }

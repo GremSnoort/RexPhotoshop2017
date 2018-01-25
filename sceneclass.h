@@ -21,7 +21,6 @@
 #include <QTextStream>
 #include <QPixmap>
 
-//#include "toolregistrator.h"
 #include "tool.h"
 
 class SceneClass : public QGraphicsScene

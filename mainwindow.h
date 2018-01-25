@@ -18,7 +18,6 @@
 #include "sceneclass.h"
 
 #include <QDebug>
-
 #include <QMainWindow>
 #include <QString>
 #include <QFileDialog>
@@ -34,12 +33,11 @@
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgWidget>
 #include <QtSvg/QtSvg>
-
 #include <QColorDialog>
 #include <QMouseEvent>
-
 #include <QStyle>
 #include <QDesktopWidget>
+
 #include "graphicsviewclass.h"
 
 namespace Ui {
@@ -68,13 +66,6 @@ public:
     ~MainWindow();
 
 
-
-    RectTool *rt;
-    EllTool *et;
-    RoundRectTool *rrt;
-    SelectionTool *st;
-    PolyLineTool *plt;
-    CommonWidget *WID;
 
 
     GraphicsViewClass *myWorkSpace;

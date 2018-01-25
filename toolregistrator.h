@@ -1,12 +1,15 @@
 #ifndef TOOLREGISTRATOR_H
 #define TOOLREGISTRATOR_H
 
+
+
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
 #include <QList>
 #include "tool.h"
 #include "sceneclass.h"
+
 
 class ToolRegistrator
 {

@@ -1,15 +1,15 @@
-#ifndef ITEMRECT_H
-#define ITEMRECT_H
+#ifndef ITEMELL_H
+#define ITEMELL_H
 
 #include <QObject>
 #include <QWidget>
 #include "itembaseclass.h"
 
-class ItemRect : public ItemBaseClass
+class ItemEll : public ItemBaseClass
 {
     Q_OBJECT
 public:
-    explicit ItemRect(PenWidget *PW = 0, BrushWidget *BW = 0, RoundCornersWidget *RW = 0);
+    explicit ItemEll(PenWidget *PW = 0, BrushWidget *BW = 0, RoundCornersWidget *RW = 0);
 
     qreal dx = 1;
     qreal dy = 1;
@@ -21,5 +21,4 @@ signals:
 
 public slots:
 };
-
-#endif // ITEMRECT_H
+#endif // ITEMELL_H

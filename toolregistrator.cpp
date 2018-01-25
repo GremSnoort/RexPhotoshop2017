@@ -5,6 +5,5 @@ QList<Tool *> ToolRegistrator::registry = QList<Tool *>{};
 ToolRegistrator::ToolRegistrator()
 {
 
-
 }
 
