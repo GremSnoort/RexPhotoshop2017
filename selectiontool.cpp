@@ -12,10 +12,15 @@ SelectionTool::SelectionTool(QMainWindow *parent, SceneClass *scene, int y) : To
     sc = scene;
 
     connect(B, SIGNAL(released()), this, SLOT(ON()));
-    connect(scene, SIGNAL(Release()), this, SLOT(RepaintAll()));
+    //connect(scene, SIGNAL(Release()), this, SLOT(RepaintAll()));
     connect(ItemBaseClass::PWID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
     connect(ItemBaseClass::BWID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
     connect(ItemBaseClass::RWID, SIGNAL(Changed()), this, SLOT(RepaintAll()));
+
+    clearSelection = new QAction(parent);
+    clearSelection->setShortcut(tr("Ctrl+D"));
+    parent->addAction(clearSelection);
+    connect(clearSelection, SIGNAL(triggered(bool)), this, SLOT(ClearSelection()));
 
     it = new ItemSelection();
     sc->addItem(it);
@@ -71,15 +76,16 @@ void SelectionTool::OFF()
 
 void SelectionTool::RepaintAll()
 {
-
     foreach(QGraphicsItem*IT, sc->selectedItems())
     {
-        QTextStream out(stdout);
-        out<<"!!!!!"<<endl;
         dynamic_cast<ItemBaseClass*>(IT)->SetParameters();
     }
+}
 
-
+void SelectionTool::ClearSelection()
+{
+    it->hide();
+    sc->clearSelection();
 }
 
 Tool *SelectionToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)
@@ -117,10 +123,7 @@ SelectionTool::SelectionTool(QMainWindow *parent, CommonWidget *W, SceneClass *s
 
     //
 
-    clearSelection = new QAction(parent);
-    clearSelection->setShortcut(tr("Ctrl+D"));
-    parent->addAction(clearSelection);
-    connect(clearSelection, SIGNAL(triggered(bool)), this, SLOT(ClearSelection()));
+
 
     removeItems = new QAction(parent);
     removeItems->setShortcut(tr("X"));

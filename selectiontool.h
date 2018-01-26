@@ -4,6 +4,7 @@
 #include "itemselection.h"
 #include "tool.h"
 #include "toolregistrator.h"
+#include <QAction>
 
 class SelectionToolRegistrator: public ToolRegistrator
 {
@@ -25,6 +26,8 @@ public:
     SceneClass *sc;
     ItemSelection *it;
 
+    QAction* clearSelection;
+
 signals:
 
 public slots:
@@ -35,7 +38,7 @@ public slots:
     void ON();
     void OFF();
 
-    //void ClearSelection();
+    void ClearSelection();
     //void RemoveSelectedItems();
     void RepaintAll();
 
@@ -78,7 +81,7 @@ public:
 
     Item *it;
 
-    QAction* clearSelection;
+
     QAction* removeItems;
 
 
