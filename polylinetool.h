@@ -18,16 +18,15 @@
 #include "item.h"
 #include "sceneclass.h"
 
-#include "commonwidget.h"
 
 class PolyLineTool : public QObject
 {
     Q_OBJECT
 public:
-    explicit PolyLineTool(QMainWindow *parent = nullptr, CommonWidget *W = nullptr, SceneClass *scene = nullptr);
+    explicit PolyLineTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr);
 
 
-    CommonWidget *WID;
+    //CommonWidget *WID;
     SceneClass *sc;
 
     QPushButton *B;

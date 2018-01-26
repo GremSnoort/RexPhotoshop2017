@@ -22,7 +22,6 @@ public:
 
     static RectToolRegistrator RTReg;
 
-
     SceneClass *sc;
     ItemRect *it;
 

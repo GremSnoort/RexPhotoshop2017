@@ -6,7 +6,6 @@
 
 #include "toolregistrator.h"
 
-#include "commonwidget.h"
 #include "recttool.h"
 #include "elltool.h"
 #include "roundrecttool.h"

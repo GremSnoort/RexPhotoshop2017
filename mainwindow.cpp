@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ToolRegistrator::registry.append(RectTool::RTReg.makeTool(this, myWorkSpace->scene, 75));
     ToolRegistrator::registry.append(EllTool::ETReg.makeTool(this, myWorkSpace->scene, 145));
     ToolRegistrator::registry.append(RoundRectTool::RRTReg.makeTool(this, myWorkSpace->scene, 215));
+    ToolRegistrator::registry.append(SelectionTool::STReg.makeTool(this, myWorkSpace->scene, 355));
 }
 
 void MainWindow::open()

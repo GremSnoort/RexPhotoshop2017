@@ -9,13 +9,13 @@
 #include <QtMath>
 #include <QPoint>
 
-#include "commonwidget.h"
+
 
 class Item : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit Item(QObject *parent = 0, CommonWidget*W = 0);
+    explicit Item(QObject *parent = 0);
     ~Item();
 
     int T = 1;
@@ -31,7 +31,7 @@ public:
     QPolygonF points = QPolygonF();
 
 
-    CommonWidget *WID;
+    //CommonWidget *WID;
 
     qreal x;
     qreal y;

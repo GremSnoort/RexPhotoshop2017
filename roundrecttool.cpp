@@ -40,6 +40,10 @@ void RoundRectTool::Release()
 void RoundRectTool::ON()
 {
         sc->ActiveTOOL = this;
+        foreach(Tool* T, ToolRegistrator::registry)
+        {
+            if(T!=this)T->OFF();
+        }
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
         ItemBaseClass::PWID->PenWIDGET->show();
         ItemBaseClass::BWID->BrushWIDGET->show();

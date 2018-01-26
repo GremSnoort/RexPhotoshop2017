@@ -7,7 +7,7 @@ public:
 
 static ToorRegistrator pr(new PolyLineToolRegistrator);*/
 
-PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) : QObject(parent)
+PolyLineTool::PolyLineTool(QMainWindow *parent, SceneClass *scene) : QObject(parent)
 {
     B = new QPushButton(parent);
 
@@ -23,7 +23,7 @@ PolyLineTool::PolyLineTool(QMainWindow *parent, CommonWidget *W, SceneClass *sce
     connect(scene, SIGNAL(Release(qreal, qreal)), this, SLOT(Release(qreal, qreal)));
 
 
-    WID = W;
+
     sc = scene;
 }
 
@@ -34,12 +34,12 @@ void PolyLineTool::TurnOnOff(bool state)
     B->setStyleSheet(UP ? "background-color: rgb(46, 255, 0);" : "");
     if(UP)
     {
-        WID->BrushWIDGET->hide();
+        //WID->BrushWIDGET->hide();
         draw = false;
         drawFirst = true;
         emit TurnOffAllOthers(false);
-    }else
-        WID->BrushWIDGET->show();
+    }
+        //WID->BrushWIDGET->show();
 }
 
 void PolyLineTool::SetUP()
@@ -54,7 +54,7 @@ void PolyLineTool::Press(qreal x, qreal y)
         if(QApplication::keyboardModifiers()==Qt::ControlModifier)drawFirst = true;
         if(drawFirst)
         {
-            it = new Item(0, WID);
+            it = new Item(0);
             it->T = 4;
             sc->addItem(it);
             sc->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);

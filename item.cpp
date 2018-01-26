@@ -12,10 +12,10 @@ public:
     virtual Tool *makeTool(QMainWindow *parent, CommonWidget *W, SceneClass *scene) =0;
 };*/
 
-Item::Item(QObject *parent, CommonWidget *W)
+Item::Item(QObject *parent)
     : QObject(parent), QGraphicsItem()
 {
-    WID = W;    
+
 }
 Item::~Item()
 {
@@ -24,13 +24,13 @@ Item::~Item()
 
 void Item::SetParameters()
 {
-    OPACITY = WID->OPACITY;
+    /*OPACITY = WID->OPACITY;
     pen = WID->ReturnPen();
     brush = WID->ReturnBrush();
     PenWIDTH = WID->PenWIDTH;
     RoundX = WID->ROUNDCornersX;
     RoundY = WID->ROUNDCornersY;
-    ANGLE = WID->ANGLE;
+    ANGLE = WID->ANGLE;*/
 }
 
 void Item::SetYX(qreal xx, qreal yy)

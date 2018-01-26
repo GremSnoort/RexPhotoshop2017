@@ -33,7 +33,6 @@ SOURCES += \
     recttool.cpp \
     elltool.cpp \
     roundrecttool.cpp \
-    commonwidget.cpp \
     item.cpp \
     selectiontool.cpp \
     polylinetool.cpp \
@@ -45,7 +44,8 @@ SOURCES += \
     roundcornerswidget.cpp \
     toolregistrator.cpp \
     itemell.cpp \
-    itemroundrect.cpp
+    itemroundrect.cpp \
+    itemselection.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +56,6 @@ HEADERS += \
     recttool.h \
     elltool.h \
     roundrecttool.h \
-    commonwidget.h \
     item.h \
     selectiontool.h \
     polylinetool.h \
@@ -68,7 +67,8 @@ HEADERS += \
     roundcornerswidget.h \
     toolregistrator.h \
     itemell.h \
-    itemroundrect.h
+    itemroundrect.h \
+    itemselection.h
 
 FORMS += \
         mainwindow.ui \

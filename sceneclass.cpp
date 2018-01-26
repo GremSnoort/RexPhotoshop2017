@@ -9,13 +9,11 @@ SceneClass::SceneClass(QObject *parent) : QGraphicsScene(parent)
 
 void SceneClass::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    previousPoint = event->scenePos();
-
-    update = true;
+    previousPoint = event->scenePos();    
     UpdateSceneRect(event);
-
     ActiveTOOL->Press(previousPoint.x(), previousPoint.y());
     emit Press();
+    update = true;
 }
 
 void SceneClass::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -46,9 +44,9 @@ void SceneClass::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         UpdateSceneRect(event);
         this->setSceneRect(X, Y, WIDTH, HEIGHT);
-    }
-    update = false;
+    }    
     emit Release();
+    update = false;
 }
 
 SceneClass::~SceneClass()

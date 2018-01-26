@@ -8,7 +8,6 @@ ItemBaseClass::ItemBaseClass()
     : QObject(), QGraphicsItem()
 {
     SetParameters();
-    //connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
 }
 
 void ItemBaseClass::SetYX(qreal xx, qreal yy)

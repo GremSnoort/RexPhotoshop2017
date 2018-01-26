@@ -21,8 +21,7 @@ void RectTool::Press(qreal x, qreal y)
         it->SetYX(x, y);
         sc->addItem(it);
 
-
-        sc->items().first()->setFlag(QGraphicsRectItem::ItemIsSelectable, true);
+        sc->items().first()->setFlag(QGraphicsItem::ItemIsSelectable, true);
 
 }
 void RectTool::Move(qreal newX, qreal newY, qreal prX, qreal prY)
@@ -41,6 +40,10 @@ void RectTool::Release()
 void RectTool::ON()
 {    
         sc->ActiveTOOL = this;
+        foreach(Tool* T, ToolRegistrator::registry)
+        {
+            if(T!=this)T->OFF();
+        }
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
         ItemBaseClass::PWID->PenWIDGET->show();
         ItemBaseClass::BWID->BrushWIDGET->show();

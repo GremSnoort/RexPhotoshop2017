@@ -1,6 +1,53 @@
 #ifndef SELECTIONTOOL_H
 #define SELECTIONTOOL_H
 
+#include "itemselection.h"
+#include "tool.h"
+#include "toolregistrator.h"
+
+class SelectionToolRegistrator: public ToolRegistrator
+{
+
+public:
+    explicit SelectionToolRegistrator(){}
+    Tool* makeTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+};
+
+class SelectionTool : public Tool
+{
+    Q_OBJECT
+
+public:
+    explicit SelectionTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+
+    static SelectionToolRegistrator STReg;
+
+    SceneClass *sc;
+    ItemSelection *it;
+
+signals:
+
+public slots:
+
+    void Press(qreal x, qreal y);
+    void Move(qreal newX, qreal newY, qreal prX, qreal prY);
+    void Release();
+    void ON();
+    void OFF();
+
+    //void ClearSelection();
+    //void RemoveSelectedItems();
+    void RepaintAll();
+
+};
+
+
+
+
+/*
+
+
+
 #include <QLabel>
 #include <QSlider>
 #include <QMainWindow>
@@ -18,7 +65,6 @@
 #include "item.h"
 #include "sceneclass.h"
 
-#include "commonwidget.h"
 
 class SelectionTool : public QObject
 {
@@ -52,11 +98,11 @@ public slots:
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
     void ClearSelection();
-    void RemoveSelectedItems();
-
+    //void RemoveSelectedItems();
     void RepaintAll();
+
 
     void TurnOnOff(bool state);
 };
-
+*/
 #endif // SELECTIONTOOL_H
