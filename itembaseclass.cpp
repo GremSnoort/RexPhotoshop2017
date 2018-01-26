@@ -1,11 +1,12 @@
 #include "itembaseclass.h"
 
-ItemBaseClass::ItemBaseClass(PenWidget *PW, BrushWidget *BW, RoundCornersWidget *RW)
+PenWidget *ItemBaseClass::PWID = 0;
+BrushWidget *ItemBaseClass::BWID = 0;
+RoundCornersWidget *ItemBaseClass::RWID = 0;
+
+ItemBaseClass::ItemBaseClass()
     : QObject(), QGraphicsItem()
 {
-    PWID = PW;
-    BWID = BW;
-    RWID = RW;
     SetParameters();
     //connect(PW, SIGNAL(Changed()), this, SLOT(SetCommonParameters()));
 }
@@ -18,15 +19,15 @@ void ItemBaseClass::SetYX(qreal xx, qreal yy)
 
 void ItemBaseClass::SetParameters()
 {
-    pen = PWID->ReturnPen();
-    PenWIDTH = PWID->PenWIDTH;
-    OPACITY = PWID->OPACITY;
-    ANGLE = PWID->ANGLE;
+    pen = ItemBaseClass::PWID->ReturnPen();
+    PenWIDTH = ItemBaseClass::PWID->PenWIDTH;
+    OPACITY = ItemBaseClass::PWID->OPACITY;
+    ANGLE = ItemBaseClass::PWID->ANGLE;
 
-    brush = BWID->ReturnBrush();
+    brush = ItemBaseClass::BWID->ReturnBrush();
 
-    RoundX = RWID->ROUNDCornersX;
-    RoundY = RWID->ROUNDCornersY;
+    RoundX = ItemBaseClass::RWID->ROUNDCornersX;
+    RoundY = ItemBaseClass::RWID->ROUNDCornersY;
 }
 
 ItemBaseClass::~ItemBaseClass()

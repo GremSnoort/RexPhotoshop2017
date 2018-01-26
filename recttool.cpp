@@ -11,12 +11,12 @@ RectTool::RectTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
 
     sc = scene;
 
-    connect(B, SIGNAL(released()), this, SLOT(ONvsOFF()));
+    connect(B, SIGNAL(released()), this, SLOT(ON()));
 }
 
 void RectTool::Press(qreal x, qreal y)
 {    
-        it = new ItemRect(PenWID, BrWID, RcWID);
+        it = new ItemRect();
         it->SetParameters();
         it->SetYX(x, y);
         sc->addItem(it);
@@ -38,24 +38,18 @@ void RectTool::Release()
 
 }
 
-void RectTool::ONvsOFF()
-{
-    if(sc->ActiveTOOL != this)
-    {
+void RectTool::ON()
+{    
         sc->ActiveTOOL = this;
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        PenWID->PenWIDGET->show();
-        BrWID->BrushWIDGET->show();
-        RcWID->RoundWIDGET->hide();
-    }
-    else
-    {
-        sc->ActiveTOOL = new Tool(nullptr);
+        ItemBaseClass::PWID->PenWIDGET->show();
+        ItemBaseClass::BWID->BrushWIDGET->show();
+        ItemBaseClass::RWID->RoundWIDGET->hide();
+}
+
+void RectTool::OFF()
+{
         B->setStyleSheet("");
-        PenWID->PenWIDGET->hide();
-        BrWID->BrushWIDGET->hide();
-        RcWID->RoundWIDGET->hide();
-    }
 }
 
 Tool *RectToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)

@@ -44,7 +44,8 @@ SOURCES += \
     brushwidget.cpp \
     roundcornerswidget.cpp \
     toolregistrator.cpp \
-    itemell.cpp
+    itemell.cpp \
+    itemroundrect.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +67,8 @@ HEADERS += \
     brushwidget.h \
     roundcornerswidget.h \
     toolregistrator.h \
-    itemell.h
+    itemell.h \
+    itemroundrect.h
 
 FORMS += \
         mainwindow.ui \

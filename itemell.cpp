@@ -1,6 +1,6 @@
 #include "itemell.h"
 
-ItemEll::ItemEll(PenWidget *PW, BrushWidget *BW, RoundCornersWidget *RW) : ItemBaseClass(PW, BW, RW)
+ItemEll::ItemEll() : ItemBaseClass()
 {
 
 }

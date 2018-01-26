@@ -25,20 +25,24 @@ public:
 
     QPushButton *B;
 
-    PenWidget *PenWID;
-    BrushWidget *BrWID;
-    RoundCornersWidget *RcWID;
-
-
-
 signals:
 
-
 public slots:
-    virtual void Press(qreal x, qreal y){}
-    virtual void Move(qreal newX, qreal newY, qreal prX, qreal prY){}
+    virtual void Press(qreal x, qreal y)
+    {
+        Q_UNUSED(x);
+        Q_UNUSED(y);
+    }
+    virtual void Move(qreal newX, qreal newY, qreal prX, qreal prY)
+    {
+        Q_UNUSED(newX);
+        Q_UNUSED(newY);
+        Q_UNUSED(prX);
+        Q_UNUSED(prY);
+    }
     virtual void Release(){}
-    virtual void ONvsOFF(){}
+    virtual void ON(){}
+    virtual void OFF(){}
 
 };
 

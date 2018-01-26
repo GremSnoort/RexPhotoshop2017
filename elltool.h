@@ -32,7 +32,8 @@ public slots:
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
-    void ONvsOFF();
+    void ON();
+    void OFF();
 
 };
 

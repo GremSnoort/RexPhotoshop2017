@@ -77,9 +77,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->menuFile->actions().at(4)->setIcon(QIcon(QPixmap(QCoreApplication::applicationDirPath()+"/Pics/closefileicon.png")));
     connect(ui->menuFile->actions().at(4), SIGNAL(triggered(bool)), this, SLOT(FileClose(bool)));
 
+    ItemBaseClass::PWID = new PenWidget(this, 75);
+    ItemBaseClass::BWID = new BrushWidget(this, 655);
+    ItemBaseClass::RWID = new RoundCornersWidget(this, 525);
+
+    ItemBaseClass::PWID->PenWIDGET->hide();
+    ItemBaseClass::BWID->BrushWIDGET->hide();
+    ItemBaseClass::RWID->RoundWIDGET->hide();
+
     ToolRegistrator::registry.append(RectTool::RTReg.makeTool(this, myWorkSpace->scene, 75));
     ToolRegistrator::registry.append(EllTool::ETReg.makeTool(this, myWorkSpace->scene, 145));
-
+    ToolRegistrator::registry.append(RoundRectTool::RRTReg.makeTool(this, myWorkSpace->scene, 215));
 }
 
 void MainWindow::open()

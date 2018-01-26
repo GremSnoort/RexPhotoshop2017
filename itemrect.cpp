@@ -1,6 +1,6 @@
 #include "itemrect.h"
 
-ItemRect::ItemRect(PenWidget *PW, BrushWidget *BW, RoundCornersWidget *RW) : ItemBaseClass(PW, BW, RW)
+ItemRect::ItemRect() : ItemBaseClass()
 {
 
 }

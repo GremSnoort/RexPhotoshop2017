@@ -5,7 +5,7 @@ PenWidget::~PenWidget()
     this->destroy();
 }
 
-PenWidget::PenWidget(QMainWindow *parent, int y) : QMainWindow(parent)
+PenWidget::PenWidget(QMainWindow *parent, int y) : QMainWindow()
 {
     PenWIDGET = new QWidget(parent);
     PenWIDGET->move(1405, y);

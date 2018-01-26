@@ -5,7 +5,7 @@ RoundCornersWidget::~RoundCornersWidget()
     this->destroy();
 }
 
-RoundCornersWidget::RoundCornersWidget(QMainWindow *parent, int y) : QMainWindow(parent)
+RoundCornersWidget::RoundCornersWidget(QMainWindow *parent, int y) : QMainWindow()
 {
     RoundWIDGET = new QWidget(parent);
     RoundWIDGET->move(1405, y);

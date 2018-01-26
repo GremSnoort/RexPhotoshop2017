@@ -5,7 +5,7 @@ BrushWidget::~BrushWidget()
     this->destroy();
 }
 
-BrushWidget::BrushWidget(QMainWindow *parent, int y) : QMainWindow(parent)
+BrushWidget::BrushWidget(QMainWindow *parent, int y) : QMainWindow()
 {
     BrushWIDGET = new QWidget(parent);
     BrushWIDGET->move(1405, y);

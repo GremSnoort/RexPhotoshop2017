@@ -9,10 +9,7 @@ class ItemRect : public ItemBaseClass
 {
     Q_OBJECT
 public:
-    explicit ItemRect(PenWidget *PW = 0, BrushWidget *BW = 0, RoundCornersWidget *RW = 0);
-
-    qreal dx = 1;
-    qreal dy = 1;
+    explicit ItemRect();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = nullptr, QWidget *widget = nullptr);
     QRectF boundingRect() const;

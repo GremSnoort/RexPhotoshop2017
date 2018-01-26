@@ -12,12 +12,12 @@ EllTool::EllTool(QMainWindow *parent, SceneClass *scene, int y) : Tool(parent)
 
     sc = scene;
 
-    connect(B, SIGNAL(released()), this, SLOT(ONvsOFF()));
+    connect(B, SIGNAL(released()), this, SLOT(ON()));
 }
 
 void EllTool::Press(qreal x, qreal y)
 {
-        it = new ItemEll(PenWID, BrWID, RcWID);
+        it = new ItemEll();
         it->SetParameters();
         it->SetYX(x, y);
         sc->addItem(it);
@@ -38,24 +38,18 @@ void EllTool::Release()
 
 }
 
-void EllTool::ONvsOFF()
+void EllTool::ON()
 {
-    if(sc->ActiveTOOL != this)
-    {
         sc->ActiveTOOL = this;
         B->setStyleSheet("background-color: rgb(46, 255, 0);");
-        PenWID->PenWIDGET->show();
-        BrWID->BrushWIDGET->show();
-        RcWID->RoundWIDGET->hide();
-    }
-    else
-    {
-        sc->ActiveTOOL = new Tool(nullptr);
+        ItemBaseClass::PWID->PenWIDGET->show();
+        ItemBaseClass::BWID->BrushWIDGET->show();
+        ItemBaseClass::RWID->RoundWIDGET->hide();
+}
+
+void EllTool::OFF()
+{
         B->setStyleSheet("");
-        PenWID->PenWIDGET->hide();
-        BrWID->BrushWIDGET->hide();
-        RcWID->RoundWIDGET->hide();
-    }
 }
 
 Tool *EllToolRegistrator::makeTool(QMainWindow *parent, SceneClass *scene, int y)

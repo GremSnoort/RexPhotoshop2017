@@ -16,12 +16,12 @@ class ItemBaseClass : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit ItemBaseClass(PenWidget *PW = 0, BrushWidget *BW = 0, RoundCornersWidget *RW = 0);
+    explicit ItemBaseClass();
     ~ItemBaseClass();
 
-    PenWidget *PWID;
-    BrushWidget *BWID;
-    RoundCornersWidget *RWID;
+    static PenWidget *PWID;
+    static BrushWidget *BWID;
+    static RoundCornersWidget *RWID;
 
     QPen pen;
     int PenWIDTH;
@@ -35,8 +35,16 @@ public:
 
     qreal x;
     qreal y;
+    qreal dx = 1;
+    qreal dy = 1;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = nullptr, QWidget *widget = nullptr){}
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = nullptr, QWidget *widget = nullptr)
+    {
+        Q_UNUSED(painter);
+        Q_UNUSED(option);
+        Q_UNUSED(widget);
+    }
+
     virtual QRectF boundingRect() const {return QRectF();}    
     void SetYX(qreal xx, qreal yy);
 

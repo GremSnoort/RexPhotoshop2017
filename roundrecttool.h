@@ -1,56 +1,40 @@
 #ifndef ROUNDRECTTOOL_H
 #define ROUNDRECTTOOL_H
 
+#include "itemroundrect.h"
+#include "tool.h"
+#include "toolregistrator.h"
 
-#include <QLabel>
-#include <QSlider>
-#include <QMainWindow>
-#include <QObject>
-#include <QWidget>
-#include <QPainter>
-#include <QPixmap>
-#include <QPushButton>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsItem>
-#include <QGraphicsEllipseItem>
-#include <QTextStream>
-#include <QBitmap>
-#include <QGraphicsPixmapItem>
-#include <QColorDialog>
-#include "sceneclass.h"
-#include "item.h"
-#include "commonwidget.h"
+class RoundRectToolRegistrator: public ToolRegistrator
+{
 
-class RoundRectTool : public QMainWindow
+public:
+    explicit RoundRectToolRegistrator(){}
+    Tool* makeTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+};
+
+class RoundRectTool : public Tool
 {
     Q_OBJECT
+
 public:
-    explicit RoundRectTool(QMainWindow *parent = nullptr, CommonWidget *W = nullptr, SceneClass *scene = nullptr);
-    CommonWidget *WID;
+    explicit RoundRectTool(QMainWindow *parent = nullptr, SceneClass *scene = nullptr, int y = 0);
+
+    static RoundRectToolRegistrator RRTReg;
+
     SceneClass *sc;
-
-    QPushButton *B;
-
-
-    Item *it;
-
-
-    bool UP = false;
-    bool draw = false;
-
-
+    ItemRoundRect *it;
 
 signals:
-    void TurnOffAllOthers(bool state);
 
 public slots:
 
-    void SetUP();
     void Press(qreal x, qreal y);
     void Move(qreal newX, qreal newY, qreal prX, qreal prY);
     void Release();
+    void ON();
+    void OFF();
 
-    void TurnOnOff(bool state);
 };
 
 #endif // ROUNDRECTTOOL_H
